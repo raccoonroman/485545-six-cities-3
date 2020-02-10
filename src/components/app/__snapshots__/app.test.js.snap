@@ -314,6 +314,7 @@ exports[`Render App 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Zolochiv Castle
                   </a>
@@ -415,6 +416,7 @@ exports[`Render App 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Sofiyivsky Park
                   </a>
@@ -516,6 +518,7 @@ exports[`Render App 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Kiev Pechersk Lavra
                   </a>
