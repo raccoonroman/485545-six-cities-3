@@ -226,6 +226,7 @@ exports[`Should Main render correctly 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -244,7 +245,7 @@ exports[`Should Main render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="https://i.picsum.photos/id/10/260/200.jpg"
                     width="260"
                   />
                 </a>
@@ -261,7 +262,8 @@ exports[`Should Main render correctly 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      105
                     </b>
                     <span
                       className="place-card__price-text"
@@ -314,20 +316,20 @@ exports[`Should Main render correctly 1`] = `
                 >
                   <a
                     href="#"
-                    onClick={[Function]}
                   >
-                    Zolochiv Castle
+                    Title 10
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Hostel
                 </p>
               </div>
             </article>
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -346,7 +348,7 @@ exports[`Should Main render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="https://i.picsum.photos/id/11/260/200.jpg"
                     width="260"
                   />
                 </a>
@@ -363,7 +365,8 @@ exports[`Should Main render correctly 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      125
                     </b>
                     <span
                       className="place-card__price-text"
@@ -400,7 +403,7 @@ exports[`Should Main render correctly 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "60%",
                         }
                       }
                     />
@@ -416,20 +419,20 @@ exports[`Should Main render correctly 1`] = `
                 >
                   <a
                     href="#"
-                    onClick={[Function]}
                   >
-                    Sofiyivsky Park
+                    Title 11
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Private room
                 </p>
               </div>
             </article>
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -448,7 +451,7 @@ exports[`Should Main render correctly 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="https://i.picsum.photos/id/12/260/200.jpg"
                     width="260"
                   />
                 </a>
@@ -465,7 +468,8 @@ exports[`Should Main render correctly 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      160
                     </b>
                     <span
                       className="place-card__price-text"
@@ -502,7 +506,7 @@ exports[`Should Main render correctly 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "100%",
                         }
                       }
                     />
@@ -518,9 +522,8 @@ exports[`Should Main render correctly 1`] = `
                 >
                   <a
                     href="#"
-                    onClick={[Function]}
                   >
-                    Kiev Pechersk Lavra
+                    Title 12
                   </a>
                 </h2>
                 <p

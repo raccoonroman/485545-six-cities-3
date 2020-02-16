@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 const convertRatingToPercentageFormat = (rating) => rating / 5 * 100;
 
+
 const OfferCard = ({offerId, offerInfo, onCardHover}) => {
   const {title, price, category, rating, imageUrl} = offerInfo;
   const ratingStarsStyle = {width: `${convertRatingToPercentageFormat(rating)}%`};
