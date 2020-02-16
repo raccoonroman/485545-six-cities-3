@@ -3,19 +3,16 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
 
-const placeTitleHandler = () => {};
-
-const App = ({amsterdamPlaces}) => {
+const App = ({offers}) => {
   return (
     <Main
-      amsterdamPlaces={amsterdamPlaces}
-      onPlaceTitleClick={placeTitleHandler}
+      offers={offers}
     />
   );
 };
 
 App.propTypes = {
-  amsterdamPlaces: PropTypes.arrayOf(PropTypes.string).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 
