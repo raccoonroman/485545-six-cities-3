@@ -92,6 +92,7 @@ exports[`Should offer card render correctly 1`] = `
     >
       <a
         href="#"
+        onClick={[Function]}
       >
         Hole
       </a>

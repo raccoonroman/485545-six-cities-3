@@ -21,7 +21,7 @@ export default class OffersList extends React.PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, onOfferTitleClick} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
@@ -32,6 +32,7 @@ export default class OffersList extends React.PureComponent {
             offerId={id}
             offerInfo={offerInfo}
             onCardHover={this.handleOfferCardHover}
+            onOfferTitleClick={onOfferTitleClick}
           />;
         })}
       </div>
@@ -41,4 +42,5 @@ export default class OffersList extends React.PureComponent {
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onOfferTitleClick: PropTypes.func.isRequired,
 };

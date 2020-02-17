@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const convertRatingToPercentageFormat = (rating) => rating / 5 * 100;
 
 
-const OfferCard = ({offerId, offerInfo, onCardHover}) => {
+const OfferCard = ({offerId, offerInfo, onCardHover, onOfferTitleClick}) => {
   const {title, price, category, rating, imageUrl} = offerInfo;
   const ratingStarsStyle = {width: `${convertRatingToPercentageFormat(rating)}%`};
 
@@ -39,7 +39,7 @@ const OfferCard = ({offerId, offerInfo, onCardHover}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <a onClick={onOfferTitleClick} href="#">{title}</a>
         </h2>
         <p className="place-card__type">{category}</p>
       </div>
@@ -57,6 +57,7 @@ OfferCard.propTypes = {
     imageUrl: PropTypes.string.isRequired,
   }),
   onCardHover: PropTypes.func.isRequired,
+  onOfferTitleClick: PropTypes.func.isRequired,
 };
 
 

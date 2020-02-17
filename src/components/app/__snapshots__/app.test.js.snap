@@ -316,6 +316,7 @@ exports[`Render App 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Title 10
                   </a>
@@ -419,6 +420,7 @@ exports[`Render App 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Title 11
                   </a>
@@ -522,6 +524,7 @@ exports[`Render App 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Title 12
                   </a>

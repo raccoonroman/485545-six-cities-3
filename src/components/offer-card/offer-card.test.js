@@ -14,12 +14,16 @@ const offer = {
   }
 };
 
+const handleCardHover = () => {};
+const handleOfferTitleClick = () => {};
+
 it(`Should offer card render correctly`, () => {
   const tree = renderer
     .create(<OfferCard
       offerId={offer.id}
       offerInfo={offer.offerInfo}
-      onCardHover={() => {}}
+      onCardHover={handleCardHover}
+      onOfferTitleClick={handleOfferTitleClick}
     />)
     .toJSON();
 

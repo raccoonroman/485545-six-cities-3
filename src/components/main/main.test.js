@@ -36,10 +36,13 @@ const offers = [
   },
 ];
 
+const handleOfferTitleClick = () => {};
+
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(<Main
       offers={offers}
+      onOfferTitleClick={handleOfferTitleClick}
     />)
     .toJSON();
 
