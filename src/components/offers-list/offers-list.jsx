@@ -25,16 +25,15 @@ export default class OffersList extends React.PureComponent {
 
     return (
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => {
-          const {id, offerInfo} = offer;
-          return <OfferCard
+        {offers.map(({id, offerInfo}) => (
+          <OfferCard
             key={id}
             offerId={id}
             offerInfo={offerInfo}
             onCardHover={this.handleOfferCardHover}
             onOfferTitleClick={onOfferTitleClick}
-          />;
-        })}
+          />
+        ))}
       </div>
     );
   }
