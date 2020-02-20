@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import {getRatingStarsStyle} from "../../utils.js";
 
 
+const CATEGORIES = [`apartment`, `room`, `house`, `hotel`];
+
+
 const OfferDetails = ({offer}) => {
   const {title, price, mark, category, rating, imageUrl} = offer.offerInfo;
 
@@ -336,7 +339,7 @@ OfferDetails.propTypes = {
       title: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       mark: PropTypes.string,
-      category: PropTypes.string.isRequired,
+      category: PropTypes.oneOf(CATEGORIES).isRequired,
       rating: PropTypes.number.isRequired,
       imageUrl: PropTypes.string.isRequired,
     }).isRequired,

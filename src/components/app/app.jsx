@@ -44,25 +44,22 @@ export default class App extends React.PureComponent {
           />
         );
       case Page.OFFER_DETAILS:
-        return (
-          <OfferDetails
-            offer={currentPageOffer}
-          />
-        );
+        return <OfferDetails offer={currentPageOffer} />;
       default:
         return null;
     }
   }
 
   render() {
+    const {offers} = this.props;
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/offer-details">
-            <OfferDetails />
+          <Route exact path="/offer">
+            <OfferDetails offer={offers[0]} />
           </Route>
         </Switch>
       </BrowserRouter>

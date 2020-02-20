@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 import {getRatingStarsStyle} from "../../utils.js";
 
 
+const CATEGORIES = [`apartment`, `room`, `house`, `hotel`];
+
+
 const OfferCard = ({offer, onCardHover, onOfferTitleClick}) => {
   const {id, offerInfo} = offer;
   const {title, price, mark, category, rating, imageUrl} = offerInfo;
+  const ratingRounded = Math.round(rating);
 
   return (
     <article onMouseEnter={onCardHover(id)} className="cities__place-card place-card">
@@ -32,7 +36,7 @@ const OfferCard = ({offer, onCardHover, onOfferTitleClick}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={getRatingStarsStyle(rating)}></span>
+            <span style={getRatingStarsStyle(ratingRounded)}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -52,7 +56,7 @@ OfferCard.propTypes = {
       title: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       mark: PropTypes.string,
-      category: PropTypes.string.isRequired,
+      category: PropTypes.oneOf(CATEGORIES).isRequired,
       rating: PropTypes.number.isRequired,
       imageUrl: PropTypes.string.isRequired,
     }).isRequired,

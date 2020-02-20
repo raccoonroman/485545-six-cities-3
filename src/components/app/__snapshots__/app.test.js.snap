@@ -229,20 +229,13 @@ exports[`Render App 1`] = `
               onMouseEnter={[Function]}
             >
               <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
-              <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
                   href="#"
                 >
                   <img
-                    alt="Place image"
+                    alt="Title 10"
                     className="place-card__image"
                     height="200"
                     src="https://i.picsum.photos/id/10/260/200.jpg"
@@ -324,7 +317,7 @@ exports[`Render App 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Hostel
+                  house
                 </p>
               </div>
             </article>
@@ -336,7 +329,7 @@ exports[`Render App 1`] = `
                 className="place-card__mark"
               >
                 <span>
-                  Premium
+                  some mark
                 </span>
               </div>
               <div
@@ -346,7 +339,7 @@ exports[`Render App 1`] = `
                   href="#"
                 >
                   <img
-                    alt="Place image"
+                    alt="Title 11"
                     className="place-card__image"
                     height="200"
                     src="https://i.picsum.photos/id/11/260/200.jpg"
@@ -404,7 +397,7 @@ exports[`Render App 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "60%",
+                          "width": "80%",
                         }
                       }
                     />
@@ -428,7 +421,7 @@ exports[`Render App 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Private room
+                  hotel
                 </p>
               </div>
             </article>
@@ -437,20 +430,13 @@ exports[`Render App 1`] = `
               onMouseEnter={[Function]}
             >
               <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
-              <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
                   href="#"
                 >
                   <img
-                    alt="Place image"
+                    alt="Title 12"
                     className="place-card__image"
                     height="200"
                     src="https://i.picsum.photos/id/12/260/200.jpg"
@@ -532,7 +518,7 @@ exports[`Render App 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  apartment
                 </p>
               </div>
             </article>
