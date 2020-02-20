@@ -4,5 +4,9 @@ const getRandomIntInclusive = (minNumber, maxNumber) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const getRatingStarsStyle = (rating) => ({width: `${rating / 5 * 100}%`});
 
-export {getRandomIntInclusive};
+export {
+  getRandomIntInclusive,
+  getRatingStarsStyle,
+};

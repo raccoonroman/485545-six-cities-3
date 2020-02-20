@@ -12,8 +12,9 @@ export default [
     offerInfo: {
       title: `Beautiful & luxurious apartment at great location`,
       price: 120,
+      mark: `Premium`,
       category: `Apartment`,
-      rating: 4,
+      rating: 4.2,
       imageUrl: getRandomImageUrl(),
     }
   },
@@ -23,7 +24,7 @@ export default [
       title: `Wood and stone place`,
       price: 80,
       category: `Private room`,
-      rating: 5,
+      rating: 4.8,
       imageUrl: getRandomImageUrl(),
     }
   },
@@ -32,8 +33,8 @@ export default [
     offerInfo: {
       title: `Canal View Prinsengracht`,
       price: 132,
-      category: `Apartment`,
-      rating: 3,
+      category: `Hostel`,
+      rating: 3.4,
       imageUrl: getRandomImageUrl(),
     }
   },
@@ -42,8 +43,9 @@ export default [
     offerInfo: {
       title: `Nice, cozy, warm big bed apartment`,
       price: 180,
+      mark: `Premium`,
       category: `Apartment`,
-      rating: 5,
+      rating: 4.7,
       imageUrl: getRandomImageUrl(),
     }
   },

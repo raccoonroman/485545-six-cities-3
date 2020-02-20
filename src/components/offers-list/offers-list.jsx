@@ -15,7 +15,7 @@ export default class OffersList extends React.PureComponent {
   handleOfferCardHover(offerId) {
     return () => {
       this.setState({
-        activeCard: offerId,
+        activeCardId: offerId,
       });
     };
   }
@@ -25,15 +25,17 @@ export default class OffersList extends React.PureComponent {
 
     return (
       <div className="cities__places-list places__list tabs__content">
-        {offers.map(({id, offerInfo}) => (
-          <OfferCard
-            key={id}
-            offerId={id}
-            offerInfo={offerInfo}
-            onCardHover={this.handleOfferCardHover}
-            onOfferTitleClick={onOfferTitleClick}
-          />
-        ))}
+        {offers.map((offer) => {
+          const {id} = offer;
+          return (
+            <OfferCard
+              key={id}
+              offer={offer}
+              onCardHover={this.handleOfferCardHover}
+              onOfferTitleClick={onOfferTitleClick}
+            />
+          );
+        })}
       </div>
     );
   }

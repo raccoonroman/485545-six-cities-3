@@ -1,14 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {getRatingStarsStyle} from "../../utils.js";
 
 
-const OfferDetails = () => {
+const OfferDetails = ({offer}) => {
+  const {title, price, mark, category, rating, imageUrl} = offer.offerInfo;
+
   return (
     <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <a className="header__logo-link" href="/">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
               </a>
             </div>
@@ -32,7 +36,7 @@ const OfferDetails = () => {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Photo studio" />
+                <img className="property__image" src={imageUrl} alt={title} />
               </div>
               <div className="property__image-wrapper">
                 <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
@@ -53,13 +57,11 @@ const OfferDetails = () => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {mark && <div className="property__mark">
+                <span>{mark}</span>
+              </div>}
               <div className="property__name-wrapper">
-                <h1 className="property__name">
-                  Beautiful &amp; luxurious studio at great location
-                </h1>
+                <h1 className="property__name">{title}</h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -69,14 +71,14 @@ const OfferDetails = () => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `80%`}}></span>
+                  <span style={getRatingStarsStyle(rating)}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  Apartment
+                  {category}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   3 Bedrooms
@@ -86,7 +88,7 @@ const OfferDetails = () => {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -325,6 +327,20 @@ const OfferDetails = () => {
       </main>
     </div>
   );
+};
+
+OfferDetails.propTypes = {
+  offer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    offerInfo: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      mark: PropTypes.string,
+      category: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+    }).isRequired,
+  }),
 };
 
 export default OfferDetails;
