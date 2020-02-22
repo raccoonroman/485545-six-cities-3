@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {OFFER_CATEGORIES} from "../../const.js";
 import {getRatingStarsStyle} from "../../utils.js";
-
-
-const CATEGORIES = [`apartment`, `room`, `house`, `hotel`];
 
 
 const OfferDetails = ({offer}) => {
@@ -339,7 +337,7 @@ OfferDetails.propTypes = {
       title: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       mark: PropTypes.string,
-      category: PropTypes.oneOf(CATEGORIES).isRequired,
+      category: PropTypes.oneOf(OFFER_CATEGORIES).isRequired,
       rating: PropTypes.number.isRequired,
       imageUrl: PropTypes.string.isRequired,
     }).isRequired,

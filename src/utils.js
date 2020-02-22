@@ -6,6 +6,7 @@ const getRandomIntInclusive = (minNumber, maxNumber) => {
 
 const getRatingStarsStyle = (rating) => ({width: `${rating / 5 * 100}%`});
 
+
 export {
   getRandomIntInclusive,
   getRatingStarsStyle,

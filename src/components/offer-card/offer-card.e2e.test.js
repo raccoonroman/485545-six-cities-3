@@ -34,7 +34,7 @@ it(`Click on offer card title`, () => {
 
   expect(handleCardTitleClick).toHaveBeenCalledTimes(1);
 
-  expect(handleCardTitleClick.mock.calls[0][0]).toMatchObject(offer);
+  expect(handleCardTitleClick.mock.calls[0][0]).toBe(100500);
 });
 
 it(`Hover on offer card`, () => {

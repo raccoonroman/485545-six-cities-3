@@ -17,23 +17,28 @@ export default class App extends React.PureComponent {
     this._handleOfferTitleClick = this._handleOfferTitleClick.bind(this);
     this.state = {
       currentPage: Page.MAIN,
-      currentPageOffer: null,
+      currentPageOfferId: null,
     };
   }
 
-  _handleOfferTitleClick(offer) {
+  _getOfferById(currentId) {
+    const {offers} = this.props;
+    return offers.find(({id}) => id === currentId);
+  }
+
+  _handleOfferTitleClick(id) {
     return (evt) => {
       evt.preventDefault();
       this.setState({
         currentPage: Page.OFFER_DETAILS,
-        currentPageOffer: offer,
+        currentPageOfferId: id,
       });
     };
   }
 
   _renderApp() {
     const {offers} = this.props;
-    const {currentPage, currentPageOffer} = this.state;
+    const {currentPage, currentPageOfferId} = this.state;
 
     switch (currentPage) {
       case Page.MAIN:
@@ -44,7 +49,8 @@ export default class App extends React.PureComponent {
           />
         );
       case Page.OFFER_DETAILS:
-        return <OfferDetails offer={currentPageOffer} />;
+        const offer = this._getOfferById(currentPageOfferId);
+        return <OfferDetails offer={offer} />;
       default:
         return null;
     }

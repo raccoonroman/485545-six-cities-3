@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {OFFER_CATEGORIES} from "../../const.js";
 import {getRatingStarsStyle} from "../../utils.js";
-
-
-const CATEGORIES = [`apartment`, `room`, `house`, `hotel`];
 
 
 const OfferCard = ({offer, onCardHover, onOfferTitleClick}) => {
@@ -41,7 +39,7 @@ const OfferCard = ({offer, onCardHover, onOfferTitleClick}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={onOfferTitleClick(offer)} href="#">{title}</a>
+          <a onClick={onOfferTitleClick(id)} href="#">{title}</a>
         </h2>
         <p className="place-card__type">{category}</p>
       </div>
@@ -56,7 +54,7 @@ OfferCard.propTypes = {
       title: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       mark: PropTypes.string,
-      category: PropTypes.oneOf(CATEGORIES).isRequired,
+      category: PropTypes.oneOf(OFFER_CATEGORIES).isRequired,
       rating: PropTypes.number.isRequired,
       imageUrl: PropTypes.string.isRequired,
     }).isRequired,
