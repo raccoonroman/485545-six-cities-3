@@ -10,8 +10,9 @@ const offer = {
   offerInfo: {
     title: `Hole`,
     price: 12,
-    category: `Slum`,
-    rating: 2,
+    mark: `Premium quality`,
+    category: `house`,
+    rating: 2.9,
     imageUrl: `https://i.picsum.photos/id/199/260/200.jpg`,
   }
 };
@@ -22,8 +23,7 @@ it(`Click on offer card title`, () => {
   const handleCardTitleClick = jest.fn();
 
   const card = shallow(<OfferCard
-    offerId={offer.id}
-    offerInfo={offer.offerInfo}
+    offer={offer}
     onCardHover={handleCardHover}
     onOfferTitleClick={handleCardTitleClick}
   />);
@@ -33,6 +33,8 @@ it(`Click on offer card title`, () => {
   cardOneTitle.simulate(`click`);
 
   expect(handleCardTitleClick).toHaveBeenCalledTimes(1);
+
+  expect(handleCardTitleClick.mock.calls[0][0]).toBe(100500);
 });
 
 it(`Hover on offer card`, () => {
@@ -40,8 +42,7 @@ it(`Hover on offer card`, () => {
   const handleCardTitleClick = jest.fn();
 
   const card = shallow(<OfferCard
-    offerId={offer.id}
-    offerInfo={offer.offerInfo}
+    offer={offer}
     onCardHover={handleCardHover}
     onOfferTitleClick={handleCardTitleClick}
   />);

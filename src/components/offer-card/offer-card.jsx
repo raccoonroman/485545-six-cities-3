@@ -1,22 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {OFFER_CATEGORIES} from "../../const.js";
+import {getRatingStarsStyle} from "../../utils.js";
 
 
-const convertRatingToPercentageFormat = (rating) => rating / 5 * 100;
-
-
-const OfferCard = ({offerId, offerInfo, onCardHover, onOfferTitleClick}) => {
-  const {title, price, category, rating, imageUrl} = offerInfo;
-  const ratingStarsStyle = {width: `${convertRatingToPercentageFormat(rating)}%`};
+const OfferCard = ({offer, onCardHover, onOfferTitleClick}) => {
+  const {id, offerInfo} = offer;
+  const {title, price, mark, category, rating, imageUrl} = offerInfo;
+  const ratingRounded = Math.round(rating);
 
   return (
-    <article onMouseEnter={onCardHover(offerId)} className="cities__place-card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+    <article onMouseEnter={onCardHover(id)} className="cities__place-card place-card">
+      {mark && <div className="place-card__mark">
+        <span>{mark}</span>
+      </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={imageUrl} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={imageUrl} width="260" height="200" alt={title} />
         </a>
       </div>
       <div className="place-card__info">
@@ -34,12 +34,12 @@ const OfferCard = ({offerId, offerInfo, onCardHover, onOfferTitleClick}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={ratingStarsStyle}></span>
+            <span style={getRatingStarsStyle(ratingRounded)}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={onOfferTitleClick} href="#">{title}</a>
+          <a onClick={onOfferTitleClick(id)} href="#">{title}</a>
         </h2>
         <p className="place-card__type">{category}</p>
       </div>
@@ -48,17 +48,19 @@ const OfferCard = ({offerId, offerInfo, onCardHover, onOfferTitleClick}) => {
 };
 
 OfferCard.propTypes = {
-  offerId: PropTypes.number.isRequired,
-  offerInfo: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    category: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    imageUrl: PropTypes.string.isRequired,
-  }),
+  offer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    offerInfo: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      mark: PropTypes.string,
+      category: PropTypes.oneOf(OFFER_CATEGORIES).isRequired,
+      rating: PropTypes.number.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
   onCardHover: PropTypes.func.isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
 };
-
 
 export default OfferCard;

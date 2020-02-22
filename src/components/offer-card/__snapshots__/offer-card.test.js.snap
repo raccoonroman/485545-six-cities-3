@@ -8,7 +8,7 @@ exports[`Should offer card render correctly 1`] = `
     className="place-card__mark"
   >
     <span>
-      Premium
+      Premium quality
     </span>
   </div>
   <div
@@ -18,7 +18,7 @@ exports[`Should offer card render correctly 1`] = `
       href="#"
     >
       <img
-        alt="Place image"
+        alt="Hole"
         className="place-card__image"
         height="200"
         src="https://i.picsum.photos/id/199/260/200.jpg"
@@ -76,7 +76,7 @@ exports[`Should offer card render correctly 1`] = `
         <span
           style={
             Object {
-              "width": "40%",
+              "width": "60%",
             }
           }
         />
@@ -92,7 +92,6 @@ exports[`Should offer card render correctly 1`] = `
     >
       <a
         href="#"
-        onClick={[Function]}
       >
         Hole
       </a>
@@ -100,7 +99,7 @@ exports[`Should offer card render correctly 1`] = `
     <p
       className="place-card__type"
     >
-      Slum
+      house
     </p>
   </div>
 </article>

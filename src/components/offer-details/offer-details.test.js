@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OfferCard from "./offer-card.jsx";
+import OfferDetails from "./offer-details.jsx";
 
 
 const offer = {
@@ -15,16 +15,10 @@ const offer = {
   }
 };
 
-const handleCardHover = () => {};
-const handleOfferTitleClick = () => {};
 
-it(`Should offer card render correctly`, () => {
+it(`Should offer details render correctly`, () => {
   const tree = renderer
-    .create(<OfferCard
-      offer={offer}
-      onCardHover={handleCardHover}
-      onOfferTitleClick={handleOfferTitleClick}
-    />)
+    .create(<OfferDetails offer={offer} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
