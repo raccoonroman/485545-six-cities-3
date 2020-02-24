@@ -17,45 +17,57 @@ const TitleLayer = {
 };
 
 
-const buildMap = (offers) => {
-  const icon = leaflet.icon({
-    iconUrl: Pin.PATH,
-    iconSize: Pin.SIZES,
-  });
+const buildMap = (container, offers) => {
+  if (container) {
+    const icon = leaflet.icon({
+      iconUrl: Pin.PATH,
+      iconSize: Pin.SIZES,
+    });
 
-  const map = leaflet.map(`map`, {
-    center: AMSTERDAM_CITY_COORDS,
-    zoom: ZOOM_LEVEL,
-    zoomControl: false,
-    marker: true,
-  });
-  map.setView(AMSTERDAM_CITY_COORDS, ZOOM_LEVEL);
+    const map = leaflet.map(container, {
+      center: AMSTERDAM_CITY_COORDS,
+      zoom: ZOOM_LEVEL,
+      zoomControl: false,
+      marker: true,
+    });
+    map.setView(AMSTERDAM_CITY_COORDS, ZOOM_LEVEL);
 
-  leaflet
-    .tileLayer(TitleLayer.PATH, {attribution: TitleLayer.ATTRIBUTION})
-    .addTo(map);
+    leaflet
+      .tileLayer(TitleLayer.PATH, {attribution: TitleLayer.ATTRIBUTION})
+      .addTo(map);
 
-  offers.forEach(({offerInfo: {coords}}) => {
-    leaflet.marker(coords, {icon}).addTo(map);
-  });
+    offers.forEach(({offerInfo: {coords}}) => {
+      leaflet.marker(coords, {icon}).addTo(map);
+    });
+  }
 };
 
 
 export default class Map extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this._mapRef = React.createRef();
+  }
+
   componentDidMount() {
     const {offers} = this.props;
-    buildMap(offers);
+    const mapElement = this._mapRef.current;
+    buildMap(mapElement, offers);
   }
 
   render() {
-    return <section id="map" className="cities__map map"></section>;
+    return (
+      <section className="cities__map map">
+        <div ref={this._mapRef} id="map"></div>
+      </section>
+    );
   }
 }
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
     offerInfo: PropTypes.shape({
-      coords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      coords: PropTypes.arrayOf(PropTypes.number),
     }).isRequired,
   })).isRequired,
 };
