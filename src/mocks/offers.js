@@ -16,6 +16,7 @@ export default [
       category: `apartment`,
       rating: 4.2,
       imageUrl: getRandomImageUrl(),
+      coords: [52.3909553943508, 4.85309666406198],
     }
   },
   {
@@ -26,6 +27,7 @@ export default [
       category: `room`,
       rating: 4.8,
       imageUrl: getRandomImageUrl(),
+      coords: [52.369553943508, 4.85309666406198],
     }
   },
   {
@@ -36,6 +38,7 @@ export default [
       category: `house`,
       rating: 3.4,
       imageUrl: getRandomImageUrl(),
+      coords: [52.3909553943508, 4.929309666406198],
     }
   },
   {
@@ -47,6 +50,7 @@ export default [
       category: `hotel`,
       rating: 4.7,
       imageUrl: getRandomImageUrl(),
+      coords: [52.3809553943508, 4.939309666406198],
     }
   },
 ];
