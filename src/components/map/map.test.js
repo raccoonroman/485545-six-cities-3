@@ -1,7 +1,10 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import {configure, mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Map from "./map.jsx";
 
+
+configure({adapter: new Adapter()});
 
 const offers = [
   {
@@ -12,6 +15,7 @@ const offers = [
       category: `house`,
       rating: 4,
       imageUrl: `https://i.picsum.photos/id/10/260/200.jpg`,
+      coords: [52.3909553943508, 4.929309666406198],
     }
   },
   {
@@ -23,6 +27,7 @@ const offers = [
       category: `hotel`,
       rating: 3.6,
       imageUrl: `https://i.picsum.photos/id/11/260/200.jpg`,
+      coords: [52.3909553943508, 4.85309666406198],
     }
   },
   {
@@ -33,19 +38,16 @@ const offers = [
       category: `apartment`,
       rating: 4.6,
       imageUrl: `https://i.picsum.photos/id/12/260/200.jpg`,
+      coords: [52.369553943508, 4.85309666406198],
     }
   },
 ];
 
-const handleOfferTitleClick = () => {};
 
-it(`Should <Main /> render correctly`, () => {
-  const tree = renderer
-    .create(<Main
-      offers={offers}
-      onOfferTitleClick={handleOfferTitleClick}
-    />)
-    .toJSON();
+it(`Should <Map /> render correctly`, () => {
+  const div = global.document.createElement(`div`);
+  global.document.body.appendChild(div);
+  const tree = mount(<Map offers={offers} />, {attachTo: div});
 
-  expect(tree).toMatchSnapshot();
+  expect(tree.getDOMNode()).toMatchSnapshot();
 });
