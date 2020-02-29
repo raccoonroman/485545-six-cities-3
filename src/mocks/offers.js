@@ -10,18 +10,20 @@ export default [
   {
     id: 0,
     offerInfo: {
+      city: `Paris`,
       title: `Beautiful & luxurious apartment at great location`,
       price: 120,
       mark: `Premium`,
       category: `apartment`,
       rating: 4.2,
       imageUrl: getRandomImageUrl(),
-      coords: [52.3909553943508, 4.85309666406198],
+      coords: [48.871613, 2.363295],
     }
   },
   {
     id: 1,
     offerInfo: {
+      city: `Amsterdam`,
       title: `Wood and stone place`,
       price: 80,
       category: `room`,
@@ -33,6 +35,7 @@ export default [
   {
     id: 2,
     offerInfo: {
+      city: `Amsterdam`,
       title: `Canal View Prinsengracht`,
       price: 132,
       category: `house`,
@@ -44,6 +47,7 @@ export default [
   {
     id: 3,
     offerInfo: {
+      city: `Amsterdam`,
       title: `Nice, cozy, warm big bed apartment`,
       price: 180,
       mark: `Premium`,
