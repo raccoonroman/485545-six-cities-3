@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cn from "classnames";
-import {OFFER_CATEGORIES} from "../../const.js";
+import React from 'react';
+import PropTypes from 'prop-types';
+import cn from 'classnames';
+import {OFFER_CATEGORIES} from '../../const.js';
 import CitiesList from '../cities-list/cities-list.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
-import Map from "../map/map.jsx";
+import Map from '../map/map.jsx';
 
 
 const Main = ({currentCity, offers, onCityChange, onOfferTitleClick}) => {

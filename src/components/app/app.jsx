@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
-import Main from "../main/main.jsx";
-import OfferDetails from "../offer-details/offer-details.jsx";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
+import Main from '../main/main.jsx';
+import OfferDetails from '../offer-details/offer-details.jsx';
 
 
 const Page = {
@@ -65,10 +65,10 @@ class App extends React.PureComponent {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
+          <Route exact path='/'>
             {this._renderApp()}
           </Route>
-          <Route exact path="/offer">
+          <Route exact path='/offer'>
             <OfferDetails offer={offers[0]} />
           </Route>
         </Switch>
