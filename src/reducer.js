@@ -1,6 +1,6 @@
-import {extend} from "./utils.js";
-import {CITIES} from "./const.js";
-import offers from "./mocks/offers.js";
+import {extend} from './utils.js';
+import {CITIES} from './const.js';
+import offers from './mocks/offers.js';
 
 
 const initialState = {
@@ -42,4 +42,4 @@ const reducer = (state = initialState, action) => {
 };
 
 
-export {reducer, ActionCreator};
+export {reducer, ActionCreator, ActionType};
