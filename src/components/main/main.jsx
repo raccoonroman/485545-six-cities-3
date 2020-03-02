@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import cn from "classnames";
 import {OFFER_CATEGORIES} from "../../const.js";
 import CitiesList from '../cities-list/cities-list.jsx';
@@ -8,7 +7,7 @@ import OffersList from '../offers-list/offers-list.jsx';
 import Map from "../map/map.jsx";
 
 
-const Main = ({offers, onOfferTitleClick, currentCity}) => {
+const Main = ({currentCity, offers, onCityChange, onOfferTitleClick}) => {
   const offersByCity = offers.filter(({offerInfo: {city}}) => currentCity === city);
 
   const renderOffersSection = () => {
@@ -17,7 +16,9 @@ const Main = ({offers, onOfferTitleClick, currentCity}) => {
         <section className="cities__no-places">
           <div className="cities__status-wrapper tabs__content">
             <b className="cities__status">No places to stay available</b>
-            <p className="cities__status-description">We could not find any property availbale at the moment in {currentCity}</p>
+            <p className="cities__status-description">
+              We could not find any property availbale at the moment in {currentCity}
+            </p>
           </div>
         </section>
       );
@@ -101,13 +102,18 @@ const Main = ({offers, onOfferTitleClick, currentCity}) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList currentCity={currentCity} />
+            <CitiesList
+              currentCity={currentCity}
+              onCityChange={onCityChange}
+            />
           </section>
         </div>
         <div className="cities">
           <div className={offersContainerClass}>
             {renderOffersSection()}
-            <div className="cities__right-section">{renderMap()}</div>
+            <div className="cities__right-section">
+              {renderMap()}
+            </div>
           </div>
         </div>
       </main>
@@ -116,6 +122,7 @@ const Main = ({offers, onOfferTitleClick, currentCity}) => {
 };
 
 Main.propTypes = {
+  currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -129,12 +136,9 @@ Main.propTypes = {
         }).isRequired,
       }).isRequired
   ).isRequired,
+  onCityChange: PropTypes.func.isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
-  currentCity: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({currentCity}) => ({currentCity});
 
-
-export {Main};
-export default connect(mapStateToProps)(Main);
+export default Main;

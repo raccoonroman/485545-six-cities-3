@@ -1,10 +1,11 @@
-import {CITIES} from "./const.js";
 import {extend} from "./utils.js";
+import {CITIES} from "./const.js";
+import offers from "./mocks/offers.js";
 
 
 const initialState = {
   currentCity: CITIES[0].name,
-  offers: [],
+  offers,
 };
 
 const ActionType = {
@@ -13,16 +14,16 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  setCity: (city) => ({
+  setCity: (cityName) => ({
     type: ActionType.SET_CITY,
     payload: {
-      city,
+      cityName,
     },
   }),
-  setOffers: (offers) => ({
+  setOffers: (offerItems) => ({
     type: ActionType.SET_OFFERS,
     payload: {
-      offers,
+      offerItems,
     },
   }),
 };
@@ -30,10 +31,10 @@ const ActionCreator = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_CITY: {
-      return extend(state, {currentCity: action.payload.city});
+      return extend(state, {currentCity: action.payload.cityName});
     }
     case ActionType.SET_OFFERS: {
-      return extend(state, {offers: action.payload.offers});
+      return extend(state, {offers: action.payload.offerItems});
     }
     default:
       return state;
