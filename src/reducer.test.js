@@ -1,4 +1,7 @@
-export default [
+import {reducer, ActionCreator, ActionType} from './reducer.js';
+
+
+const offers = [
   {
     id: 0,
     offerInfo: {
@@ -50,3 +53,38 @@ export default [
     }
   },
 ];
+
+
+it(`Reducer should return initial state`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    currentCity: `Paris`,
+    offers,
+  });
+});
+
+it(`Reducer should set current city by a given name`, () => {
+  expect(reducer({
+    currentCity: `Paris`,
+    offers,
+  }, {
+    type: ActionType.SET_CITY,
+    payload: {
+      cityName: `Brussels`,
+    },
+  })).toEqual({
+    currentCity: `Brussels`,
+    offers,
+  });
+});
+
+
+describe(`Action creators work correctly`, () => {
+  it(`Action creator for setting city returns correct action`, () => {
+    expect(ActionCreator.setCity(`Dusseldorf`)).toEqual({
+      type: ActionType.SET_CITY,
+      payload: {
+        cityName: `Dusseldorf`,
+      },
+    });
+  });
+});

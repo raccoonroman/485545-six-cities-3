@@ -1,8 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
-import Main from "../main/main.jsx";
-import OfferDetails from "../offer-details/offer-details.jsx";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
+import Main from '../main/main.jsx';
+import OfferDetails from '../offer-details/offer-details.jsx';
 
 
 const Page = {
@@ -11,7 +13,7 @@ const Page = {
 };
 
 
-export default class App extends React.PureComponent {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this._handleOfferTitleClick = this._handleOfferTitleClick.bind(this);
@@ -37,14 +39,16 @@ export default class App extends React.PureComponent {
   }
 
   _renderApp() {
-    const {offers} = this.props;
+    const {currentCity, offers, onCityChange} = this.props;
     const {currentPage, currentPageOfferId} = this.state;
 
     switch (currentPage) {
       case Page.MAIN:
         return (
           <Main
+            currentCity={currentCity}
             offers={offers}
+            onCityChange={onCityChange}
             onOfferTitleClick={this._handleOfferTitleClick}
           />
         );
@@ -61,10 +65,10 @@ export default class App extends React.PureComponent {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
+          <Route exact path='/'>
             {this._renderApp()}
           </Route>
-          <Route exact path="/offer">
+          <Route exact path='/offer'>
             <OfferDetails offer={offers[0]} />
           </Route>
         </Switch>
@@ -74,5 +78,19 @@ export default class App extends React.PureComponent {
 }
 
 App.propTypes = {
+  currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onCityChange: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = ({currentCity, offers}) => ({currentCity, offers});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(cityName) {
+    dispatch(ActionCreator.setCity(cityName));
+  },
+});
+
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
