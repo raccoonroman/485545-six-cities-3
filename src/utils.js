@@ -7,8 +7,14 @@ const getRandomIntInclusive = (minNumber, maxNumber) => {
 const getRatingStarsStyle = (rating) => ({width: `${rating / 5 * 100}%`});
 const extend = (a, b) => Object.assign({}, a, b);
 
+const getCities = (offers) => {
+  const cities = offers.map(({city}) => city.name);
+  return [...new Set(cities)];
+};
+
 export {
   getRandomIntInclusive,
   getRatingStarsStyle,
   extend,
+  getCities,
 };

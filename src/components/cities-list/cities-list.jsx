@@ -1,27 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import {CITIES} from '../../const.js';
 
 
-const CitiesList = ({currentCity, onCityChange}) => {
+const CitiesList = ({cities, currentCity, onCityChange}) => {
   const getTabClass = (city) => cn({
-    'locations__item-link': true,
-    'tabs__item': true,
+    'locations__item-link tabs__item': true,
     'tabs__item--active': city === currentCity,
   });
 
-  const handleCityTabClick = (cityName) => (evt) => {
+  const handleCityTabClick = (city) => (evt) => {
     evt.preventDefault();
-    onCityChange(cityName);
+    onCityChange(city);
   };
 
   return (
     <ul className="locations__list tabs__list">
-      {CITIES.map(({name}) => (
-        <li key={name} className="locations__item">
-          <a onClick={handleCityTabClick(name)} className={getTabClass(name)} href="#">
-            <span>{name}</span>
+      {cities.map((city) => (
+        <li key={city} className="locations__item">
+          <a onClick={handleCityTabClick(city)} className={getTabClass(city)} href="#">
+            <span>{city}</span>
           </a>
         </li>
       ))}
@@ -30,6 +28,7 @@ const CitiesList = ({currentCity, onCityChange}) => {
 };
 
 CitiesList.propTypes = {
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   currentCity: PropTypes.string.isRequired,
   onCityChange: PropTypes.func.isRequired,
 };

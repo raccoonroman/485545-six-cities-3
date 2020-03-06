@@ -1,10 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import {CITIES} from "../../const.js";
 
-
-const ZOOM_LEVEL = 12;
 
 const Pin = {
   PATH: `img/pin.svg`,
@@ -16,18 +13,13 @@ const TitleLayer = {
   ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
 };
 
-const getCityCoords = (cityName) => {
-  const city = CITIES.find(({name}) => name === cityName);
-  return city.coords;
-};
 
-
-const buildMap = (container, offers, city) => {
+const buildMap = (container, offers, cityLocation) => {
   if (!container) {
     return null;
   }
 
-  const cityCoords = getCityCoords(city);
+  const {latitude, longitude, zoom} = cityLocation;
 
   const icon = leaflet.icon({
     iconUrl: Pin.PATH,
@@ -35,19 +27,20 @@ const buildMap = (container, offers, city) => {
   });
 
   const map = leaflet.map(container, {
-    center: cityCoords,
-    zoom: ZOOM_LEVEL,
+    center: [latitude, longitude],
+    zoom,
     zoomControl: false,
     marker: true,
   });
-  map.setView(cityCoords, ZOOM_LEVEL);
+  map.setView([latitude, longitude], zoom);
 
   leaflet
     .tileLayer(TitleLayer.PATH, {attribution: TitleLayer.ATTRIBUTION})
     .addTo(map);
 
-  offers.forEach(({offerInfo: {coords}}) => {
-    leaflet.marker(coords, {icon}).addTo(map);
+  offers.forEach(({location}) => {
+    const {latitude: x, longitude: y} = location;
+    leaflet.marker([x, y], {icon}).addTo(map);
   });
 
   return map;
@@ -75,9 +68,9 @@ export default class Map extends React.Component {
   }
 
   _buildMap() {
-    const {offers, city} = this.props;
+    const {offers, cityLocation} = this.props;
     const mapElement = this._mapRef.current;
-    this._map = buildMap(mapElement, offers, city);
+    this._map = buildMap(mapElement, offers, cityLocation);
   }
 
   _removeMap() {
@@ -97,10 +90,17 @@ export default class Map extends React.Component {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    offerInfo: PropTypes.shape({
-      coords: PropTypes.arrayOf(PropTypes.number),
-    }).isRequired,
-  })).isRequired,
-  city: PropTypes.string.isRequired,
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+        }).isRequired,
+      }).isRequired
+  ).isRequired,
+  cityLocation: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
 };

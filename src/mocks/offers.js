@@ -115,7 +115,7 @@ export default [
       location: {
         latitude: 50.850402,
         longitude: 4.351012,
-        zoom: 10,
+        zoom: 13,
       },
     },
   },
@@ -139,7 +139,7 @@ export default [
       location: {
         latitude: 48.857708,
         longitude: 2.352208,
-        zoom: 10,
+        zoom: 12,
       },
     },
   },

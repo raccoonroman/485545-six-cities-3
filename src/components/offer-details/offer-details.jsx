@@ -1,11 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
+import cn from 'classnames';
 import {OFFER_CATEGORIES} from "../../const.js";
 import {getRatingStarsStyle} from "../../utils.js";
 
 
 const OfferDetails = ({offer}) => {
-  const {title, price, mark, category, rating, imageUrl} = offer.offerInfo;
+  const {
+    title,
+    previewImage,
+    price,
+    rating,
+    type,
+    bedrooms,
+    maxAdults,
+    isFavorite,
+    isPremium,
+  } = offer;
+
+  const bookmarkButtonClass = cn({
+    'property__bookmark-button button': true,
+    'property__bookmark-button--active': isFavorite,
+  });
 
   return (
     <div className="page">
@@ -37,7 +53,7 @@ const OfferDetails = ({offer}) => {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               <div className="property__image-wrapper">
-                <img className="property__image" src={imageUrl} alt={title} />
+                <img className="property__image" src={previewImage} alt={title} />
               </div>
               <div className="property__image-wrapper">
                 <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
@@ -58,12 +74,12 @@ const OfferDetails = ({offer}) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {mark && <div className="property__mark">
-                <span>{mark}</span>
+              {isPremium && <div className="property__mark">
+                <span>Premium</span>
               </div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{title}</h1>
-                <button className="property__bookmark-button button" type="button">
+                <button className={bookmarkButtonClass} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -79,13 +95,13 @@ const OfferDetails = ({offer}) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {category}
+                  {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  3 Bedrooms
+                  {bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max 4 adults
+                  Max {maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -333,15 +349,28 @@ const OfferDetails = ({offer}) => {
 OfferDetails.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    offerInfo: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      mark: PropTypes.string,
-      category: PropTypes.oneOf(OFFER_CATEGORIES).isRequired,
-      rating: PropTypes.number.isRequired,
-      imageUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.oneOf(OFFER_CATEGORIES).isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
     }).isRequired,
-  }),
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default OfferDetails;
