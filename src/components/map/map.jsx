@@ -4,7 +4,10 @@ import leaflet from "leaflet";
 
 
 const Pin = {
-  PATH: `img/pin.svg`,
+  PATH: {
+    BLUE: `img/pin.svg`,
+    ORANGE: `img/pin-active.svg`,
+  },
   SIZES: [30, 30],
 };
 
@@ -36,16 +39,20 @@ const renderMap = (container, cityLocation) => {
 };
 
 
-const renderMarkers = (offers, map) => {
+const renderMarkers = (offers, currentOfferId, map) => {
   const markers = leaflet.layerGroup().addTo(map);
 
-  const icon = leaflet.icon({
-    iconUrl: Pin.PATH,
-    iconSize: Pin.SIZES,
-  });
+  const createIcon = (pinType) => {
+    return leaflet.icon({
+      iconUrl: pinType,
+      iconSize: Pin.SIZES,
+    });
+  };
 
-  offers.forEach(({location}) => {
+  offers.forEach(({id, location}) => {
     const {latitude: x, longitude: y} = location;
+    const pinType = id === currentOfferId ? Pin.PATH.ORANGE : Pin.PATH.BLUE;
+    const icon = createIcon(pinType);
     leaflet.marker([x, y], {icon}).addTo(markers);
   });
 
@@ -84,11 +91,11 @@ export default class Map extends React.PureComponent {
   }
 
   _renderMarkers() {
-    const {offers} = this.props;
+    const {offers, currentOfferId} = this.props;
     if (this._markers) {
       this._removeMarkers();
     }
-    this._markers = renderMarkers(offers, this._map);
+    this._markers = renderMarkers(offers, currentOfferId, this._map);
   }
 
   _removeMap() {
