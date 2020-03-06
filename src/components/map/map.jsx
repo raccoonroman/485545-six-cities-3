@@ -81,8 +81,10 @@ export default class Map extends React.Component {
   }
 
   render() {
+    const {className} = this.props;
+
     return (
-      <section className="cities__map map">
+      <section className={className}>
         <div ref={this._mapRef} id="map"></div>
       </section>
     );
@@ -90,6 +92,7 @@ export default class Map extends React.Component {
 }
 
 Map.propTypes = {
+  className: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         location: PropTypes.shape({
