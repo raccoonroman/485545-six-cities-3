@@ -14,17 +14,12 @@ const TitleLayer = {
 };
 
 
-const buildMap = (container, offers, cityLocation) => {
+const renderMap = (container, cityLocation) => {
   if (!container) {
     return null;
   }
 
   const {latitude, longitude, zoom} = cityLocation;
-
-  const icon = leaflet.icon({
-    iconUrl: Pin.PATH,
-    iconSize: Pin.SIZES,
-  });
 
   const map = leaflet.map(container, {
     center: [latitude, longitude],
@@ -32,51 +27,81 @@ const buildMap = (container, offers, cityLocation) => {
     zoomControl: false,
     marker: true,
   });
-  map.setView([latitude, longitude], zoom);
 
   leaflet
     .tileLayer(TitleLayer.PATH, {attribution: TitleLayer.ATTRIBUTION})
     .addTo(map);
 
-  offers.forEach(({location}) => {
-    const {latitude: x, longitude: y} = location;
-    leaflet.marker([x, y], {icon}).addTo(map);
-  });
-
   return map;
 };
 
 
-export default class Map extends React.Component {
+const renderMarkers = (offers, map) => {
+  const markers = leaflet.layerGroup().addTo(map);
+
+  const icon = leaflet.icon({
+    iconUrl: Pin.PATH,
+    iconSize: Pin.SIZES,
+  });
+
+  offers.forEach(({location}) => {
+    const {latitude: x, longitude: y} = location;
+    leaflet.marker([x, y], {icon}).addTo(markers);
+  });
+
+  return markers;
+};
+
+
+export default class Map extends React.PureComponent {
   constructor(props) {
     super(props);
     this._mapRef = React.createRef();
     this._map = null;
+    this._markers = null;
   }
 
   componentDidMount() {
-    this._buildMap();
+    this._renderMap();
+    this._renderMarkers();
   }
 
   componentDidUpdate() {
-    this._removeMap();
-    this._buildMap();
+    const {latitude, longitude, zoom} = this.props.cityLocation;
+    this._map.setView([latitude, longitude], zoom);
+    this._renderMarkers();
   }
 
   componentWillUnmount() {
     this._removeMap();
+    this._removeMarkers();
   }
 
-  _buildMap() {
-    const {offers, cityLocation} = this.props;
+  _renderMap() {
+    const {cityLocation} = this.props;
     const mapElement = this._mapRef.current;
-    this._map = buildMap(mapElement, offers, cityLocation);
+    this._map = renderMap(mapElement, cityLocation);
+  }
+
+  _renderMarkers() {
+    const {offers} = this.props;
+    if (this._markers) {
+      this._removeMarkers();
+    }
+    this._markers = renderMarkers(offers, this._map);
   }
 
   _removeMap() {
     if (this._map) {
       this._map.remove();
       this._map = null;
+    }
+  }
+
+  _removeMarkers() {
+    if (this._markers) {
+      this._markers.clearLayers();
+      this._markers = null;
     }
   }
 
@@ -101,6 +126,7 @@ Map.propTypes = {
         }).isRequired,
       }).isRequired
   ).isRequired,
+  currentOfferId: PropTypes.number,
   cityLocation: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
