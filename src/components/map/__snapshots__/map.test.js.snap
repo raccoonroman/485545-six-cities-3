@@ -29,8 +29,8 @@ exports[`Should <Map /> render correctly 1`] = `
               alt=""
               class="leaflet-tile"
               role="presentation"
-              src="https://b.basemaps.cartocdn.com/rastertiles/voyager/12/2103/1345.png"
-              style="width: 256px; height: 256px; left: -192px; top: -219px;"
+              src="https://c.basemaps.cartocdn.com/rastertiles/voyager/12/2371/1402.png"
+              style="width: 256px; height: 256px; left: -229px; top: -153px;"
             />
           </div>
         </div>
@@ -48,28 +48,21 @@ exports[`Should <Map /> render correctly 1`] = `
           alt=""
           class="leaflet-marker-icon leaflet-zoom-hide leaflet-interactive"
           src="img/pin.svg"
-          style="margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; left: -7388px; top: 16134px; z-index: 16134;"
+          style="margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; left: -69303px; top: -14391px; z-index: -14391;"
+          tabindex="0"
+        />
+        <img
+          alt=""
+          class="leaflet-marker-icon leaflet-zoom-hide leaflet-interactive"
+          src="img/pin-active.svg"
+          style="margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; left: -68638px; top: -14327px; z-index: -14327;"
           tabindex="0"
         />
         <img
           alt=""
           class="leaflet-marker-icon leaflet-zoom-hide leaflet-interactive"
           src="img/pin.svg"
-          style="margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; left: -136px; top: 66px; z-index: 66;"
-          tabindex="0"
-        />
-        <img
-          alt=""
-          class="leaflet-marker-icon leaflet-zoom-hide leaflet-interactive"
-          src="img/pin.svg"
-          style="margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; left: 86px; top: -36px; z-index: -36;"
-          tabindex="0"
-        />
-        <img
-          alt=""
-          class="leaflet-marker-icon leaflet-zoom-hide leaflet-interactive"
-          src="img/pin.svg"
-          style="margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; left: 115px; top: 11px; z-index: 11;"
+          style="margin-left: -15px; margin-top: -15px; width: 30px; height: 30px; left: -68792px; top: -14411px; z-index: -14411;"
           tabindex="0"
         />
       </div>

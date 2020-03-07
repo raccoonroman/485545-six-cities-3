@@ -17,7 +17,8 @@ exports[`Render <Main /> 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link header__logo-link--active"
+            className="header__logo-link"
+            href="/"
           >
             <img
               alt="6 cities logo"
@@ -82,7 +83,7 @@ exports[`Render <Main /> 1`] = `
               onClick={[Function]}
             >
               <span>
-                Paris
+                Vinnytsya
               </span>
             </a>
           </li>
@@ -95,7 +96,7 @@ exports[`Render <Main /> 1`] = `
               onClick={[Function]}
             >
               <span>
-                Cologne
+                Lviv
               </span>
             </a>
           </li>
@@ -108,46 +109,7 @@ exports[`Render <Main /> 1`] = `
               onClick={[Function]}
             >
               <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Hamburg
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Dusseldorf
+                Kyiv
               </span>
             </a>
           </li>
@@ -173,7 +135,7 @@ exports[`Render <Main /> 1`] = `
           >
             1
              places to stay in 
-            Paris
+            Vinnytsya
           </b>
           <form
             action="#"
@@ -183,10 +145,11 @@ exports[`Render <Main /> 1`] = `
             <span
               className="places__sorting-caption"
             >
-              Sort by
+              Sort by 
             </span>
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
@@ -201,28 +164,32 @@ exports[`Render <Main /> 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom"
             >
               <li
                 className="places__option places__option--active"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Top rated first
@@ -235,14 +202,8 @@ exports[`Render <Main /> 1`] = `
             <article
               className="cities__place-card place-card"
               onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
-              <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
@@ -250,10 +211,10 @@ exports[`Render <Main /> 1`] = `
                   href="#"
                 >
                   <img
-                    alt="Lorem ipsum dolor sit amet"
+                    alt="Lorem ipsum"
                     className="place-card__image"
                     height="200"
-                    src="https://i.picsum.photos/id/63/260/200.jpg"
+                    src="https://i.picsum.photos/id/22/260/200.jpg"
                     width="260"
                   />
                 </a>
@@ -271,7 +232,7 @@ exports[`Render <Main /> 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      62
+                      100
                     </b>
                     <span
                       className="place-card__price-text"
@@ -325,7 +286,7 @@ exports[`Render <Main /> 1`] = `
                   <a
                     href="#"
                   >
-                    Lorem ipsum dolor sit amet
+                    Lorem ipsum
                   </a>
                 </h2>
                 <p

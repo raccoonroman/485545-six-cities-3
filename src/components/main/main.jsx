@@ -43,7 +43,6 @@ class Main extends React.PureComponent {
     return (
       <div className="page page--gray page--main">
         <Header />
-
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
@@ -88,6 +87,7 @@ Main.propTypes = {
       PropTypes.shape({
         city: PropTypes.shape({
           name: PropTypes.string.isRequired,
+          location: PropTypes.object.isRequired,
         }).isRequired,
       }).isRequired
   ).isRequired,

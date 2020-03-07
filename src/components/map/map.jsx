@@ -40,6 +40,9 @@ const renderMap = (container, cityLocation) => {
 
 
 const renderMarkers = (offers, currentOfferId, map) => {
+  if (!map) {
+    return null;
+  }
   const markers = leaflet.layerGroup().addTo(map);
 
   const createIcon = (pinType) => {
