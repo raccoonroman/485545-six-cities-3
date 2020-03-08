@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import {CITIES} from "../../const.js";
 
-
-const ZOOM_LEVEL = 12;
 
 const Pin = {
-  PATH: `img/pin.svg`,
+  PATH: {
+    BLUE: `img/pin.svg`,
+    ORANGE: `img/pin-active.svg`,
+  },
   SIZES: [30, 30],
 };
 
@@ -16,68 +16,89 @@ const TitleLayer = {
   ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
 };
 
-const getCityCoords = (cityName) => {
-  const city = CITIES.find(({name}) => name === cityName);
-  return city.coords;
-};
 
-
-const buildMap = (container, offers, city) => {
+const renderMap = (container, cityLocation) => {
   if (!container) {
     return null;
   }
 
-  const cityCoords = getCityCoords(city);
-
-  const icon = leaflet.icon({
-    iconUrl: Pin.PATH,
-    iconSize: Pin.SIZES,
-  });
+  const {latitude, longitude, zoom} = cityLocation;
 
   const map = leaflet.map(container, {
-    center: cityCoords,
-    zoom: ZOOM_LEVEL,
+    center: [latitude, longitude],
+    zoom,
     zoomControl: false,
     marker: true,
   });
-  map.setView(cityCoords, ZOOM_LEVEL);
 
   leaflet
     .tileLayer(TitleLayer.PATH, {attribution: TitleLayer.ATTRIBUTION})
     .addTo(map);
 
-  offers.forEach(({offerInfo: {coords}}) => {
-    leaflet.marker(coords, {icon}).addTo(map);
-  });
-
   return map;
 };
 
 
-export default class Map extends React.Component {
+const renderMarkers = (offers, currentOfferId, map) => {
+  if (!map) {
+    return null;
+  }
+  const markers = leaflet.layerGroup().addTo(map);
+
+  const createIcon = (pinType) => {
+    return leaflet.icon({
+      iconUrl: pinType,
+      iconSize: Pin.SIZES,
+    });
+  };
+
+  offers.forEach(({id, location}) => {
+    const {latitude: x, longitude: y} = location;
+    const pinType = id === currentOfferId ? Pin.PATH.ORANGE : Pin.PATH.BLUE;
+    const icon = createIcon(pinType);
+    leaflet.marker([x, y], {icon}).addTo(markers);
+  });
+
+  return markers;
+};
+
+
+export default class Map extends React.PureComponent {
   constructor(props) {
     super(props);
     this._mapRef = React.createRef();
     this._map = null;
+    this._markers = null;
   }
 
   componentDidMount() {
-    this._buildMap();
+    this._renderMap();
+    this._renderMarkers();
   }
 
   componentDidUpdate() {
-    this._removeMap();
-    this._buildMap();
+    const {latitude, longitude, zoom} = this.props.cityLocation;
+    this._map.setView([latitude, longitude], zoom);
+    this._renderMarkers();
   }
 
   componentWillUnmount() {
     this._removeMap();
+    this._removeMarkers();
   }
 
-  _buildMap() {
-    const {offers, city} = this.props;
+  _renderMap() {
+    const {cityLocation} = this.props;
     const mapElement = this._mapRef.current;
-    this._map = buildMap(mapElement, offers, city);
+    this._map = renderMap(mapElement, cityLocation);
+  }
+
+  _renderMarkers() {
+    const {offers, currentOfferId} = this.props;
+    if (this._markers) {
+      this._removeMarkers();
+    }
+    this._markers = renderMarkers(offers, currentOfferId, this._map);
   }
 
   _removeMap() {
@@ -87,9 +108,18 @@ export default class Map extends React.Component {
     }
   }
 
+  _removeMarkers() {
+    if (this._markers) {
+      this._markers.clearLayers();
+      this._markers = null;
+    }
+  }
+
   render() {
+    const {className} = this.props;
+
     return (
-      <section className="cities__map map">
+      <section className={className}>
         <div ref={this._mapRef} id="map"></div>
       </section>
     );
@@ -97,10 +127,19 @@ export default class Map extends React.Component {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    offerInfo: PropTypes.shape({
-      coords: PropTypes.arrayOf(PropTypes.number),
-    }).isRequired,
-  })).isRequired,
-  city: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+  offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        location: PropTypes.shape({
+          latitude: PropTypes.number.isRequired,
+          longitude: PropTypes.number.isRequired,
+        }).isRequired,
+      }).isRequired
+  ).isRequired,
+  currentOfferId: PropTypes.number,
+  cityLocation: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
 };

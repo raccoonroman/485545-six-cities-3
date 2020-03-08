@@ -1,11 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Provider} from 'react-redux';
-import configureStore from 'redux-mock-store';
-import {App} from './app.jsx';
+import Offers from './offers.jsx';
 
-
-const mockStore = configureStore([]);
 
 const offers = [
   {
@@ -24,7 +20,7 @@ const offers = [
       longitude: 4.673877537499948,
     },
     city: {
-      name: `Vinnytsia`,
+      name: `Vinnytsya`,
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
@@ -48,7 +44,7 @@ const offers = [
       longitude: 4.902452,
     },
     city: {
-      name: `Vinnytsia`,
+      name: `Vinnytsya`,
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
@@ -72,7 +68,7 @@ const offers = [
       longitude: 4.849366,
     },
     city: {
-      name: `Kyiv`,
+      name: `Vinnytsya`,
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
@@ -83,19 +79,14 @@ const offers = [
 ];
 
 
-it(`Render App`, () => {
-  const store = mockStore({});
-
+it(`Should offers render correctly`, () => {
   const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            currentCity={`Vinnytsia`}
-            offers={offers}
-            onCityChange={() => {}}
-          />
-        </Provider>
-    )
+    .create(<Offers
+      offers={offers}
+      currentCity={`Vinnytsya`}
+      onCardHover={() => {}}
+      onOfferTitleClick={() => {}}
+    />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -5,14 +5,15 @@ import OfferDetails from "./offer-details.jsx";
 
 const offer = {
   id: 100500,
-  offerInfo: {
-    title: `Hole`,
-    price: 12,
-    mark: `Premium quality`,
-    category: `house`,
-    rating: 2.9,
-    imageUrl: `https://i.picsum.photos/id/199/260/200.jpg`,
-  }
+  title: `Lorem ipsum`,
+  previewImage: `https://i.picsum.photos/id/77/260/200.jpg`,
+  price: 200,
+  rating: 5.0,
+  type: `apartment`,
+  bedrooms: 11,
+  maxAdults: 12,
+  isFavorite: true,
+  isPremium: true,
 };
 
 

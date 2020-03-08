@@ -1,10 +1,11 @@
-import {extend} from './utils.js';
-import {CITIES} from './const.js';
+import {extend, getCities} from './utils.js';
 import offers from './mocks/offers.js';
 
 
+const firstCity = getCities(offers)[0];
+
 const initialState = {
-  currentCity: CITIES[0].name,
+  currentCity: firstCity,
   offers,
 };
 
