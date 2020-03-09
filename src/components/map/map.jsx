@@ -28,11 +28,16 @@ const renderMap = (container, cityLocation) => {
     center: [latitude, longitude],
     zoom,
     zoomControl: false,
+    scrollWheelZoom: false,
     marker: true,
   });
 
   leaflet
     .tileLayer(TitleLayer.PATH, {attribution: TitleLayer.ATTRIBUTION})
+    .addTo(map);
+
+  leaflet.control
+    .zoom({position: `topright`})
     .addTo(map);
 
   return map;

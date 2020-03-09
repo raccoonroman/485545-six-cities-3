@@ -4,10 +4,12 @@ import cn from 'classnames';
 import {OFFER_CATEGORIES} from "../../const.js";
 import {getRatingStarsStyle} from "../../utils.js";
 import Header from '../../components/header/header.jsx';
+import Map from '../map/map.jsx';
 
 
-const OfferDetails = ({offer}) => {
+const OfferDetails = ({offer, neighbourhoodOffers}) => {
   const {
+    id,
     title,
     previewImage,
     price,
@@ -17,7 +19,10 @@ const OfferDetails = ({offer}) => {
     maxAdults,
     isFavorite,
     isPremium,
+    city,
   } = offer;
+
+  const {location: cityLocation} = city;
 
   const bookmarkButtonClass = cn({
     'property__bookmark-button button': true,
@@ -217,7 +222,12 @@ const OfferDetails = ({offer}) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map
+            className="property__map map"
+            offers={neighbourhoodOffers}
+            cityLocation={cityLocation}
+            currentOfferId={id}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
@@ -338,7 +348,20 @@ OfferDetails.propTypes = {
     maxAdults: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+    }).isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
   }).isRequired,
+  neighbourhoodOffers: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default OfferDetails;

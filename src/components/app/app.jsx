@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {getOffersByCity, getDistanceBetweenPoints} from '../../utils.js';
 import {ActionCreator} from '../../reducer.js';
 import Main from '../main/main.jsx';
 import OfferDetails from '../offer-details/offer-details.jsx';
@@ -26,6 +27,19 @@ class App extends React.PureComponent {
   _getOfferById(currentId) {
     const {offers} = this.props;
     return offers.find(({id}) => id === currentId);
+  }
+
+  _getNeighbourhoodOffers(currentOffer, offers) {
+    const sortedOffersByDistance = offers.slice().sort((a, b) => {
+      const {longitude: x0, latitude: y0} = currentOffer.location;
+      const {longitude: x1, latitude: y1} = a.location;
+      const {longitude: x2, latitude: y2} = b.location;
+      const distanceToFirstPoint = getDistanceBetweenPoints([x0, y0], [x1, y1]);
+      const distanceToSecondPoint = getDistanceBetweenPoints([x0, y0], [x2, y2]);
+      return distanceToFirstPoint - distanceToSecondPoint;
+    });
+
+    return sortedOffersByDistance.slice(0, 4);
   }
 
   _handleOfferTitleClick(id) {
@@ -53,8 +67,15 @@ class App extends React.PureComponent {
           />
         );
       case Page.OFFER_DETAILS:
-        const offer = this._getOfferById(currentPageOfferId);
-        return <OfferDetails offer={offer} />;
+        const currentOffer = this._getOfferById(currentPageOfferId);
+        const offersByCity = getOffersByCity(currentCity, offers);
+        const neighbourhoodOffers = this._getNeighbourhoodOffers(currentOffer, offersByCity);
+        return (
+          <OfferDetails
+            offer={currentOffer}
+            neighbourhoodOffers={neighbourhoodOffers}
+          />
+        );
       default:
         return null;
     }
