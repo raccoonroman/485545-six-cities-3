@@ -30,7 +30,8 @@ class App extends React.PureComponent {
   }
 
   _getNeighbourhoodOffers(currentOffer, offers) {
-    const sortedOffersByDistance = offers.slice().sort((a, b) => {
+    const offersWithoutCurrent = offers.filter(({id}) => id !== currentOffer.id);
+    const sortedOffersByDistance = offersWithoutCurrent.slice().sort((a, b) => {
       const {longitude: x0, latitude: y0} = currentOffer.location;
       const {longitude: x1, latitude: y1} = a.location;
       const {longitude: x2, latitude: y2} = b.location;
@@ -39,7 +40,7 @@ class App extends React.PureComponent {
       return distanceToFirstPoint - distanceToSecondPoint;
     });
 
-    return sortedOffersByDistance.slice(0, 4);
+    return sortedOffersByDistance.slice(0, 3);
   }
 
   _handleOfferTitleClick(id) {
@@ -74,6 +75,7 @@ class App extends React.PureComponent {
           <OfferDetails
             offer={currentOffer}
             neighbourhoodOffers={neighbourhoodOffers}
+            onOfferTitleClick={this._handleOfferTitleClick}
           />
         );
       default:

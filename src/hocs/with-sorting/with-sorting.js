@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {SortType} from '../../const.js';
+import {SortType, CardType} from '../../const.js';
 import Sorting from '../../components/sorting/sorting.jsx';
 
 
@@ -65,6 +65,8 @@ const withSorting = (Component) => {
             onSortTypeChange={this._handleSortTypeChange}
           />
           <Component
+            className={`cities__places-list places__list`}
+            cardsType={CardType.CITY}
             offers={sortedOffers}
             onCardHover={onCardHover}
             onOfferTitleClick={onOfferTitleClick}

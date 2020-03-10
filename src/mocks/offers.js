@@ -146,7 +146,7 @@ export default [
   {
     id: 6,
     title: `There is room for improvement`,
-    previewImage: `https://i.picsum.photos/id/35/260/200.jpg`,
+    previewImage: `https://i.picsum.photos/id/36/260/200.jpg`,
     price: 96,
     rating: 4.3,
     type: `room`,
