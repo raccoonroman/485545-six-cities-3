@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Offers from './offers.jsx';
+import OffersList from './offers-list.jsx';
 
 
 const offers = [
@@ -81,7 +81,7 @@ const offers = [
 
 it(`Should offers render correctly`, () => {
   const tree = renderer
-    .create(<Offers
+    .create(<OffersList
       offers={offers}
       currentCity={`Vinnytsya`}
       onCardHover={() => {}}

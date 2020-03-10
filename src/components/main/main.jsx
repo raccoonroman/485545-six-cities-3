@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {getCities, getOffersByCity} from '../../utils.js';
+import withSorting from '../../hocs/with-sorting/with-sorting.js';
 import Header from '../../components/header/header.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
-import Offers from '../offers/offers.jsx';
+import OffersList from '../offers-list/offers-list.jsx';
 import Map from '../map/map.jsx';
+
+
+const OffersListWithSorting = withSorting(OffersList);
 
 
 class Main extends React.PureComponent {
@@ -53,7 +57,7 @@ class Main extends React.PureComponent {
           <div className="cities">
             <div className="cities__places-container container">
 
-              <Offers
+              <OffersListWithSorting
                 offers={offersByCity}
                 currentCity={currentCity}
                 onCardHover={this._handleOfferCardHover}
