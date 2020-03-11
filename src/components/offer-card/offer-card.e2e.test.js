@@ -1,7 +1,9 @@
-import React from "react";
-import {configure, shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import OfferCard from "./offer-card.jsx";
+import React from 'react';
+import {configure, shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import {CardType} from '../../const.js';
+import OfferCard from './offer-card.jsx';
+
 
 configure({adapter: new Adapter()});
 
@@ -32,12 +34,11 @@ const offer = {
 
 
 it(`Click on offer card title`, () => {
-  const handleCardHover = jest.fn();
   const handleCardTitleClick = jest.fn();
 
   const card = shallow(<OfferCard
+    cardType={CardType.NEAR}
     offer={offer}
-    onCardHover={handleCardHover}
     onOfferTitleClick={handleCardTitleClick}
   />);
 
@@ -55,6 +56,7 @@ it(`Hover on offer card`, () => {
   const handleCardTitleClick = jest.fn();
 
   const card = shallow(<OfferCard
+    cardType={CardType.CITY}
     offer={offer}
     onCardHover={handleCardHover}
     onOfferTitleClick={handleCardTitleClick}

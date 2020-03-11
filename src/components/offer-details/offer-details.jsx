@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
-import {OFFER_CATEGORIES, CardType} from "../../const.js";
-import {getRatingStarsStyle} from "../../utils.js";
+import {OFFER_CATEGORIES, CardType} from '../../const.js';
+import {getRatingStarsStyle} from '../../utils.js';
 import Header from '../../components/header/header.jsx';
 import Map from '../map/map.jsx';
 import OffersList from '../offers-list/offers-list.jsx';

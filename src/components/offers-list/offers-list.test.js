@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {CardType} from '../../const.js';
 import OffersList from './offers-list.jsx';
 
 
@@ -82,9 +83,9 @@ const offers = [
 it(`Should offers render correctly`, () => {
   const tree = renderer
     .create(<OffersList
+      className={`near-places__list places__list`}
+      cardsType={CardType.NEAR}
       offers={offers}
-      currentCity={`Vinnytsya`}
-      onCardHover={() => {}}
       onOfferTitleClick={() => {}}
     />)
     .toJSON();
