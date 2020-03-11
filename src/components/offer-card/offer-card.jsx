@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
-import {OFFER_CATEGORIES} from "../../const.js";
-import {getRatingStarsStyle} from "../../utils.js";
+import {OFFER_CATEGORIES, CardType} from '../../const.js';
+import {getRatingStarsStyle} from '../../utils.js';
 
 
-const OfferCard = ({offer, onCardHover, onOfferTitleClick}) => {
+const OfferCard = ({cardType, offer, onCardHover, onOfferTitleClick}) => {
   const {
     id,
     title,
@@ -19,17 +19,27 @@ const OfferCard = ({offer, onCardHover, onOfferTitleClick}) => {
 
   const ratingRounded = Math.round(rating);
 
+  const placeCardClass = cn({
+    'cities__place-card': cardType === CardType.CITY,
+    'near-places__card': cardType === CardType.NEAR,
+    'place-card': true,
+  });
+  const imageWrapperClass = cn({
+    'cities__image-wrapper': cardType === CardType.CITY,
+    'near-places__image-wrapper': cardType === CardType.NEAR,
+    'place-card__image-wrapper': true,
+  });
   const bookmarkButtonClass = cn({
     'place-card__bookmark-button button': true,
     'place-card__bookmark-button--active': isFavorite,
   });
 
   return (
-    <article onMouseEnter={onCardHover(id)} onMouseLeave={onCardHover(null)} className="cities__place-card place-card">
+    <article onMouseEnter={onCardHover && onCardHover(id)} onMouseLeave={onCardHover && onCardHover(null)} className={placeCardClass}>
       {isPremium && <div className="place-card__mark">
         <span>Premium</span>
       </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={imageWrapperClass}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
         </a>
@@ -63,6 +73,7 @@ const OfferCard = ({offer, onCardHover, onOfferTitleClick}) => {
 };
 
 OfferCard.propTypes = {
+  cardType: PropTypes.string.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -73,7 +84,7 @@ OfferCard.propTypes = {
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
   }).isRequired,
-  onCardHover: PropTypes.func.isRequired,
+  onCardHover: PropTypes.func,
   onOfferTitleClick: PropTypes.func.isRequired,
 };
 

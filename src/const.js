@@ -7,4 +7,9 @@ const SortType = {
   TOP_RATED_FIRST: `Top rated first`,
 };
 
-export {OFFER_CATEGORIES, SortType};
+const CardType = {
+  CITY: `city`,
+  NEAR: `near`,
+};
+
+export {OFFER_CATEGORIES, SortType, CardType};

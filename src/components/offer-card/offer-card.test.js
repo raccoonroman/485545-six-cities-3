@@ -1,6 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import OfferCard from "./offer-card.jsx";
+import React from 'react';
+import renderer from 'react-test-renderer';
+import {CardType} from '../../const.js';
+import OfferCard from './offer-card.jsx';
 
 
 const offer = {
@@ -32,6 +33,7 @@ const offer = {
 it(`Should offer card render correctly`, () => {
   const tree = renderer
     .create(<OfferCard
+      cardType={CardType.NEAR}
       offer={offer}
       onCardHover={() => {}}
       onOfferTitleClick={() => {}}
