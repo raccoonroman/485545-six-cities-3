@@ -9,11 +9,15 @@ class Sorting extends React.PureComponent {
     super(props);
     this._handleSortTypeClick = this._handleSortTypeClick.bind(this);
     this._handleSortItemClick = this._handleSortItemClick.bind(this);
-    this.state = {sortListOpened: false};
+    this.state = {
+      sortListOpened: false,
+    };
   }
 
   _handleSortTypeClick() {
-    this.setState(({sortListOpened}) => ({sortListOpened: !sortListOpened}));
+    this.setState(({sortListOpened}) => ({
+      sortListOpened: !sortListOpened,
+    }));
   }
 
   _handleSortItemClick(sortType) {
