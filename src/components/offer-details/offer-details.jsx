@@ -277,7 +277,7 @@ OfferDetails.propTypes = {
         zoom: PropTypes.number.isRequired,
       }).isRequired,
     }).isRequired,
-  }).isRequired,
+  }),
   neighbourhoodOffers: PropTypes.arrayOf(PropTypes.object),
   onOfferTitleClick: PropTypes.func,
 };
