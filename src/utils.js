@@ -1,10 +1,22 @@
+import {DEFAULT_CITIES} from './const.js';
+
+
 const getRatingStarsStyle = (rating) => ({width: `${rating / 5 * 100}%`});
 const extend = (a, b) => Object.assign({}, a, b);
 
-const getCities = (offers) => {
+const getCitiesByOffers = (offers) => {
   const cities = offers.map(({city}) => city.name);
   return [...new Set(cities)];
 };
+
+const getCities = (offers) => {
+  if (!offers.length) {
+    return DEFAULT_CITIES;
+  }
+
+  return getCitiesByOffers(offers);
+};
+
 
 const getOffersByCity = (currentCity, offers) => {
   return offers.filter(({city}) => currentCity === city.name);

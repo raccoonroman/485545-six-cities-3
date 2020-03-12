@@ -1,4 +1,5 @@
 const OFFER_CATEGORIES = [`apartment`, `room`, `house`, `hotel`];
+const DEFAULT_CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 const SortType = {
   POPULAR: `Popular`,
@@ -12,4 +13,4 @@ const CardType = {
   NEAR: `near`,
 };
 
-export {OFFER_CATEGORIES, SortType, CardType};
+export {OFFER_CATEGORIES, DEFAULT_CITIES, SortType, CardType};
