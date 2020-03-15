@@ -23,8 +23,6 @@ const Main = (props) => {
     onCardHover,
   } = props;
 
-  // console.log(offers);
-
   const offersByCity = getOffersByCity(currentCity, offers);
 
 

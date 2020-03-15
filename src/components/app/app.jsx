@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getOffersByCity, getDistanceBetweenPoints} from '../../utils.js';
-import {ActionCreator} from '../../reducer.js';
+import * as actions from '../../actions/actions.js';
 import Main from '../main/main.jsx';
 import OfferDetails from '../offer-details/offer-details.jsx';
 
@@ -106,11 +106,17 @@ App.propTypes = {
   onCityChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({currentCity, offers}) => ({currentCity, offers});
+// const mapStateToProps = ({currentCity, offers}) => ({currentCity, offers});
+const mapStateToProps = ({offers, cities}) => {
+  return {
+    offers,
+    currentCity: cities.currentCity,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(cityName) {
-    dispatch(ActionCreator.setCity(cityName));
+    dispatch(actions.setCity(cityName));
   },
 });
 
