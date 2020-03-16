@@ -11,16 +11,24 @@ export const mapToClient = (data) => {
   result.maxAdults = data[`max_adults`];
   result.isFavorite = data[`is_favorite`];
   result.isPremium = data[`is_premium`];
-  result.location = data[`location`];
+  result.location = {};
   result.location.latitude = data[`location`][`latitude`];
   result.location.longitude = data[`location`][`longitude`];
   result.location.zoom = data[`location`][`zoom`];
-  result.city = data[`city`];
+  result.city = {};
   result.city.name = data[`city`][`name`];
-  result.city.location = data[`city`][`location`];
+  result.city.location = {};
   result.city.location.latitude = data[`city`][`location`][`latitude`];
   result.city.location.longitude = data[`city`][`location`][`longitude`];
   result.city.location.zoom = data[`location`][`zoom`];
+
+  result.description = data[`description`];
+  result.goods = data[`goods`];
+  result.hostAvatarUrl = data[`host`][`avatar_url`];
+  result.hostId = data[`host`][`id`];
+  result.hostIsPro = data[`host`][`is_pro`];
+  result.hostName = data[`host`][`name`];
+  result.images = data[`images`];
 
   return result;
 };

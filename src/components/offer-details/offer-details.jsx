@@ -12,7 +12,6 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick}) => {
   const {
     id,
     title,
-    previewImage,
     price,
     rating,
     type,
@@ -21,11 +20,24 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick}) => {
     isFavorite,
     isPremium,
     location: offerLocation,
+    description,
+    goods,
+    hostAvatarUrl,
+    hostIsPro,
+    hostName,
+    images,
   } = offer;
+
+  const MAX_IMAGES = 6;
 
   const bookmarkButtonClass = cn({
     'property__bookmark-button button': true,
     'property__bookmark-button--active': isFavorite,
+  });
+
+  const hostAvatarWrapperClass = cn({
+    'property__avatar-wrapper user__avatar-wrapper': true,
+    'property__avatar-wrapper--pro': hostIsPro,
   });
 
   const getNearPlacesTitleText = () => {
@@ -43,24 +55,11 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick}) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src={previewImage} alt={title} />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
+              {images.slice(0, MAX_IMAGES).map((img) => (
+                <div key={img + id} className="property__image-wrapper">
+                  <img className="property__image" src={img} alt={title} />
+                </div>
+              ))}
             </div>
           </div>
           <div className="property__container container">
@@ -102,55 +101,23 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick}) => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="property__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="property__inside-item">
-                    Towels
-                  </li>
-                  <li className="property__inside-item">
-                    Heating
-                  </li>
-                  <li className="property__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="property__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="property__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="property__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="property__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="property__inside-item">
-                    Fridge
-                  </li>
+                  {goods.map((good) => (
+                    <li key={good + id} className="property__inside-item">
+                      {good}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                  <div className={hostAvatarWrapperClass}>
+                    <img className="property__avatar user__avatar" src={hostAvatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
-                  <span className="property__user-name">
-                    Angelina
-                  </span>
+                  <span className="property__user-name">{hostName}</span>
                 </div>
                 <div className="property__description">
-                  <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-                  </p>
+                  <p className="property__text">{description}</p>
                 </div>
               </div>
               <section className="property__reviews reviews">
@@ -266,6 +233,7 @@ OfferDetails.propTypes = {
     location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
     }).isRequired,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -275,6 +243,13 @@ OfferDetails.propTypes = {
         zoom: PropTypes.number.isRequired,
       }).isRequired,
     }).isRequired,
+    description: PropTypes.string.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    hostAvatarUrl: PropTypes.string.isRequired,
+    hostId: PropTypes.number.isRequired,
+    hostIsPro: PropTypes.bool.isRequired,
+    hostName: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
   neighbourhoodOffers: PropTypes.arrayOf(PropTypes.object),
   onOfferTitleClick: PropTypes.func,
