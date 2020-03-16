@@ -20,10 +20,8 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick}) => {
     maxAdults,
     isFavorite,
     isPremium,
-    city,
+    location: offerLocation,
   } = offer;
-
-  const {location: cityLocation} = city;
 
   const bookmarkButtonClass = cn({
     'property__bookmark-button button': true,
@@ -233,7 +231,7 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick}) => {
           <Map
             className="property__map map"
             offers={[...neighbourhoodOffers, offer]}
-            cityLocation={cityLocation}
+            location={offerLocation}
             currentOfferId={id}
           />
         </section>

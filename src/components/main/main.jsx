@@ -58,7 +58,7 @@ const Main = (props) => {
       <Map
         className="cities__map map"
         offers={offersByCity}
-        cityLocation={cityLocation}
+        location={cityLocation}
         currentOfferId={hoveredCardId}
       />
     );
