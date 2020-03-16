@@ -10,8 +10,3 @@ export const setCity = (cityName) => ({
   type: ActionType.SET_CITY,
   payload: cityName,
 });
-
-export const setHoveredCardId = (id) => ({
-  type: ActionType.SET_HOVERED_CARD_ID,
-  payload: id,
-});

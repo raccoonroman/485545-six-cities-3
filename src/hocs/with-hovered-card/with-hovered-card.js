@@ -35,6 +35,7 @@ const withHoveredCard = (Component) => {
   }
 
   WithHoveredCard.propTypes = {
+    currentCity: PropTypes.string.isRequired,
     offers: PropTypes.arrayOf(
         PropTypes.shape({
           city: PropTypes.shape({
