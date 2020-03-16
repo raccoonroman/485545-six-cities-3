@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 
@@ -34,7 +35,6 @@ const withHoveredCard = (Component) => {
   }
 
   WithHoveredCard.propTypes = {
-    currentCity: PropTypes.string.isRequired,
     offers: PropTypes.arrayOf(
         PropTypes.shape({
           city: PropTypes.shape({
@@ -43,12 +43,12 @@ const withHoveredCard = (Component) => {
           }).isRequired,
         }).isRequired
     ).isRequired,
-    onCityChange: PropTypes.func.isRequired,
     onOfferTitleClick: PropTypes.func.isRequired,
   };
 
+  const mapStateToProps = ({cities: {currentCity}}) => ({currentCity});
 
-  return WithHoveredCard;
+  return connect(mapStateToProps)(WithHoveredCard);
 };
 
 

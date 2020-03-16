@@ -16,6 +16,7 @@ const CardType = {
 const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   SET_CITY: `SET_CITY`,
+  SET_HOVERED_CARD_ID: `SET_HOVERED_CARD_ID`,
 };
 
 export {

@@ -1,6 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
+import {setCity} from '../../actions/actions.js';
 
 
 const CitiesList = ({cities, currentCity, onCityChange}) => {
@@ -34,4 +36,12 @@ CitiesList.propTypes = {
 };
 
 
-export default CitiesList;
+const mapStateToProps = ({cities: {cities}}) => ({cities});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(cityName) {
+    dispatch(setCity(cityName));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
