@@ -24,7 +24,6 @@ const Main = (props) => {
 
   const offersByCity = getOffersByCity(currentCity, offers);
 
-
   const renderOffersList = () => {
     if (!offersByCity.length) {
       return (

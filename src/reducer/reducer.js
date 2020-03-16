@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {DEFAULT_CITIES, ActionType} from '../const.js';
+import {getCitiesByOffers} from '../utils';
 
 
 const CitiesInitialState = {
@@ -20,7 +21,11 @@ const offers = (state = [], action) => {
 const cities = (state = CitiesInitialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS: {
-      return action.payload;
+      const allCities = getCitiesByOffers(action.payload);
+      return {
+        currentCity: allCities[0],
+        cities: allCities,
+      };
     }
     case ActionType.SET_CITY: {
       return Object.assign({}, state, {currentCity: action.payload});
