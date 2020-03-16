@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+import {getCitiesList} from '../../selectors/selectors.js';
 import {setCity} from '../../actions/actions.js';
 
 
@@ -35,8 +36,10 @@ CitiesList.propTypes = {
   onCityChange: PropTypes.func.isRequired,
 };
 
-
-const mapStateToProps = ({cities: {cities}}) => ({cities});
+const mapStateToProps = (state) => {
+  const cities = getCitiesList(state);
+  return {cities};
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(cityName) {

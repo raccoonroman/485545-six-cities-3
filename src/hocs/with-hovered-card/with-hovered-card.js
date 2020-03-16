@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {getCurrentCity} from '../../selectors/selectors.js';
 
 
 const withHoveredCard = (Component) => {
@@ -47,7 +48,10 @@ const withHoveredCard = (Component) => {
     onOfferTitleClick: PropTypes.func.isRequired,
   };
 
-  const mapStateToProps = ({cities: {currentCity}}) => ({currentCity});
+  const mapStateToProps = (state) => {
+    const currentCity = getCurrentCity(state);
+    return {currentCity};
+  };
 
   return connect(mapStateToProps)(WithHoveredCard);
 };

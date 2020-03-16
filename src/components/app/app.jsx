@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getOffersByCity, getDistanceBetweenPoints} from '../../utils.js';
+import {getOffers} from '../../selectors/selectors.js';
 import Main from '../main/main.jsx';
 import OfferDetails from '../offer-details/offer-details.jsx';
 
@@ -107,7 +108,10 @@ App.propTypes = {
 };
 
 
-const mapStateToProps = ({offers}) => ({offers});
+const mapStateToProps = (state) => {
+  const offers = getOffers(state);
+  return {offers};
+};
 
 
 export {App};
