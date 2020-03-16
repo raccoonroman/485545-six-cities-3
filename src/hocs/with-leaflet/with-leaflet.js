@@ -57,11 +57,14 @@ const renderMarkers = (offers, currentOfferId, map) => {
     });
   };
 
-  offers.forEach(({id, location}) => {
+  offers.forEach(({id, title, location}) => {
     const {latitude: x, longitude: y} = location;
     const pinType = id === currentOfferId ? Pin.PATH.ORANGE : Pin.PATH.BLUE;
     const icon = createIcon(pinType);
-    leaflet.marker([x, y], {icon}).addTo(markers);
+    leaflet
+      .marker([x, y], {icon})
+      .addTo(markers)
+      .bindPopup(title);
   });
 
   return markers;
