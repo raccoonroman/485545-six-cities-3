@@ -80,7 +80,7 @@ const offers = [
 ];
 
 
-it(`Should offers render correctly`, () => {
+it(`Should <OffersList /> render correctly`, () => {
   const tree = renderer
     .create(<OffersList
       className={`near-places__list places__list`}

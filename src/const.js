@@ -13,4 +13,15 @@ const CardType = {
   NEAR: `near`,
 };
 
-export {OFFER_CATEGORIES, DEFAULT_CITIES, SortType, CardType};
+const ActionType = {
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  SET_CITY: `SET_CITY`,
+};
+
+export {
+  OFFER_CATEGORIES,
+  DEFAULT_CITIES,
+  SortType,
+  CardType,
+  ActionType,
+};

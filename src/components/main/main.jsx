@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import {getCities, getOffersByCity} from '../../utils.js';
+import {getOffersByCity} from '../../utils.js';
 import withHoveredCard from '../../hocs/with-hovered-card/with-hovered-card.js';
 import withSorting from '../../hocs/with-sorting/with-sorting.js';
 import Header from '../../components/header/header.jsx';
@@ -17,16 +17,12 @@ const Main = (props) => {
   const {
     currentCity,
     offers,
-    onCityChange,
     onOfferTitleClick,
     hoveredCardId,
     onCardHover,
   } = props;
 
-  // console.log(offers);
-
   const offersByCity = getOffersByCity(currentCity, offers);
-
 
   const renderOffersList = () => {
     if (!offersByCity.length) {
@@ -62,7 +58,7 @@ const Main = (props) => {
       <Map
         className="cities__map map"
         offers={offersByCity}
-        cityLocation={cityLocation}
+        location={cityLocation}
         currentOfferId={hoveredCardId}
       />
     );
@@ -85,11 +81,7 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList
-              cities={getCities(offers)}
-              currentCity={currentCity}
-              onCityChange={onCityChange}
-            />
+            <CitiesList currentCity={currentCity} />
           </section>
         </div>
         <div className="cities">
@@ -116,7 +108,6 @@ Main.propTypes = {
         }).isRequired,
       }).isRequired
   ).isRequired,
-  onCityChange: PropTypes.func.isRequired,
   onOfferTitleClick: PropTypes.func.isRequired,
   hoveredCardId: PropTypes.number,
   onCardHover: PropTypes.func.isRequired,

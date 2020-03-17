@@ -17,12 +17,12 @@ const TitleLayer = {
 };
 
 
-const renderMap = (container, cityLocation) => {
+const renderMap = (container, location) => {
   if (!container) {
     return null;
   }
 
-  const {latitude, longitude, zoom} = cityLocation;
+  const {latitude, longitude, zoom} = location;
 
   const map = leaflet.map(container, {
     center: [latitude, longitude],
@@ -57,11 +57,14 @@ const renderMarkers = (offers, currentOfferId, map) => {
     });
   };
 
-  offers.forEach(({id, location}) => {
+  offers.forEach(({id, title, location}) => {
     const {latitude: x, longitude: y} = location;
     const pinType = id === currentOfferId ? Pin.PATH.ORANGE : Pin.PATH.BLUE;
     const icon = createIcon(pinType);
-    leaflet.marker([x, y], {icon}).addTo(markers);
+    leaflet
+      .marker([x, y], {icon})
+      .addTo(markers)
+      .bindPopup(title);
   });
 
   return markers;
@@ -82,9 +85,21 @@ const withLeaflet = (Component) => {
       this._renderMarkers();
     }
 
-    componentDidUpdate() {
-      const {latitude, longitude, zoom} = this.props.cityLocation;
-      this._map.setView([latitude, longitude], zoom);
+    componentDidUpdate({offers: prevOffers}) {
+      const {offers, location, currentOfferId} = this.props;
+
+      if (prevOffers[0].city.name !== offers[0].city.name) {
+        const {latitude, longitude, zoom} = location;
+        this._map.setView([latitude, longitude], zoom);
+      }
+
+      if (currentOfferId) {
+        const currentOffer = offers.find(({id}) => id === currentOfferId);
+        const {location: currentOfferLocation} = currentOffer;
+        const {latitude, longitude, zoom} = currentOfferLocation;
+        this._map.setView([latitude, longitude], zoom);
+      }
+
       this._renderMarkers();
     }
 
@@ -94,9 +109,9 @@ const withLeaflet = (Component) => {
     }
 
     _renderMap() {
-      const {cityLocation} = this.props;
+      const {location} = this.props;
       const mapElement = this._mapRef.current;
-      this._map = renderMap(mapElement, cityLocation);
+      this._map = renderMap(mapElement, location);
     }
 
     _renderMarkers() {
@@ -139,15 +154,24 @@ const withLeaflet = (Component) => {
           location: PropTypes.shape({
             latitude: PropTypes.number.isRequired,
             longitude: PropTypes.number.isRequired,
+            zoom: PropTypes.number.isRequired,
+          }).isRequired,
+          city: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            location: PropTypes.shape({
+              latitude: PropTypes.number.isRequired,
+              longitude: PropTypes.number.isRequired,
+              zoom: PropTypes.number.isRequired,
+            }).isRequired,
           }).isRequired,
         }).isRequired
     ).isRequired,
-    currentOfferId: PropTypes.number,
-    cityLocation: PropTypes.shape({
+    location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }).isRequired,
+    currentOfferId: PropTypes.number,
   };
 
 

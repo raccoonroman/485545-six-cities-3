@@ -17,15 +17,23 @@ const offer = {
   location: {
     latitude: 52.35,
     longitude: 4.67,
+    zoom: 14,
   },
   city: {
     name: `Vinnytsya`,
     location: {
       latitude: 52.370216,
       longitude: 4.895168,
-      zoom: 10,
+      zoom: 12,
     },
   },
+  description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
+  goods: [`Baby seat`, `Towels`, `Dishwasher`, `Breakfast`],
+  hostAvatarUrl: `https://i.picsum.photos/id/58/400/200.jpg`,
+  hostId: 911,
+  hostIsPro: false,
+  hostName: `Rachel`,
+  images: [`https://i.picsum.photos/id/82/400/200.jpg`, `https://i.picsum.photos/id/83/400/200.jpg`, `https://i.picsum.photos/id/84/400/200.jpg`, `https://i.picsum.photos/id/85/400/200.jpg`, `https://i.picsum.photos/id/86/400/200.jpg`, `https://i.picsum.photos/id/87/400/200.jpg`, `https://i.picsum.photos/id/88/400/200.jpg`, `https://i.picsum.photos/id/89/400/200.jpg`],
 };
 
 const neighbourhoodOffers = [
@@ -43,6 +51,7 @@ const neighbourhoodOffers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
+      zoom: 14,
     },
     city: {
       name: `Vinnytsya`,
@@ -67,6 +76,7 @@ const neighbourhoodOffers = [
     location: {
       latitude: 52.341667,
       longitude: 4.902452,
+      zoom: 12,
     },
     city: {
       name: `Vinnytsya`,
@@ -91,6 +101,7 @@ const neighbourhoodOffers = [
     location: {
       latitude: 52.359160,
       longitude: 4.849366,
+      zoom: 13,
     },
     city: {
       name: `Vinnytsya`,

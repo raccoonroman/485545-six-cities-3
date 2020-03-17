@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {getCurrentCity} from '../../selectors/selectors.js';
 
 
 const withHoveredCard = (Component) => {
@@ -43,12 +45,15 @@ const withHoveredCard = (Component) => {
           }).isRequired,
         }).isRequired
     ).isRequired,
-    onCityChange: PropTypes.func.isRequired,
     onOfferTitleClick: PropTypes.func.isRequired,
   };
 
+  const mapStateToProps = (state) => {
+    const currentCity = getCurrentCity(state);
+    return {currentCity};
+  };
 
-  return WithHoveredCard;
+  return connect(mapStateToProps)(WithHoveredCard);
 };
 
 

@@ -1,7 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import Main from './main.jsx';
 
+
+const mockStore = configureStore([]);
 
 const offers = [
   {
@@ -18,6 +22,7 @@ const offers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
+      zoom: 14,
     },
     city: {
       name: `Vinnytsya`,
@@ -42,6 +47,7 @@ const offers = [
     location: {
       latitude: 52.341667,
       longitude: 4.902452,
+      zoom: 13,
     },
     city: {
       name: `Lviv`,
@@ -66,6 +72,7 @@ const offers = [
     location: {
       latitude: 52.359160,
       longitude: 4.849366,
+      zoom: 13,
     },
     city: {
       name: `Kyiv`,
@@ -78,16 +85,25 @@ const offers = [
   },
 ];
 
+const cities = [`Vinnytsya`, `Lviv`, `Kyiv`];
+
 
 it(`Render <Main />`, () => {
+  const store = mockStore({
+    cities: {
+      currentCity: cities[0],
+      cities,
+    },
+  });
+
   const tree = renderer
     .create(
-        <Main
-          currentCity={`Vinnytsya`}
-          offers={offers}
-          onCityChange={() => {}}
-          onOfferTitleClick={() => {}}
-        />
+        <Provider store={store}>
+          <Main
+            offers={offers}
+            onOfferTitleClick={() => {}}
+          />
+        </Provider>
     )
     .toJSON();
 

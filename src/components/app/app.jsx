@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getOffersByCity, getDistanceBetweenPoints} from '../../utils.js';
-import {ActionCreator} from '../../reducer.js';
+import {getMappedOffers} from '../../selectors/selectors.js';
 import Main from '../main/main.jsx';
 import OfferDetails from '../offer-details/offer-details.jsx';
 
@@ -54,22 +54,22 @@ class App extends React.PureComponent {
   }
 
   _renderApp() {
-    const {currentCity, offers, onCityChange} = this.props;
+    const {offers} = this.props;
     const {currentPage, currentPageOfferId} = this.state;
 
     switch (currentPage) {
-      case Page.MAIN:
+      case Page.MAIN: {
         return (
           <Main
-            currentCity={currentCity}
             offers={offers}
-            onCityChange={onCityChange}
             onOfferTitleClick={this._handleOfferTitleClick}
           />
         );
-      case Page.OFFER_DETAILS:
+      }
+      case Page.OFFER_DETAILS: {
         const currentOffer = this._getOfferById(currentPageOfferId);
-        const offersByCity = getOffersByCity(currentCity, offers);
+        const {name: currentOfferCity} = currentOffer.city;
+        const offersByCity = getOffersByCity(currentOfferCity, offers);
         const neighbourhoodOffers = this._getNeighbourhoodOffers(currentOffer, offersByCity);
         return (
           <OfferDetails
@@ -78,13 +78,16 @@ class App extends React.PureComponent {
             onOfferTitleClick={this._handleOfferTitleClick}
           />
         );
-      default:
+      }
+      default: {
         return null;
+      }
     }
   }
 
   render() {
     const {offers} = this.props;
+
     return (
       <BrowserRouter>
         <Switch>
@@ -101,19 +104,15 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onCityChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({currentCity, offers}) => ({currentCity, offers});
 
-const mapDispatchToProps = (dispatch) => ({
-  onCityChange(cityName) {
-    dispatch(ActionCreator.setCity(cityName));
-  },
-});
+const mapStateToProps = (state) => {
+  const offers = getMappedOffers(state);
+  return {offers};
+};
 
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

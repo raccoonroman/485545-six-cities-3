@@ -21,6 +21,7 @@ const offers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
+      zoom: 10,
     },
     city: {
       name: `Vinnytsia`,
@@ -45,6 +46,7 @@ const offers = [
     location: {
       latitude: 52.341667,
       longitude: 4.902452,
+      zoom: 11,
     },
     city: {
       name: `Vinnytsia`,
@@ -69,6 +71,7 @@ const offers = [
     location: {
       latitude: 52.359160,
       longitude: 4.849366,
+      zoom: 16,
     },
     city: {
       name: `Vinnytsia`,
@@ -81,7 +84,7 @@ const offers = [
   },
 ];
 
-const currentCityLocation = {
+const location = {
   latitude: 49.233614,
   longitude: 28.467170,
   zoom: 12,
@@ -95,7 +98,7 @@ it(`Should <Map /> render correctly`, () => {
       <Map
         className="cities__map map"
         offers={offers}
-        cityLocation={currentCityLocation}
+        location={location}
         currentOfferId={100501}
       />,
       {attachTo: div}

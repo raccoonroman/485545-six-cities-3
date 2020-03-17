@@ -1,13 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from 'react-redux';
-import configureStore from 'redux-mock-store';
-import {App} from './app.jsx';
+import {offers, cities} from './reducer.js';
+import {DEFAULT_CITIES, ActionType} from '../const.js';
 
 
-const mockStore = configureStore([]);
-
-const offers = [
+const mockOffers = [
   {
     id: 100500,
     title: `Lorem ipsum`,
@@ -106,25 +101,53 @@ const offers = [
   },
 ];
 
-const cities = [`Vinnytsia`, `Kyiv`];
-const currentCity = `Vinnytsia`;
 
+describe(`Reducers working correctly`, () => {
+  describe(`Reducer 'offers' works correctly`, () => {
+    test(`Reducer without additional parameters should return initial state`, () => {
+      expect(offers(void 0, {})).toEqual([]);
+    });
 
-it(`Render App`, () => {
-  const store = mockStore({
-    cities: {
-      currentCity,
-      cities,
-    },
+    test(`Reducer should update offers by load offers`, () => {
+      expect(offers([], {
+        type: ActionType.LOAD_OFFERS,
+        payload: mockOffers,
+      })).toEqual(mockOffers);
+    });
   });
 
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App offers={offers} />
-        </Provider>
-    )
-    .toJSON();
+  describe(`Reducer 'cities' works correctly`, () => {
+    test(`Reducer without additional parameters should return initial state`, () => {
+      expect(cities(void 0, {})).toEqual({
+        currentCity: DEFAULT_CITIES[0],
+        cities: DEFAULT_CITIES,
+      });
+    });
 
-  expect(tree).toMatchSnapshot();
+    test(`Reducer should update cities by load offers`, () => {
+      expect(cities({
+        currentCity: DEFAULT_CITIES[0],
+        cities: DEFAULT_CITIES,
+      }, {
+        type: ActionType.LOAD_OFFERS,
+        payload: mockOffers,
+      })).toEqual({
+        currentCity: `Vinnytsia`,
+        cities: [`Vinnytsia`, `Kyiv`],
+      });
+    });
+
+    test(`Reducer should update currentCity by setting city`, () => {
+      expect(cities({
+        currentCity: `Vinnytsia`,
+        cities: [`Vinnytsia`, `Kyiv`],
+      }, {
+        type: ActionType.SET_CITY,
+        payload: `Kyiv`,
+      })).toEqual({
+        currentCity: `Kyiv`,
+        cities: [`Vinnytsia`, `Kyiv`],
+      });
+    });
+  });
 });

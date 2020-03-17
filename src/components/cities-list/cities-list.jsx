@@ -1,6 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
+import {getCitiesList} from '../../selectors/selectors.js';
+import {setCity} from '../../actions/actions.js';
 
 
 const CitiesList = ({cities, currentCity, onCityChange}) => {
@@ -33,5 +36,15 @@ CitiesList.propTypes = {
   onCityChange: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  const cities = getCitiesList(state);
+  return {cities};
+};
 
-export default CitiesList;
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(cityName) {
+    dispatch(setCity(cityName));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
