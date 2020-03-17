@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should offers render correctly 1`] = `
+exports[`Should <OffersList /> render correctly 1`] = `
 <div
   className="near-places__list places__list"
 >

@@ -46,9 +46,9 @@ exports[`Should offer details render correctly 1`] = `
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
                 <span
-                  className="header__user-name user__name"
+                  className="header__login"
                 >
-                  Oliver.conner@gmail.com
+                  Sign in
                 </span>
               </a>
             </li>
@@ -75,52 +75,52 @@ exports[`Should offer details render correctly 1`] = `
             <img
               alt="The best title ever"
               className="property__image"
-              src="https://i.picsum.photos/id/22/400/200.jpg"
+              src="https://i.picsum.photos/id/82/400/200.jpg"
             />
           </div>
           <div
             className="property__image-wrapper"
           >
             <img
-              alt="Photo studio"
+              alt="The best title ever"
               className="property__image"
-              src="img/apartment-01.jpg"
+              src="https://i.picsum.photos/id/83/400/200.jpg"
             />
           </div>
           <div
             className="property__image-wrapper"
           >
             <img
-              alt="Photo studio"
+              alt="The best title ever"
               className="property__image"
-              src="img/apartment-02.jpg"
+              src="https://i.picsum.photos/id/84/400/200.jpg"
             />
           </div>
           <div
             className="property__image-wrapper"
           >
             <img
-              alt="Photo studio"
+              alt="The best title ever"
               className="property__image"
-              src="img/apartment-03.jpg"
+              src="https://i.picsum.photos/id/85/400/200.jpg"
             />
           </div>
           <div
             className="property__image-wrapper"
           >
             <img
-              alt="Photo studio"
+              alt="The best title ever"
               className="property__image"
-              src="img/studio-01.jpg"
+              src="https://i.picsum.photos/id/86/400/200.jpg"
             />
           </div>
           <div
             className="property__image-wrapper"
           >
             <img
-              alt="Photo studio"
+              alt="The best title ever"
               className="property__image"
-              src="img/apartment-01.jpg"
+              src="https://i.picsum.photos/id/87/400/200.jpg"
             />
           </div>
         </div>
@@ -235,12 +235,7 @@ exports[`Should offer details render correctly 1`] = `
               <li
                 className="property__inside-item"
               >
-                Wi-Fi
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Washing machine
+                Baby seat
               </li>
               <li
                 className="property__inside-item"
@@ -250,37 +245,12 @@ exports[`Should offer details render correctly 1`] = `
               <li
                 className="property__inside-item"
               >
-                Heating
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Coffee machine
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Baby seat
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Kitchen
-              </li>
-              <li
-                className="property__inside-item"
-              >
                 Dishwasher
               </li>
               <li
                 className="property__inside-item"
               >
-                Cabel TV
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Fridge
+                Breakfast
               </li>
             </ul>
           </div>
@@ -296,20 +266,20 @@ exports[`Should offer details render correctly 1`] = `
               className="property__host-user user"
             >
               <div
-                className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper"
+                className="property__avatar-wrapper user__avatar-wrapper"
               >
                 <img
                   alt="Host avatar"
                   className="property__avatar user__avatar"
                   height="74"
-                  src="img/avatar-angelina.jpg"
+                  src="https://i.picsum.photos/id/58/400/200.jpg"
                   width="74"
                 />
               </div>
               <span
                 className="property__user-name"
               >
-                Angelina
+                Rachel
               </span>
             </div>
             <div
@@ -318,12 +288,7 @@ exports[`Should offer details render correctly 1`] = `
               <p
                 className="property__text"
               >
-                A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-              </p>
-              <p
-                className="property__text"
-              >
-                An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
             </div>
           </div>
