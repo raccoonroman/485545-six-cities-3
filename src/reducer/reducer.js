@@ -35,6 +35,9 @@ const cities = (state = CitiesInitialState, action) => {
   return state;
 };
 
+
+export {offers, cities};
+
 export default combineReducers({
   offers,
   cities,
