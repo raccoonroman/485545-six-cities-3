@@ -13,7 +13,8 @@ export const loadOffers = () => (dispatch, getState, api) => {
 export const checkAuth = () => (dispatch, getState, api) => {
   return api
     .get(`/login`)
-    .then(() => {
+    .then((response) => {
+      console.log(response);
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
     })
     .catch((err) => {
@@ -27,7 +28,8 @@ export const login = (authData) => (dispatch, getState, api) => {
       email: authData.login,
       password: authData.password,
     })
-    .then(() => {
+    .then((response) => {
+      console.log(response);
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
     });
 };

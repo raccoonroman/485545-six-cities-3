@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getOffersByCity, getDistanceBetweenPoints} from '../../utils.js';
-import {getMappedOffers} from '../../selectors/selectors.js';
+import {getMappedOffers, getAuthorizationStatus} from '../../selectors/selectors.js';
+import * as operations from '../../operations/operations.js';
 import Main from '../main/main.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
 import OfferDetails from '../offer-details/offer-details.jsx';
 
 
@@ -86,7 +88,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {login, offers} = this.props;
 
     return (
       <BrowserRouter>
@@ -94,8 +96,11 @@ class App extends React.PureComponent {
           <Route exact path='/'>
             {this._renderApp()}
           </Route>
-          <Route exact path='/offer'>
+          <Route exact path='/dev-offer'>
             <OfferDetails offer={offers[0]} />
+          </Route>
+          <Route exact path="/dev-auth">
+            <SignIn onSubmit={login} />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -104,15 +109,23 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 
-const mapStateToProps = (state) => {
-  const offers = getMappedOffers(state);
-  return {offers};
-};
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  offers: getMappedOffers(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(operations.login(authData));
+  },
+});
 
 
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
