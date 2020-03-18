@@ -1,11 +1,15 @@
 import {combineReducers} from 'redux';
-import {DEFAULT_CITIES, ActionType} from '../const.js';
+import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
 import {getCitiesByOffers} from '../utils';
 
 
 const CitiesInitialState = {
   currentCity: DEFAULT_CITIES[0],
   cities: DEFAULT_CITIES,
+};
+
+const AuthorizationInitialState = {
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
 const offers = (state = [], action) => {
@@ -35,10 +39,22 @@ const cities = (state = CitiesInitialState, action) => {
   return state;
 };
 
+const authorization = (state = AuthorizationInitialState, action) => {
+  switch (action.type) {
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return Object.assign({}, state, {
+        authorizationStatus: action.payload,
+      });
+  }
 
-export {offers, cities};
+  return state;
+};
+
+
+export {offers, cities, authorization};
 
 export default combineReducers({
   offers,
   cities,
+  authorization,
 });
