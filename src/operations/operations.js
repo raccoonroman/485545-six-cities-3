@@ -14,8 +14,8 @@ export const checkAuth = () => (dispatch, getState, api) => {
   return api
     .get(`/login`)
     .then((response) => {
-      console.log(response);
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(actions.setEmail(response.data.email));
     })
     .catch((err) => {
       throw err;
@@ -29,7 +29,7 @@ export const login = (authData) => (dispatch, getState, api) => {
       password: authData.password,
     })
     .then((response) => {
-      console.log(response);
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(actions.setEmail(response.data.email));
     });
 };

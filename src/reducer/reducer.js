@@ -3,13 +3,17 @@ import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
 import {getCitiesByOffers} from '../utils';
 
 
-const CitiesInitialState = {
-  currentCity: DEFAULT_CITIES[0],
-  cities: DEFAULT_CITIES,
-};
-
-const AuthorizationInitialState = {
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+const InitialState = {
+  CITIES: {
+    currentCity: DEFAULT_CITIES[0],
+    cities: DEFAULT_CITIES,
+  },
+  AUTHORIZATION: {
+    authorizationStatus: AuthorizationStatus.NO_AUTH,
+  },
+  USER_DATA: {
+    email: ``,
+  },
 };
 
 const offers = (state = [], action) => {
@@ -22,7 +26,7 @@ const offers = (state = [], action) => {
   return state;
 };
 
-const cities = (state = CitiesInitialState, action) => {
+const cities = (state = InitialState.CITIES, action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS: {
       const allCities = getCitiesByOffers(action.payload);
@@ -39,7 +43,7 @@ const cities = (state = CitiesInitialState, action) => {
   return state;
 };
 
-const authorization = (state = AuthorizationInitialState, action) => {
+const authorization = (state = InitialState.AUTHORIZATION, action) => {
   switch (action.type) {
     case ActionType.REQUIRED_AUTHORIZATION:
       return Object.assign({}, state, {
@@ -50,11 +54,27 @@ const authorization = (state = AuthorizationInitialState, action) => {
   return state;
 };
 
+const userData = (state = InitialState.USER_DATA, action) => {
+  switch (action.type) {
+    case ActionType.SET_EMAIL:
+      return Object.assign({}, state, {
+        email: action.payload,
+      });
+  }
 
-export {offers, cities, authorization};
+  return state;
+};
+
+export {
+  offers,
+  cities,
+  authorization,
+  userData,
+};
 
 export default combineReducers({
   offers,
   cities,
   authorization,
+  userData,
 });

@@ -1,4 +1,4 @@
-import {offers, cities, authorization} from './reducer.js';
+import {offers, cities, authorization, userData} from './reducer.js';
 import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
 
 
@@ -193,6 +193,25 @@ describe(`Reducers working correctly`, () => {
         payload: AuthorizationStatus.NO_AUTH,
       })).toEqual({
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      });
+    });
+  });
+
+  describe(`Reducer 'userData' works correctly`, () => {
+    it(`Reducer without additional parameters should return initial state`, () => {
+      expect(userData(void 0, {})).toEqual({
+        email: ``,
+      });
+    });
+
+    it(`Reducer should change email by a given value`, () => {
+      expect(userData({
+        email: ``,
+      }, {
+        type: ActionType.SET_EMAIL,
+        payload: `romankushnir@gmail.com`,
+      })).toEqual({
+        email: `romankushnir@gmail.com`,
       });
     });
   });

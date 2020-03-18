@@ -11,9 +11,9 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for setting city returns correct action`, () => {
-    expect(actions.setCity(``)).toEqual({
+    expect(actions.setCity(`cityName`)).toEqual({
       type: ActionType.SET_CITY,
-      payload: ``,
+      payload: `cityName`,
     });
   });
 
@@ -26,6 +26,13 @@ describe(`Action creators work correctly`, () => {
     expect(actions.requireAuthorization(AuthorizationStatus.AUTH)).toEqual({
       type: ActionType.REQUIRED_AUTHORIZATION,
       payload: AuthorizationStatus.AUTH,
+    });
+  });
+
+  it(`Action creator for setting email returns correct action`, () => {
+    expect(actions.setEmail(`email`)).toEqual({
+      type: ActionType.SET_EMAIL,
+      payload: `email`,
     });
   });
 });
