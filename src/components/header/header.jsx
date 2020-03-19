@@ -1,7 +1,22 @@
-import React from "react";
+import React from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {getUserEmail, getAuthorizationStatus} from '../../selectors/selectors.js';
+import {AuthorizationStatus} from '../../const.js';
 
 
-const Header = () => {
+const Header = ({authorizationStatus, email}) => {
+  const renderLoginText = () => {
+    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+      return <span className="header__login">Sign in</span>;
+    }
+    return (
+      <span className="header__user-name user__name">
+        {email}
+      </span>
+    );
+  };
+
   return (
     <header className="header">
       <div className="container">
@@ -17,7 +32,7 @@ const Header = () => {
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__login">Sign in</span>
+                  {renderLoginText()}
                 </a>
               </li>
             </ul>
@@ -28,5 +43,14 @@ const Header = () => {
   );
 };
 
+Header.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};
 
-export default Header;
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  email: getUserEmail(state),
+});
+
+export default connect(mapStateToProps)(Header);
