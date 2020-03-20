@@ -82,13 +82,14 @@ const offers = [
 
 it(`Should <OffersList /> render correctly`, () => {
   const tree = renderer
-    .create(<OffersList
-      className={`near-places__list places__list`}
-      cardsType={CardType.NEAR}
-      offers={offers}
-      onOfferTitleClick={() => {}}
-    />)
-    .toJSON();
+    .create(
+        <OffersList
+          className={`near-places__list places__list`}
+          cardsType={CardType.NEAR}
+          offers={offers}
+          onOfferTitleClick={() => {}}
+        />
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

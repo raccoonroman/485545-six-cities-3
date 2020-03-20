@@ -1,11 +1,19 @@
 import {combineReducers} from 'redux';
-import {DEFAULT_CITIES, ActionType} from '../const.js';
+import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
 import {getCitiesByOffers} from '../utils';
 
 
-const CitiesInitialState = {
-  currentCity: DEFAULT_CITIES[0],
-  cities: DEFAULT_CITIES,
+const InitialState = {
+  CITIES: {
+    currentCity: DEFAULT_CITIES[0],
+    cities: DEFAULT_CITIES,
+  },
+  AUTHORIZATION: {
+    authorizationStatus: AuthorizationStatus.NO_AUTH,
+  },
+  USER_DATA: {
+    email: ``,
+  },
 };
 
 const offers = (state = [], action) => {
@@ -18,7 +26,7 @@ const offers = (state = [], action) => {
   return state;
 };
 
-const cities = (state = CitiesInitialState, action) => {
+const cities = (state = InitialState.CITIES, action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS: {
       const allCities = getCitiesByOffers(action.payload);
@@ -35,10 +43,38 @@ const cities = (state = CitiesInitialState, action) => {
   return state;
 };
 
+const authorization = (state = InitialState.AUTHORIZATION, action) => {
+  switch (action.type) {
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return Object.assign({}, state, {
+        authorizationStatus: action.payload,
+      });
+  }
 
-export {offers, cities};
+  return state;
+};
+
+const userData = (state = InitialState.USER_DATA, action) => {
+  switch (action.type) {
+    case ActionType.SET_EMAIL:
+      return Object.assign({}, state, {
+        email: action.payload,
+      });
+  }
+
+  return state;
+};
+
+export {
+  offers,
+  cities,
+  authorization,
+  userData,
+};
 
 export default combineReducers({
   offers,
   cities,
+  authorization,
+  userData,
 });

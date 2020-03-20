@@ -1,5 +1,5 @@
-import {offers, cities} from './reducer.js';
-import {DEFAULT_CITIES, ActionType} from '../const.js';
+import {offers, cities, authorization, userData} from './reducer.js';
+import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
 
 
 const mockOffers = [
@@ -104,11 +104,11 @@ const mockOffers = [
 
 describe(`Reducers working correctly`, () => {
   describe(`Reducer 'offers' works correctly`, () => {
-    test(`Reducer without additional parameters should return initial state`, () => {
+    it(`Reducer without additional parameters should return initial state`, () => {
       expect(offers(void 0, {})).toEqual([]);
     });
 
-    test(`Reducer should update offers by load offers`, () => {
+    it(`Reducer should update offers by load offers`, () => {
       expect(offers([], {
         type: ActionType.LOAD_OFFERS,
         payload: mockOffers,
@@ -117,14 +117,14 @@ describe(`Reducers working correctly`, () => {
   });
 
   describe(`Reducer 'cities' works correctly`, () => {
-    test(`Reducer without additional parameters should return initial state`, () => {
+    it(`Reducer without additional parameters should return initial state`, () => {
       expect(cities(void 0, {})).toEqual({
         currentCity: DEFAULT_CITIES[0],
         cities: DEFAULT_CITIES,
       });
     });
 
-    test(`Reducer should update cities by load offers`, () => {
+    it(`Reducer should update cities by load offers`, () => {
       expect(cities({
         currentCity: DEFAULT_CITIES[0],
         cities: DEFAULT_CITIES,
@@ -137,7 +137,7 @@ describe(`Reducers working correctly`, () => {
       });
     });
 
-    test(`Reducer should update currentCity by setting city`, () => {
+    it(`Reducer should change currentCity by a given value`, () => {
       expect(cities({
         currentCity: `Vinnytsia`,
         cities: [`Vinnytsia`, `Kyiv`],
@@ -147,6 +147,71 @@ describe(`Reducers working correctly`, () => {
       })).toEqual({
         currentCity: `Kyiv`,
         cities: [`Vinnytsia`, `Kyiv`],
+      });
+    });
+  });
+
+  describe(`Reducer 'authorization' works correctly`, () => {
+    it(`Reducer without additional parameters should return initial state`, () => {
+      expect(authorization(void 0, {})).toEqual({
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      });
+    });
+
+    it(`Reducer should change authorizationStatus by a given value`, () => {
+      expect(authorization({
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      }, {
+        type: ActionType.REQUIRED_AUTHORIZATION,
+        payload: AuthorizationStatus.AUTH,
+      })).toEqual({
+        authorizationStatus: AuthorizationStatus.AUTH,
+      });
+
+      expect(authorization({
+        authorizationStatus: AuthorizationStatus.AUTH,
+      }, {
+        type: ActionType.REQUIRED_AUTHORIZATION,
+        payload: AuthorizationStatus.NO_AUTH,
+      })).toEqual({
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      });
+
+      expect(authorization({
+        authorizationStatus: AuthorizationStatus.AUTH,
+      }, {
+        type: ActionType.REQUIRED_AUTHORIZATION,
+        payload: AuthorizationStatus.AUTH,
+      })).toEqual({
+        authorizationStatus: AuthorizationStatus.AUTH,
+      });
+
+      expect(authorization({
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      }, {
+        type: ActionType.REQUIRED_AUTHORIZATION,
+        payload: AuthorizationStatus.NO_AUTH,
+      })).toEqual({
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      });
+    });
+  });
+
+  describe(`Reducer 'userData' works correctly`, () => {
+    it(`Reducer without additional parameters should return initial state`, () => {
+      expect(userData(void 0, {})).toEqual({
+        email: ``,
+      });
+    });
+
+    it(`Reducer should change email by a given value`, () => {
+      expect(userData({
+        email: ``,
+      }, {
+        type: ActionType.SET_EMAIL,
+        payload: `romankushnir@gmail.com`,
+      })).toEqual({
+        email: `romankushnir@gmail.com`,
       });
     });
   });

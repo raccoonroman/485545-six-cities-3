@@ -2,6 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import {AuthorizationStatus} from '../../const.js';
 import Main from './main.jsx';
 
 
@@ -94,6 +95,12 @@ it(`Render <Main />`, () => {
       currentCity: cities[0],
       cities,
     },
+    authorization: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+    userData: {
+      email: ``,
+    },
   });
 
   const tree = renderer
@@ -104,8 +111,7 @@ it(`Render <Main />`, () => {
             onOfferTitleClick={() => {}}
           />
         </Provider>
-    )
-    .toJSON();
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

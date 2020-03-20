@@ -16,6 +16,13 @@ const CardType = {
 const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   SET_CITY: `SET_CITY`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  SET_EMAIL: `SET_EMAIL`,
+};
+
+const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
 };
 
 export {
@@ -24,4 +31,5 @@ export {
   SortType,
   CardType,
   ActionType,
+  AuthorizationStatus,
 };

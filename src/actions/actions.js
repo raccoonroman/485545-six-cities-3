@@ -10,3 +10,13 @@ export const setCity = (cityName) => ({
   type: ActionType.SET_CITY,
   payload: cityName,
 });
+
+export const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status,
+});
+
+export const setEmail = (email) => ({
+  type: ActionType.SET_EMAIL,
+  payload: email,
+});

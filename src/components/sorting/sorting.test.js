@@ -6,11 +6,12 @@ import Sorting from './sorting.jsx';
 
 it(`Should <Sorting /> render correctly`, () => {
   const tree = renderer
-    .create(<Sorting
-      sortBy={SortType.POPULAR}
-      onSortTypeChange={() => {}}
-    />)
-    .toJSON();
+    .create(
+        <Sorting
+          sortBy={SortType.POPULAR}
+          onSortTypeChange={() => {}}
+        />
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
