@@ -32,13 +32,14 @@ const offer = {
 
 it(`Should offer card render correctly`, () => {
   const tree = renderer
-    .create(<OfferCard
-      cardType={CardType.NEAR}
-      offer={offer}
-      onCardHover={() => {}}
-      onOfferTitleClick={() => {}}
-    />)
-    .toJSON();
+    .create(
+        <OfferCard
+          cardType={CardType.NEAR}
+          offer={offer}
+          onCardHover={() => {}}
+          onOfferTitleClick={() => {}}
+        />
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

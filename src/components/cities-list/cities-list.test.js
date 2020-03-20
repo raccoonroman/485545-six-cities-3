@@ -23,8 +23,7 @@ it(`Render <CitiesList />`, () => {
         <Provider store={store}>
           <CitiesList currentCity={currentCity} />
         </Provider>
-    )
-    .toJSON();
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
