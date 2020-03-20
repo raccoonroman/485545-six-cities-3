@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {isAuthorized} from '../../utils.js';
 import {getUserEmail, getAuthorizationStatus} from '../../selectors/selectors.js';
-import {AuthorizationStatus} from '../../const.js';
 
 
 const Header = ({authorizationStatus, email}) => {
   const renderLoginText = () => {
-    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+    if (!isAuthorized(authorizationStatus)) {
       return <span className="header__login">Sign in</span>;
     }
     return (
