@@ -125,7 +125,7 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, loadCommen
                   <p className="property__text">{description}</p>
                 </div>
               </div>
-              <Reviews />
+              <Reviews offerdId={id} />
             </div>
           </div>
           <Map

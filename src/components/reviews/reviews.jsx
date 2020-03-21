@@ -6,7 +6,7 @@ import {getAuthorizationStatus, getMappedComments} from '../../selectors/selecto
 import ReviewsForm from '../reviews-form/reviews-form.jsx';
 
 
-const Reviews = ({authorizationStatus, comments}) => {
+const Reviews = ({offerdId, authorizationStatus, comments}) => {
   const authorized = isAuthorized(authorizationStatus);
 
   const renderReviewItems = () => {
@@ -57,14 +57,22 @@ const Reviews = ({authorizationStatus, comments}) => {
         <span className="reviews__amount">{comments.length}</span>
       </h2>
       <ul className="reviews__list">{renderReviewItems()}</ul>
-      {authorized && <ReviewsForm />}
+      {authorized && <ReviewsForm offerdId={offerdId} />}
     </section>
   );
 };
 
 Reviews.propTypes = {
+  offerdId: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    commentId: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    userAvatarUrl: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = (state) => ({
