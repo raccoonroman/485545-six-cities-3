@@ -4,7 +4,7 @@ import cn from 'classnames';
 import {getOffersByCity} from '../../utils.js';
 import withHoveredCard from '../../hocs/with-hovered-card/with-hovered-card.js';
 import withSorting from '../../hocs/with-sorting/with-sorting.js';
-import Header from '../../components/header/header.jsx';
+import Header from '../header/header.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 import Map from '../map/map.jsx';
