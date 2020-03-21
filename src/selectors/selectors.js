@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {mapToClient} from '../adapter.js';
+import {mapOffersToClient, mapCommentsToClient} from '../adapter.js';
 
 
 export const getOffers = (state) => state.offers;
@@ -11,5 +11,10 @@ export const getCommentsByOffer = (state) => state.commentsByOffer;
 
 export const getMappedOffers = createSelector(
     getOffers,
-    (offers) => offers.map((offer) => mapToClient(offer))
+    (offers) => offers.map((offer) => mapOffersToClient(offer))
+);
+
+export const getMappedComments = createSelector(
+    getCommentsByOffer,
+    (comments) => comments.map((comment) => mapCommentsToClient(comment))
 );

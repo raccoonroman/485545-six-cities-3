@@ -1,4 +1,4 @@
-export const mapToClient = (data) => {
+export const mapOffersToClient = (data) => {
   const result = {};
 
   result.id = data[`id`];
@@ -29,6 +29,22 @@ export const mapToClient = (data) => {
   result.hostIsPro = data[`host`][`is_pro`];
   result.hostName = data[`host`][`name`];
   result.images = data[`images`];
+
+  return result;
+};
+
+
+export const mapCommentsToClient = (data) => {
+  const result = {};
+
+  result.commentId = data[`id`];
+  result.text = data[`comment`];
+  result.date = data[`date`];
+  result.rating = data[`rating`];
+  result.userAvatarUrl = data[`user`][`avatar_url`];
+  result.userId = data[`user`][`id`];
+  result.isUserPro = data[`user`][`is_pro`];
+  result.userName = data[`user`][`name`];
 
   return result;
 };

@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 import {OFFER_CATEGORIES, CardType} from '../../const.js';
-import {getRatingStarsStyle, isAuthorized} from '../../utils.js';
-import {getAuthorizationStatus} from '../../selectors/selectors.js';
-import Header from '../../components/header/header.jsx';
-import ReviewsForm from '../reviews-form/reviews-form.jsx';
+import {getRatingStarsStyle} from '../../utils.js';
+import * as operations from '../../operations/operations.js';
+import Header from '../header/header.jsx';
+import Reviews from '../reviews/reviews.jsx';
 import Map from '../map/map.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 
 
-const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, authorizationStatus}) => {
+const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, loadComments}) => {
   const {
     id,
     title,
@@ -31,8 +31,9 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, authorizat
     images,
   } = offer;
 
+  loadComments(id);
+
   const MAX_IMAGES = 6;
-  const authorized = isAuthorized(authorizationStatus);
 
   const bookmarkButtonClass = cn({
     'property__bookmark-button button': true,
@@ -124,34 +125,7 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, authorizat
                   <p className="property__text">{description}</p>
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: `80%`}}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
-                {authorized && <ReviewsForm />}
-              </section>
+              <Reviews />
             </div>
           </div>
           <Map
@@ -212,11 +186,13 @@ OfferDetails.propTypes = {
   }),
   neighbourhoodOffers: PropTypes.arrayOf(PropTypes.object),
   onOfferTitleClick: PropTypes.func,
-  authorizationStatus: PropTypes.string.isRequired,
+  loadComments: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
+const mapDispatchToProps = (dispatch) => ({
+  loadComments(offerId) {
+    dispatch(operations.loadComments(offerId));
+  },
 });
 
-export default connect(mapStateToProps)(OfferDetails);
+export default connect(null, mapDispatchToProps)(OfferDetails);
