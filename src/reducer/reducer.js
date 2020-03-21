@@ -45,10 +45,11 @@ const cities = (state = InitialState.CITIES, action) => {
 
 const authorization = (state = InitialState.AUTHORIZATION, action) => {
   switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
+    case ActionType.REQUIRED_AUTHORIZATION: {
       return Object.assign({}, state, {
         authorizationStatus: action.payload,
       });
+    }
   }
 
   return state;
@@ -56,10 +57,21 @@ const authorization = (state = InitialState.AUTHORIZATION, action) => {
 
 const userData = (state = InitialState.USER_DATA, action) => {
   switch (action.type) {
-    case ActionType.SET_EMAIL:
+    case ActionType.SET_EMAIL: {
       return Object.assign({}, state, {
         email: action.payload,
       });
+    }
+  }
+
+  return state;
+};
+
+const commentsByOffer = (state = [], action) => {
+  switch (action.type) {
+    case ActionType.LOAD_COMMENTS: {
+      return action.payload;
+    }
   }
 
   return state;
@@ -70,6 +82,7 @@ export {
   cities,
   authorization,
   userData,
+  commentsByOffer,
 };
 
 export default combineReducers({
@@ -77,4 +90,5 @@ export default combineReducers({
   cities,
   authorization,
   userData,
+  commentsByOffer,
 });

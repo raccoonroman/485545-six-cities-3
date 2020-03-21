@@ -33,3 +33,19 @@ export const login = (authData) => (dispatch, getState, api) => {
       dispatch(actions.setEmail(response.data.email));
     });
 };
+
+export const loadComments = (offerId) => (dispatch, getState, api) => {
+  return api
+    .get(`/comments/${offerId}`)
+    .then((response) => {
+      dispatch(actions.loadComments(response.data));
+    });
+};
+
+export const postComment = (commentData, offerId) => (dispatch, getState, api) => {
+  return api
+    .post(`/comments/${offerId}`)
+    .then((response) => {
+      dispatch(actions.loadComments(response.data));
+    });
+};

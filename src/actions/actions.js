@@ -20,3 +20,8 @@ export const setEmail = (email) => ({
   type: ActionType.SET_EMAIL,
   payload: email,
 });
+
+export const loadComments = (comments) => ({
+  type: ActionType.LOAD_COMMENTS,
+  payload: comments,
+});
