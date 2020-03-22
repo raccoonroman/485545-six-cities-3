@@ -20,7 +20,8 @@ const Reviews = ({offerdId, authorizationStatus, comments}) => {
         userName,
       } = comment;
 
-      const dateString = new Date(date).toLocaleString(`default`, {
+      const dateISOString = date.slice(0, 10);
+      const dateReadableString = new Date(date).toLocaleString(`default`, {
         month: `long`,
         year: `numeric`,
       });
@@ -41,8 +42,8 @@ const Reviews = ({offerdId, authorizationStatus, comments}) => {
               </div>
             </div>
             <p className="reviews__text">{text}</p>
-            <time className="reviews__time" dateTime={date.slice(0, 10)}>
-              {dateString}
+            <time className="reviews__time" dateTime={dateISOString}>
+              {dateReadableString}
             </time>
           </div>
         </li>
