@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getRatingStarsStyle, isAuthorized} from '../../utils.js';
-import {getAuthorizationStatus, getMappedComments} from '../../selectors/selectors.js';
+import {getAuthorizationStatus, getTenSortedComments} from '../../selectors/selectors.js';
 import ReviewsForm from '../reviews-form/reviews-form.jsx';
 
 
@@ -77,7 +77,7 @@ Reviews.propTypes = {
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
-  comments: getMappedComments(state),
+  comments: getTenSortedComments(state)
 });
 
 export default connect(mapStateToProps)(Reviews);
