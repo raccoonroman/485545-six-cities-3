@@ -42,7 +42,7 @@ export const loadComments = (offerId) => (dispatch, getState, api) => {
     });
 };
 
-export const postComment = (commentData, offerId, enableForm) => (dispatch, getState, api) => {
+export const postComment = (commentData, offerId, enableForm, clearForm) => (dispatch, getState, api) => {
   return api
     .post(`/comments/${offerId}`, {
       comment: commentData.comment,
@@ -50,6 +50,7 @@ export const postComment = (commentData, offerId, enableForm) => (dispatch, getS
     })
     .then((response) => {
       enableForm();
+      clearForm();
       dispatch(actions.loadComments(response.data));
     })
     .catch((err) => {

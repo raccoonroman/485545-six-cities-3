@@ -26,6 +26,7 @@ class ReviewsForm extends React.PureComponent {
     this._handleTextChange = this._handleTextChange.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
     this.enableForm = this.enableForm.bind(this);
+    this.clearForm = this.clearForm.bind(this);
     this.state = {
       rating: 0,
       text: ``,
@@ -35,6 +36,10 @@ class ReviewsForm extends React.PureComponent {
 
   enableForm() {
     this.setState({isFormDisabled: false});
+  }
+
+  clearForm() {
+    this.setState({rating: 0, text: ``});
   }
 
   _handleRatingChange({target}) {
@@ -50,12 +55,8 @@ class ReviewsForm extends React.PureComponent {
     const {offerdId, postComment} = this.props;
     const {rating, text} = this.state;
     const comment = {rating, comment: text};
-    postComment(comment, offerdId, this.enableForm);
-    this.setState({
-      rating: 0,
-      text: ``,
-      isFormDisabled: true,
-    });
+    this.setState({isFormDisabled: true});
+    postComment(comment, offerdId, this.enableForm, this.clearForm);
   }
 
   _renderStars() {
@@ -115,8 +116,8 @@ ReviewsForm.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  postComment(commentData, offerId, enableForm) {
-    dispatch(operations.postComment(commentData, offerId, enableForm));
+  postComment(commentData, offerId, enableForm, clearForm) {
+    dispatch(operations.postComment(commentData, offerId, enableForm, clearForm));
   },
 });
 
