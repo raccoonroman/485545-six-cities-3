@@ -53,12 +53,10 @@ const Main = (props) => {
       return null;
     }
 
-    const {location: cityLocation} = offersByCity[0].city;
     return (
       <Map
         className="cities__map map"
         offers={offersByCity}
-        location={cityLocation}
         currentOfferId={hoveredCardId}
       />
     );

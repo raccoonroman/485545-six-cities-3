@@ -22,7 +22,6 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, loadCommen
     maxAdults,
     isFavorite,
     isPremium,
-    location: offerLocation,
     description,
     goods,
     hostAvatarUrl,
@@ -138,7 +137,6 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, loadCommen
           <Map
             className="property__map map"
             offers={[...neighbourhoodOffers, offer]}
-            location={offerLocation}
             currentOfferId={id}
           />
         </section>
