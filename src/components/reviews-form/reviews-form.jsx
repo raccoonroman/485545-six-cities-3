@@ -52,11 +52,11 @@ class ReviewsForm extends React.PureComponent {
 
   _handleFormSubmit(evt) {
     evt.preventDefault();
-    const {offerdId, postComment} = this.props;
+    const {offerId, postComment} = this.props;
     const {rating, text} = this.state;
     const comment = {rating, comment: text};
     this.setState({isFormDisabled: true});
-    postComment(comment, offerdId, this.enableForm, this.clearForm);
+    postComment(comment, offerId, this.enableForm, this.clearForm);
   }
 
   _renderStars() {
@@ -98,7 +98,15 @@ class ReviewsForm extends React.PureComponent {
         <div className="reviews__rating-form form__rating">
           {this._renderStars()}
         </div>
-        <textarea value={text} onChange={this._handleTextChange} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" disabled={isFormDisabled} />
+        <textarea
+          value={text}
+          onChange={this._handleTextChange}
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          disabled={isFormDisabled}
+        />
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with <b className="reviews__text-amount">minimum 50 and maximum 300 characters</b>.
@@ -111,7 +119,7 @@ class ReviewsForm extends React.PureComponent {
 }
 
 ReviewsForm.propTypes = {
-  offerdId: PropTypes.number.isRequired,
+  offerId: PropTypes.number.isRequired,
   postComment: PropTypes.func.isRequired,
 };
 

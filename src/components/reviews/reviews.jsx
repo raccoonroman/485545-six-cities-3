@@ -6,7 +6,7 @@ import {getAuthorizationStatus, getTenSortedComments} from '../../selectors/sele
 import ReviewsForm from '../reviews-form/reviews-form.jsx';
 
 
-const Reviews = ({offerdId, authorizationStatus, comments}) => {
+const Reviews = ({offerId, authorizationStatus, comments}) => {
   const authorized = isAuthorized(authorizationStatus);
 
   const renderReviewItems = () => {
@@ -58,13 +58,13 @@ const Reviews = ({offerdId, authorizationStatus, comments}) => {
         <span className="reviews__amount">{comments.length}</span>
       </h2>
       <ul className="reviews__list">{renderReviewItems()}</ul>
-      {authorized && <ReviewsForm offerdId={offerdId} />}
+      {authorized && <ReviewsForm offerId={offerId} />}
     </section>
   );
 };
 
 Reviews.propTypes = {
-  offerdId: PropTypes.number.isRequired,
+  offerId: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({
     commentId: PropTypes.number.isRequired,

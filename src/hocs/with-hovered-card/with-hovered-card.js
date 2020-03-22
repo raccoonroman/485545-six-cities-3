@@ -48,10 +48,9 @@ const withHoveredCard = (Component) => {
     onOfferTitleClick: PropTypes.func.isRequired,
   };
 
-  const mapStateToProps = (state) => {
-    const currentCity = getCurrentCity(state);
-    return {currentCity};
-  };
+  const mapStateToProps = (state) => ({
+    currentCity: getCurrentCity(state),
+  });
 
   return connect(mapStateToProps)(WithHoveredCard);
 };

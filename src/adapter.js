@@ -1,50 +1,43 @@
-export const mapOffersToClient = (data) => {
-  const result = {};
+export const mapOfferToClient = (data) => ({
+  id: data[`id`],
+  title: data[`title`],
+  previewImage: data[`preview_image`],
+  price: data[`price`],
+  rating: data[`rating`],
+  type: data[`type`],
+  bedrooms: data[`bedrooms`],
+  maxAdults: data[`max_adults`],
+  isFavorite: data[`is_favorite`],
+  isPremium: data[`is_premium`],
+  location: {
+    latitude: data[`location`][`latitude`],
+    longitude: data[`location`][`longitude`],
+    zoom: data[`location`][`zoom`],
+  },
+  city: {
+    name: data[`city`][`name`],
+    location: {
+      latitude: data[`city`][`location`][`latitude`],
+      longitude: data[`city`][`location`][`longitude`],
+      zoom: data[`city`][`location`][`zoom`],
+    }
+  },
+  description: data[`description`],
+  goods: data[`goods`],
+  hostAvatarUrl: data[`host`][`avatar_url`],
+  hostId: data[`host`][`id`],
+  hostIsPro: data[`host`][`is_pro`],
+  hostName: data[`host`][`name`],
+  images: data[`images`],
+});
 
-  result.id = data[`id`];
-  result.title = data[`title`];
-  result.previewImage = data[`preview_image`];
-  result.price = data[`price`];
-  result.rating = data[`rating`];
-  result.type = data[`type`];
-  result.bedrooms = data[`bedrooms`];
-  result.maxAdults = data[`max_adults`];
-  result.isFavorite = data[`is_favorite`];
-  result.isPremium = data[`is_premium`];
-  result.location = {};
-  result.location.latitude = data[`location`][`latitude`];
-  result.location.longitude = data[`location`][`longitude`];
-  result.location.zoom = data[`location`][`zoom`];
-  result.city = {};
-  result.city.name = data[`city`][`name`];
-  result.city.location = {};
-  result.city.location.latitude = data[`city`][`location`][`latitude`];
-  result.city.location.longitude = data[`city`][`location`][`longitude`];
-  result.city.location.zoom = data[`location`][`zoom`];
-
-  result.description = data[`description`];
-  result.goods = data[`goods`];
-  result.hostAvatarUrl = data[`host`][`avatar_url`];
-  result.hostId = data[`host`][`id`];
-  result.hostIsPro = data[`host`][`is_pro`];
-  result.hostName = data[`host`][`name`];
-  result.images = data[`images`];
-
-  return result;
-};
-
-
-export const mapCommentsToClient = (data) => {
-  const result = {};
-
-  result.commentId = data[`id`];
-  result.text = data[`comment`];
-  result.date = data[`date`];
-  result.rating = data[`rating`];
-  result.userAvatarUrl = data[`user`][`avatar_url`];
-  result.userId = data[`user`][`id`];
-  result.isUserPro = data[`user`][`is_pro`];
-  result.userName = data[`user`][`name`];
-
-  return result;
-};
+export const mapCommentToClient = (data) => ({
+  commentId: data[`id`],
+  text: data[`comment`],
+  date: data[`date`],
+  rating: data[`rating`],
+  userAvatarUrl: data[`user`][`avatar_url`],
+  userId: data[`user`][`id`],
+  isUserPro: data[`user`][`is_pro`],
+  userName: data[`user`][`name`],
+});

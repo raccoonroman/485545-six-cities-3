@@ -5,17 +5,20 @@ import {AuthorizationStatus} from '../const.js';
 export const loadOffers = () => (dispatch, getState, api) => {
   return api
     .get(`/hotels`)
-    .then((response) => {
-      dispatch(actions.loadOffers(response.data));
+    .then((data) => {
+      dispatch(actions.loadOffers(data));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 
 export const checkAuth = () => (dispatch, getState, api) => {
   return api
     .get(`/login`)
-    .then((response) => {
+    .then((data) => {
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(actions.setEmail(response.data.email));
+      dispatch(actions.setEmail(data.email));
     })
     .catch((err) => {
       throw err;
@@ -28,17 +31,23 @@ export const login = (authData) => (dispatch, getState, api) => {
       email: authData.login,
       password: authData.password,
     })
-    .then((response) => {
+    .then((data) => {
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(actions.setEmail(response.data.email));
+      dispatch(actions.setEmail(data.email));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 
 export const loadComments = (offerId) => (dispatch, getState, api) => {
   return api
     .get(`/comments/${offerId}`)
-    .then((response) => {
-      dispatch(actions.loadComments(response.data));
+    .then((data) => {
+      dispatch(actions.loadComments(data));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 
@@ -48,10 +57,10 @@ export const postComment = (commentData, offerId, enableForm, clearForm) => (dis
       comment: commentData.comment,
       rating: commentData.rating,
     })
-    .then((response) => {
+    .then((data) => {
       enableForm();
       clearForm();
-      dispatch(actions.loadComments(response.data));
+      dispatch(actions.loadComments(data));
     })
     .catch((err) => {
       enableForm();

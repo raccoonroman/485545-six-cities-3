@@ -69,9 +69,10 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, loadCommen
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium && <div className="property__mark">
-                <span>Premium</span>
-              </div>}
+              {isPremium && (
+                <div className="property__mark">
+                  <span>Premium</span>
+                </div>)}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{title}</h1>
                 <button className={bookmarkButtonClass} type="button">
@@ -117,7 +118,13 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, loadCommen
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className={hostAvatarWrapperClass}>
-                    <img className="property__avatar user__avatar" src={hostAvatarUrl} width="74" height="74" alt="Host avatar" />
+                    <img
+                      className="property__avatar user__avatar"
+                      src={hostAvatarUrl}
+                      width="74"
+                      height="74"
+                      alt="Host avatar"
+                    />
                   </div>
                   <span className="property__user-name">{hostName}</span>
                 </div>
@@ -125,7 +132,7 @@ const OfferDetails = ({offer, neighbourhoodOffers, onOfferTitleClick, loadCommen
                   <p className="property__text">{description}</p>
                 </div>
               </div>
-              <Reviews offerdId={id} />
+              <Reviews offerId={id} />
             </div>
           </div>
           <Map

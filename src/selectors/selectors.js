@@ -1,5 +1,6 @@
 import {createSelector} from 'reselect';
-import {mapOffersToClient, mapCommentsToClient} from '../adapter.js';
+import {getTime} from '../utils.js';
+import {mapOfferToClient, mapCommentToClient} from '../adapter.js';
 
 
 export const getOffers = (state) => state.offers;
@@ -11,15 +12,18 @@ export const getCommentsByOffer = (state) => state.commentsByOffer;
 
 export const getMappedOffers = createSelector(
     getOffers,
-    (offers) => offers.map((offer) => mapOffersToClient(offer))
+    (offers) => offers.map(mapOfferToClient)
 );
 
 export const getMappedComments = createSelector(
     getCommentsByOffer,
-    (comments) => comments.map((comment) => mapCommentsToClient(comment))
+    (comments) => comments.map(mapCommentToClient)
 );
 
 export const getTenSortedComments = createSelector(
     getMappedComments,
-    (mappedComments) => mappedComments.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10)
+    (mappedComments) => mappedComments
+      .slice()
+      .sort((a, b) => getTime(b.date) - getTime(a.date))
+      .slice(0, 10)
 );

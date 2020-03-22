@@ -35,10 +35,15 @@ const OfferCard = ({cardType, offer, onCardHover, onOfferTitleClick}) => {
   });
 
   return (
-    <article onMouseEnter={onCardHover && onCardHover(id)} onMouseLeave={onCardHover && onCardHover(null)} className={placeCardClass}>
-      {isPremium && <div className="place-card__mark">
-        <span>Premium</span>
-      </div>}
+    <article
+      onMouseEnter={onCardHover && onCardHover(id)}
+      onMouseLeave={onCardHover && onCardHover(null)}
+      className={placeCardClass}
+    >
+      {isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>)}
       <div className={imageWrapperClass}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
