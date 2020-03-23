@@ -1,12 +1,16 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import {AuthorizationStatus} from '../../const.js';
+import {createAPI} from '../../api.js';
 import OfferDetails from './offer-details.jsx';
 
 
-const mockStore = configureStore([]);
+const api = createAPI(() => {});
+const middlewares = [thunk.withExtraArgument(api)];
+const mockStore = configureStore(middlewares);
 
 
 const offer = {
@@ -129,6 +133,7 @@ it(`Render <OfferDetails />`, () => {
     userData: {
       email: `name@gmail.com`,
     },
+    commentsByOffer: [],
   });
 
   const tree = renderer
