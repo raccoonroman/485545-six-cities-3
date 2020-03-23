@@ -1,5 +1,11 @@
-import {offers, cities, authorization, userData} from './reducer.js';
 import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
+import {
+  offers,
+  cities,
+  authorization,
+  userData,
+  commentsByOffer,
+} from './reducer.js';
 
 
 const mockOffers = [
@@ -99,6 +105,29 @@ const mockOffers = [
     hostName: `Monica`,
     images: [`https://i.picsum.photos/id/112/400/200.jpg`, `https://i.picsum.photos/id/113/400/200.jpg`, `https://i.picsum.photos/id/114/400/200.jpg`, `https://i.picsum.photos/id/115/400/200.jpg`, `https://i.picsum.photos/id/116/400/200.jpg`, `https://i.picsum.photos/id/117/400/200.jpg`, `https://i.picsum.photos/id/118/400/200.jpg`, `https://i.picsum.photos/id/119/400/200.jpg`],
   },
+];
+
+const mockComments = [
+  {
+    commentId: 110,
+    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit`,
+    date: `2011-10-05T14:48:00.000Z`,
+    rating: 5,
+    userAvatarUrl: `https://i.picsum.photos/id/136/200/200.jpg`,
+    userId: 300,
+    isUserPro: false,
+    userName: `Alex`,
+  },
+  {
+    commentId: 111,
+    text: `Lorem ipsum dolor sit amet`,
+    date: `2012-12-06T12:18:50.000Z`,
+    rating: 4,
+    userAvatarUrl: `https://i.picsum.photos/id/137/200/200.jpg`,
+    userId: 301,
+    isUserPro: true,
+    userName: `John`,
+  }
 ];
 
 
@@ -213,6 +242,19 @@ describe(`Reducers working correctly`, () => {
       })).toEqual({
         email: `romankushnir@gmail.com`,
       });
+    });
+  });
+
+  describe(`Reducer 'commentsByOffer' works correctly`, () => {
+    it(`Reducer without additional parameters should return initial state`, () => {
+      expect(commentsByOffer(void 0, {})).toEqual([]);
+    });
+
+    it(`Reducer should update commentsByOffer by load comments`, () => {
+      expect(commentsByOffer([], {
+        type: ActionType.LOAD_COMMENTS,
+        payload: mockComments,
+      })).toEqual(mockComments);
     });
   });
 });

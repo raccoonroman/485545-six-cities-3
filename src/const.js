@@ -18,6 +18,7 @@ const ActionType = {
   SET_CITY: `SET_CITY`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_EMAIL: `SET_EMAIL`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
 };
 
 const AuthorizationStatus = {

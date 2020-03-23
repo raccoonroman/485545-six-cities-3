@@ -4,7 +4,7 @@ import cn from 'classnames';
 import {getOffersByCity} from '../../utils.js';
 import withHoveredCard from '../../hocs/with-hovered-card/with-hovered-card.js';
 import withSorting from '../../hocs/with-sorting/with-sorting.js';
-import Header from '../../components/header/header.jsx';
+import Header from '../header/header.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 import Map from '../map/map.jsx';
@@ -31,7 +31,7 @@ const Main = (props) => {
           <div className="cities__status-wrapper tabs__content">
             <b className="cities__status">No places to stay available</b>
             <p className="cities__status-description">
-              We could not find any property availbale at the moment in {currentCity}
+              We could not find any property available at the moment in {currentCity}
             </p>
           </div>
         </section>
@@ -53,12 +53,10 @@ const Main = (props) => {
       return null;
     }
 
-    const {location: cityLocation} = offersByCity[0].city;
     return (
       <Map
         className="cities__map map"
         offers={offersByCity}
-        location={cityLocation}
         currentOfferId={hoveredCardId}
       />
     );

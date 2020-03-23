@@ -21,14 +21,14 @@ const offers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
-      zoom: 10,
+      zoom: 16,
     },
     city: {
       name: `Vinnytsia`,
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10,
+        zoom: 12,
       },
     },
   },
@@ -46,14 +46,14 @@ const offers = [
     location: {
       latitude: 52.341667,
       longitude: 4.902452,
-      zoom: 11,
+      zoom: 16,
     },
     city: {
       name: `Vinnytsia`,
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 11,
+        zoom: 12,
       },
     },
   },
@@ -78,17 +78,11 @@ const offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 13,
+        zoom: 12,
       },
     },
   },
 ];
-
-const location = {
-  latitude: 49.233614,
-  longitude: 28.467170,
-  zoom: 12,
-};
 
 
 it(`Should <Map /> render correctly`, () => {
@@ -98,7 +92,6 @@ it(`Should <Map /> render correctly`, () => {
       <Map
         className="cities__map map"
         offers={offers}
-        location={location}
         currentOfferId={100501}
       />,
       {attachTo: div}

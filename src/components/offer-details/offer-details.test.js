@@ -1,12 +1,16 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import {AuthorizationStatus} from '../../const.js';
+import {createAPI} from '../../api.js';
 import OfferDetails from './offer-details.jsx';
 
 
-const mockStore = configureStore([]);
+const api = createAPI(() => {});
+const middlewares = [thunk.withExtraArgument(api)];
+const mockStore = configureStore(middlewares);
 
 
 const offer = {
@@ -121,52 +125,27 @@ const neighbourhoodOffers = [
 ];
 
 
-describe(`Render <OfferDetails />`, () => {
-  it(`When user is not authorized`, () => {
-    const store = mockStore({
-      authorization: {
-        authorizationStatus: AuthorizationStatus.NO_AUTH,
-      },
-      userData: {
-        email: ``,
-      },
-    });
-
-    const tree = renderer
-    .create(
-        <Provider store={store}>
-          <OfferDetails
-            offer={offer}
-            neighbourhoodOffers={neighbourhoodOffers}
-            onOfferTitleClick={() => {}}
-          />
-        </Provider>
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
+it(`Render <OfferDetails />`, () => {
+  const store = mockStore({
+    authorization: {
+      authorizationStatus: AuthorizationStatus.AUTH,
+    },
+    userData: {
+      email: `name@gmail.com`,
+    },
+    commentsByOffer: [],
   });
 
-  it(`When user is authorized`, () => {
-    const store = mockStore({
-      authorization: {
-        authorizationStatus: AuthorizationStatus.AUTH,
-      },
-      userData: {
-        email: `name@gmail.com`,
-      },
-    });
+  const tree = renderer
+  .create(
+      <Provider store={store}>
+        <OfferDetails
+          offer={offer}
+          neighbourhoodOffers={neighbourhoodOffers}
+          onOfferTitleClick={() => {}}
+        />
+      </Provider>
+  ).toJSON();
 
-    const tree = renderer
-    .create(
-        <Provider store={store}>
-          <OfferDetails
-            offer={offer}
-            neighbourhoodOffers={neighbourhoodOffers}
-            onOfferTitleClick={() => {}}
-          />
-        </Provider>
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
+  expect(tree).toMatchSnapshot();
 });

@@ -86,17 +86,18 @@ const withLeaflet = (Component) => {
     }
 
     componentDidUpdate({offers: prevOffers}) {
-      const {offers, location, currentOfferId} = this.props;
+      const {offers, currentOfferId} = this.props;
+      const {location: cityLocation} = offers[0].city;
+      const {zoom} = cityLocation;
 
       if (prevOffers[0].city.name !== offers[0].city.name) {
-        const {latitude, longitude, zoom} = location;
+        const {latitude, longitude} = cityLocation;
         this._map.setView([latitude, longitude], zoom);
       }
 
       if (currentOfferId) {
-        const currentOffer = offers.find(({id}) => id === currentOfferId);
-        const {location: currentOfferLocation} = currentOffer;
-        const {latitude, longitude, zoom} = currentOfferLocation;
+        const offer = offers.find(({id}) => id === currentOfferId);
+        const {latitude, longitude} = offer.location;
         this._map.setView([latitude, longitude], zoom);
       }
 
@@ -109,7 +110,8 @@ const withLeaflet = (Component) => {
     }
 
     _renderMap() {
-      const {location} = this.props;
+      const {offers} = this.props;
+      const {location} = offers[0].city;
       const mapElement = this._mapRef.current;
       this._map = renderMap(mapElement, location);
     }
@@ -166,11 +168,6 @@ const withLeaflet = (Component) => {
           }).isRequired,
         }).isRequired
     ).isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
     currentOfferId: PropTypes.number,
   };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from '../../components/header/header.jsx';
+import Header from '../header/header.jsx';
 
 
 export default class SignIn extends React.PureComponent {
