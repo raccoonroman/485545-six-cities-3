@@ -25,7 +25,7 @@ export const checkAuth = () => (dispatch, getState, api) => {
     });
 };
 
-export const login = (authData) => (dispatch, getState, api) => {
+export const login = (authData, goToPreviousPage) => (dispatch, getState, api) => {
   return api
     .post(`/login`, {
       email: authData.login,
@@ -34,6 +34,7 @@ export const login = (authData) => (dispatch, getState, api) => {
     .then((data) => {
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
       dispatch(actions.setEmail(data.email));
+      goToPreviousPage();
     })
     .catch((err) => {
       throw err;
