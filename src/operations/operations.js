@@ -13,6 +13,28 @@ export const loadOffers = () => (dispatch, getState, api) => {
     });
 };
 
+export const loadFavoriteOffers = () => (dispatch, getState, api) => {
+  return api
+    .get(`/favorite`)
+    .then((data) => {
+      dispatch(actions.loadFavoriteOffers(data));
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const loadNearbyOffers = (offerId) => (dispatch, getState, api) => {
+  return api
+    .get(`/hotels/${offerId}/nearby`)
+    .then((data) => {
+      dispatch(actions.loadNearbyOffers(data));
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 export const checkAuth = () => (dispatch, getState, api) => {
   return api
     .get(`/login`)
@@ -65,17 +87,6 @@ export const postComment = (commentData, offerId, enableForm, clearForm) => (dis
     })
     .catch((err) => {
       enableForm();
-      throw err;
-    });
-};
-
-export const loadFavoriteOffers = () => (dispatch, getState, api) => {
-  return api
-    .get(`/favorite`)
-    .then((data) => {
-      dispatch(actions.loadFavoriteOffers(data));
-    })
-    .catch((err) => {
       throw err;
     });
 };

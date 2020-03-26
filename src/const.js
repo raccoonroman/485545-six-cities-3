@@ -20,6 +20,7 @@ export const ActionType = {
   SET_EMAIL: `SET_EMAIL`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`
 };
 
 export const AuthorizationStatus = {
@@ -31,4 +32,5 @@ export const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
+  OFFER: `/offer`,
 };
