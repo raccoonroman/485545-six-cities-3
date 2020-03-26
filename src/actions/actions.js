@@ -26,11 +26,6 @@ export const loadComments = (comments) => ({
   payload: comments,
 });
 
-export const loadFavoriteOffers = (favoriteOffers) => ({
-  type: ActionType.LOAD_FAVORITE_OFFERS,
-  payload: favoriteOffers,
-});
-
 export const loadNearbyOffers = (nearbyOffers) => ({
   type: ActionType.LOAD_NEARBY_OFFERS,
   payload: nearbyOffers,

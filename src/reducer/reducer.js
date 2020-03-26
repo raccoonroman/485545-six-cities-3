@@ -77,16 +77,6 @@ const commentsByOffer = (state = [], action) => {
   return state;
 };
 
-const favoriteOffers = (state = [], action) => {
-  switch (action.type) {
-    case ActionType.LOAD_FAVORITE_OFFERS: {
-      return action.payload;
-    }
-  }
-
-  return state;
-};
-
 const nearbyOffers = (state = [], action) => {
   switch (action.type) {
     case ActionType.LOAD_NEARBY_OFFERS: {
@@ -104,7 +94,6 @@ export {
   authorization,
   userData,
   commentsByOffer,
-  favoriteOffers,
   nearbyOffers,
 };
 
@@ -114,6 +103,5 @@ export default combineReducers({
   authorization,
   userData,
   commentsByOffer,
-  favoriteOffers,
   nearbyOffers,
 });

@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getMappedFavoriteOffers} from '../../selectors/selectors.js';
+import {getFavoriteOffers} from '../../selectors/selectors.js';
 import Header from '../header/header.jsx';
 
 
 const Favorites = ({favoriteOffers}) => {
   console.log(favoriteOffers);
+
   return (
     <div className="page page--favorites-empty">
       <Header />
@@ -37,7 +38,7 @@ Favorites.propTypes = {
 
 
 const mapStateToProps = (state) => ({
-  favoriteOffers: getMappedFavoriteOffers(state),
+  favoriteOffers: getFavoriteOffers(state),
 });
 
 export default connect(mapStateToProps)(Favorites);

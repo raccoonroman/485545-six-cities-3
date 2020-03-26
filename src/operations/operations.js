@@ -13,17 +13,6 @@ export const loadOffers = () => (dispatch, getState, api) => {
     });
 };
 
-export const loadFavoriteOffers = () => (dispatch, getState, api) => {
-  return api
-    .get(`/favorite`)
-    .then((data) => {
-      dispatch(actions.loadFavoriteOffers(data));
-    })
-    .catch((err) => {
-      throw err;
-    });
-};
-
 export const loadNearbyOffers = (offerId) => (dispatch, getState, api) => {
   return api
     .get(`/hotels/${offerId}/nearby`)
