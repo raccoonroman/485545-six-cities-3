@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import * as operations from '../../operations/operations.js';
 import Header from '../header/header.jsx';
 
 
@@ -28,9 +30,9 @@ class SignIn extends React.PureComponent {
 
   _handleFormSubmit(evt) {
     evt.preventDefault();
-    const {onSubmit} = this.props;
+    const {login} = this.props;
     const {email, password} = this.state;
-    onSubmit({login: email, password}, this.goToPreviousPage);
+    login({login: email, password}, this.goToPreviousPage);
   }
 
   render() {
@@ -79,10 +81,16 @@ class SignIn extends React.PureComponent {
   }
 }
 
-
 SignIn.propTypes = {
   history: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-export default SignIn;
+
+const mapDispatchToProps = (dispatch) => ({
+  login(authData, goToPreviousPage) {
+    dispatch(operations.login(authData, goToPreviousPage));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);

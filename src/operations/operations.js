@@ -68,3 +68,14 @@ export const postComment = (commentData, offerId, enableForm, clearForm) => (dis
       throw err;
     });
 };
+
+export const loadFavoriteOffers = () => (dispatch, getState, api) => {
+  return api
+    .get(`/favorite`)
+    .then((data) => {
+      dispatch(actions.loadFavoriteOffers(data));
+    })
+    .catch((err) => {
+      throw err;
+    });
+};

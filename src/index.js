@@ -8,7 +8,7 @@ import {AuthorizationStatus} from './const.js';
 import App from './components/app/app.jsx';
 import reducer from './reducer/reducer.js';
 import {requireAuthorization} from './actions/actions.js';
-import {loadOffers, checkAuth} from './operations/operations.js';
+import {loadOffers, checkAuth, loadFavoriteOffers} from './operations/operations.js';
 import {createAPI} from './api.js';
 
 
@@ -27,6 +27,7 @@ const store = createStore(
 
 store.dispatch(loadOffers());
 store.dispatch(checkAuth());
+store.dispatch(loadFavoriteOffers());
 
 ReactDOM.render(
     <Provider store={store}>

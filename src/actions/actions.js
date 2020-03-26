@@ -25,3 +25,8 @@ export const loadComments = (comments) => ({
   type: ActionType.LOAD_COMMENTS,
   payload: comments,
 });
+
+export const loadFavoriteOffers = (favoriteOffers) => ({
+  type: ActionType.LOAD_FAVORITE_OFFERS,
+  payload: favoriteOffers,
+});
