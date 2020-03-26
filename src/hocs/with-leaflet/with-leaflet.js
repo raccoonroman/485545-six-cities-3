@@ -5,8 +5,8 @@ import leaflet from 'leaflet';
 
 const Pin = {
   PATH: {
-    BLUE: `img/pin.svg`,
-    ORANGE: `img/pin-active.svg`,
+    BLUE: `/img/pin.svg`,
+    ORANGE: `/img/pin-active.svg`,
   },
   SIZES: [30, 30],
 };

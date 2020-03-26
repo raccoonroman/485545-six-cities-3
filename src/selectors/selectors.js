@@ -10,6 +10,7 @@ export const getAuthorizationStatus = (state) => state.authorization.authorizati
 export const getUserEmail = (state) => state.userData.email;
 export const getCommentsByOffer = (state) => state.commentsByOffer;
 export const getFavoriteOffers = (state) => state.favoriteOffers;
+export const getNearbyOffers = (state) => state.nearbyOffers;
 
 export const getMappedOffers = createSelector(
     getOffers,
@@ -17,7 +18,12 @@ export const getMappedOffers = createSelector(
 );
 
 export const getMappedFavoriteOffers = createSelector(
-    getFavoriteOffers,
+  getFavoriteOffers,
+  (offers) => offers.map(mapOfferToClient)
+);
+
+export const getMappedNearbyOffers = createSelector(
+    getNearbyOffers,
     (offers) => offers.map(mapOfferToClient)
 );
 
