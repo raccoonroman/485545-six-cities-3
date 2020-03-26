@@ -43,9 +43,9 @@ export const login = (authData, goToPreviousPage) => (dispatch, getState, api) =
       password: authData.password,
     })
     .then((data) => {
+      goToPreviousPage();
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
       dispatch(actions.setEmail(data.email));
-      goToPreviousPage();
     })
     .catch((err) => {
       throw err;
