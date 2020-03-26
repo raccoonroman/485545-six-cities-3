@@ -45,12 +45,7 @@ const withSorting = (Component) => {
 
     render() {
       const {sortBy} = this.state;
-      const {
-        offers,
-        currentCity,
-        onCardHover,
-        onOfferTitleClick,
-      } = this.props;
+      const {offers, currentCity, onCardHover} = this.props;
 
       const sortedOffers = this._getSortedOffers(offers, sortBy);
 
@@ -69,7 +64,6 @@ const withSorting = (Component) => {
             cardsType={CardType.CITY}
             offers={sortedOffers}
             onCardHover={onCardHover}
-            onOfferTitleClick={onOfferTitleClick}
           />
         </section>
       );
@@ -80,7 +74,6 @@ const withSorting = (Component) => {
     offers: PropTypes.arrayOf(PropTypes.object).isRequired,
     currentCity: PropTypes.string.isRequired,
     onCardHover: PropTypes.func.isRequired,
-    onOfferTitleClick: PropTypes.func.isRequired,
   };
 
 
