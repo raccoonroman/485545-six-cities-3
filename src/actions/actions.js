@@ -30,3 +30,8 @@ export const loadNearbyOffers = (nearbyOffers) => ({
   type: ActionType.LOAD_NEARBY_OFFERS,
   payload: nearbyOffers,
 });
+
+export const updateOffer = (newOffer) => ({
+  type: ActionType.UPDATE_OFFER,
+  payload: newOffer,
+});

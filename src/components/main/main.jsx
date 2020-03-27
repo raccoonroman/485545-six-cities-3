@@ -15,7 +15,7 @@ import Map from '../map/map.jsx';
 const OffersListWithSorting = withSorting(OffersList);
 
 
-const Main = ({currentCity, offers, hoveredCardId, onCardHover}) => {
+const Main = ({history, currentCity, offers, hoveredCardId, onCardHover}) => {
   const offersByCity = getOffersByCity(currentCity, offers);
 
   const renderOffersList = () => {
@@ -34,6 +34,7 @@ const Main = ({currentCity, offers, hoveredCardId, onCardHover}) => {
 
     return (
       <OffersListWithSorting
+        history={history}
         offers={offersByCity}
         currentCity={currentCity}
         onCardHover={onCardHover}
@@ -90,6 +91,7 @@ const Main = ({currentCity, offers, hoveredCardId, onCardHover}) => {
 };
 
 Main.propTypes = {
+  history: PropTypes.object.isRequired,
   currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({

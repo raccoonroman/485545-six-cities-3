@@ -17,8 +17,8 @@ const App = ({authorizationStatus}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={AppRoute.ROOT} render={() => (
-          <Main />
+        <Route exact path={AppRoute.ROOT} render={({history}) => (
+          <Main history={history} />
         )} />
         <Route exact path={`${AppRoute.OFFER}/:id`} render={({match}) => (
           <OfferDetails match={match} />

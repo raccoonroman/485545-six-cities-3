@@ -79,3 +79,14 @@ export const postComment = (commentData, offerId, enableForm, clearForm) => (dis
       throw err;
     });
 };
+
+export const setFavoriteStatus = (offerId, status) => (dispatch, getState, api) => {
+  return api
+    .post(`/favorite/${offerId}/${status}`)
+    .then((data) => {
+      dispatch(actions.updateOffer(data));
+    })
+    .catch((err) => {
+      throw err;
+    });
+};

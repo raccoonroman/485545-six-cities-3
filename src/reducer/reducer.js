@@ -21,6 +21,12 @@ const offers = (state = [], action) => {
     case ActionType.LOAD_OFFERS: {
       return action.payload;
     }
+    case ActionType.UPDATE_OFFER: {
+      const newOffer = action.payload;
+      const {id: newOfferId} = newOffer;
+      const i = state.findIndex(({id}) => id === newOfferId);
+      return [...state.slice(0, i), newOffer, ...state.slice(i + 1)];
+    }
   }
 
   return state;
