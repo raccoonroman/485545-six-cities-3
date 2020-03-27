@@ -20,8 +20,8 @@ const App = ({authorizationStatus}) => {
         <Route exact path={AppRoute.ROOT} render={({history}) => (
           <Main history={history} />
         )} />
-        <Route exact path={`${AppRoute.OFFER}/:id`} render={({match}) => (
-          <OfferDetails match={match} />
+        <Route exact path={`${AppRoute.OFFER}/:id`} render={(props) => (
+          <OfferDetails {...props} />
         )} />
         <Route exact path={AppRoute.LOGIN} render={({history}) => (
           !authorized ? <SignIn history={history} /> : <Redirect to={AppRoute.ROOT} />

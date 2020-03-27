@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
-import {getCitiesByOffers} from '../utils';
+import {getCitiesByOffers, updateOffers} from '../utils';
 
 
 const InitialState = {
@@ -23,9 +23,8 @@ const offers = (state = [], action) => {
     }
     case ActionType.UPDATE_OFFER: {
       const newOffer = action.payload;
-      const {id: newOfferId} = newOffer;
-      const i = state.findIndex(({id}) => id === newOfferId);
-      return [...state.slice(0, i), newOffer, ...state.slice(i + 1)];
+      const updatedOffers = updateOffers(state, newOffer);
+      return updatedOffers;
     }
   }
 
@@ -87,6 +86,11 @@ const nearbyOffers = (state = [], action) => {
   switch (action.type) {
     case ActionType.LOAD_NEARBY_OFFERS: {
       return action.payload;
+    }
+    case ActionType.UPDATE_OFFER: {
+      const newOffer = action.payload;
+      const updatedOffers = updateOffers(state, newOffer);
+      return updatedOffers;
     }
   }
 

@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import cn from 'classnames';
-import {OFFER_CATEGORIES, CardType} from '../../const.js';
-import {getRatingStarsStyle} from '../../utils.js';
-import {getMappedOffers, getMappedNearbyOffers} from '../../selectors/selectors.js';
+import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const.js';
+import {getRatingStarsStyle, isAuthorized} from '../../utils.js';
 import * as operations from '../../operations/operations.js';
+import {getMappedOffers, getMappedNearbyOffers, getAuthorizationStatus} from '../../selectors/selectors.js';
 import Header from '../header/header.jsx';
 import Reviews from '../reviews/reviews.jsx';
 import Map from '../map/map.jsx';
@@ -15,6 +15,11 @@ import OffersList from '../offers-list/offers-list.jsx';
 const MAX_IMAGES = 6;
 
 class OfferDetails extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this._handleBookmarkButtonClick = this._handleBookmarkButtonClick.bind(this);
+  }
+
   componentDidMount() {
     this._loadComments();
     this._loadNearbyOffers();
@@ -41,6 +46,20 @@ class OfferDetails extends React.PureComponent {
     loadNearbyOffers(id);
   }
 
+  _handleBookmarkButtonClick() {
+    const {history, authorizationStatus, setFavoriteStatus} = this.props;
+    const authorized = isAuthorized(authorizationStatus);
+    const currentOffer = this._getCurrentOffer();
+    const {id, isFavorite} = currentOffer;
+
+    if (!authorized) {
+      history.push(AppRoute.LOGIN);
+    } else {
+      const status = +(!isFavorite);
+      setFavoriteStatus(id, status);
+    }
+  }
+
   _getCurrentOffer() {
     const {match, offers} = this.props;
     const {id: currentId} = match.params;
@@ -55,7 +74,7 @@ class OfferDetails extends React.PureComponent {
   }
 
   render() {
-    const {nearbyOffers} = this.props;
+    const {history, nearbyOffers} = this.props;
     const currentOffer = this._getCurrentOffer();
     if (!currentOffer) {
       return null;
@@ -112,7 +131,7 @@ class OfferDetails extends React.PureComponent {
                   </div>)}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
-                  <button className={bookmarkButtonClass} type="button">
+                  <button onClick={this._handleBookmarkButtonClick} className={bookmarkButtonClass} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -184,6 +203,7 @@ class OfferDetails extends React.PureComponent {
                 {this._getNearbyOffersTitleText(nearbyOffers.length)}
               </h2>
               <OffersList
+                history={history}
                 className={`near-places__list places__list`}
                 cardsType={CardType.NEAR}
                 offers={nearbyOffers}
@@ -197,7 +217,9 @@ class OfferDetails extends React.PureComponent {
 }
 
 OfferDetails.propTypes = {
+  history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -235,9 +257,11 @@ OfferDetails.propTypes = {
   nearbyOffers: PropTypes.arrayOf(PropTypes.object),
   loadComments: PropTypes.func.isRequired,
   loadNearbyOffers: PropTypes.func.isRequired,
+  setFavoriteStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
   offers: getMappedOffers(state),
   nearbyOffers: getMappedNearbyOffers(state),
 });
@@ -248,7 +272,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadNearbyOffers(offerId) {
     dispatch(operations.loadNearbyOffers(offerId));
-  }
+  },
+  setFavoriteStatus(offerId, status) {
+    dispatch(operations.setFavoriteStatus(offerId, status));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferDetails);
