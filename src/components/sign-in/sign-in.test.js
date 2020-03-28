@@ -2,7 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {AuthorizationStatus} from '../../const.js';
+import {BrowserRouter, Route} from 'react-router-dom';
+import {AuthorizationStatus, AppRoute} from '../../const.js';
 import SignIn from './sign-in.jsx';
 
 
@@ -21,9 +22,11 @@ it(`Render <SignIn />`, () => {
   const tree = renderer
   .create(
       <Provider store={store}>
-        <SignIn
-          onSubmit={() => {}}
-        />
+        <BrowserRouter>
+          <Route exact path={AppRoute.LOGIN} render={({history}) => (
+            <SignIn history={history} />
+          )} />
+        </BrowserRouter>
       </Provider>
   ).toJSON();
 

@@ -45,6 +45,7 @@ exports[`Should <OffersList /> render correctly 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -87,7 +88,8 @@ exports[`Should <OffersList /> render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/100500"
+          onClick={[Function]}
         >
           Lorem ipsum
         </a>
@@ -147,6 +149,7 @@ exports[`Should <OffersList /> render correctly 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -189,7 +192,8 @@ exports[`Should <OffersList /> render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/100501"
+          onClick={[Function]}
         >
           Ut enim ad minim veniam
         </a>
@@ -242,6 +246,7 @@ exports[`Should <OffersList /> render correctly 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button place-card__bookmark-button--active"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -284,7 +289,8 @@ exports[`Should <OffersList /> render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/100502"
+          onClick={[Function]}
         >
           Excepteur sint occaecat cupidatat non proident
         </a>

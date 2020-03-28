@@ -77,4 +77,34 @@ describe(`Action creators work correctly`, () => {
       payload: mock,
     });
   });
+
+  it(`Action creator for loading nearby offers returns correct action`, () => {
+    expect(actions.loadNearbyOffers([])).toEqual({
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: [],
+    });
+
+    expect(actions.loadNearbyOffers(mock)).toEqual({
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: mock,
+    });
+  });
+
+  it(`Action creator for updating offers returns correct action`, () => {
+    expect(actions.updateOffer({})).toEqual({
+      type: ActionType.UPDATE_OFFER,
+      payload: {},
+    });
+
+    expect(actions.updateOffer({
+      id: 1,
+      key1: `some value`,
+    })).toEqual({
+      type: ActionType.UPDATE_OFFER,
+      payload: {
+        id: 1,
+        key1: `some value`,
+      },
+    });
+  });
 });

@@ -2,13 +2,14 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import {BrowserRouter} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const.js';
 import Header from './header.jsx';
 
 
 const mockStore = configureStore([]);
 
-describe(`Render <CitiesList />`, () => {
+describe(`Render <Header />`, () => {
   it(`When user is not authorized`, () => {
     const store = mockStore({
       authorization: {
@@ -22,7 +23,9 @@ describe(`Render <CitiesList />`, () => {
     const tree = renderer
     .create(
         <Provider store={store}>
-          <Header />
+          <BrowserRouter>
+            <Header />
+          </BrowserRouter>
         </Provider>
     ).toJSON();
 
@@ -42,7 +45,9 @@ describe(`Render <CitiesList />`, () => {
     const tree = renderer
     .create(
         <Provider store={store}>
-          <Header />
+          <BrowserRouter>
+            <Header />
+          </BrowserRouter>
         </Provider>
     ).toJSON();
 

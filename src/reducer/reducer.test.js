@@ -5,6 +5,7 @@ import {
   authorization,
   userData,
   commentsByOffer,
+  nearbyOffers,
 } from './reducer.js';
 
 
@@ -107,6 +108,77 @@ const mockOffers = [
   },
 ];
 
+const updatedMockOffers = [
+  {
+    id: 100500,
+    key1: `value1`,
+  },
+  {
+    id: 100501,
+    title: `Ut enim ad minim veniam`,
+    previewImage: `https://i.picsum.photos/id/23/260/200.jpg`,
+    price: 9,
+    rating: 4.0,
+    type: `room`,
+    bedrooms: 4,
+    maxAdults: 5,
+    isFavorite: false,
+    isPremium: true,
+    location: {
+      latitude: 52.341667,
+      longitude: 4.902452,
+      zoom: 12,
+    },
+    city: {
+      name: `Vinnytsia`,
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 11,
+      },
+    },
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    goods: [`Towels`, `Dishwasher`, `Breakfast`],
+    hostAvatarUrl: `https://i.picsum.photos/id/105/400/200.jpg`,
+    hostId: 912,
+    hostIsPro: false,
+    hostName: `Phoebe`,
+    images: [`https://i.picsum.photos/id/92/400/200.jpg`, `https://i.picsum.photos/id/93/400/200.jpg`, `https://i.picsum.photos/id/94/400/200.jpg`, `https://i.picsum.photos/id/95/400/200.jpg`, `https://i.picsum.photos/id/96/400/200.jpg`, `https://i.picsum.photos/id/97/400/200.jpg`, `https://i.picsum.photos/id/98/400/200.jpg`, `https://i.picsum.photos/id/99/400/200.jpg`],
+  },
+  {
+    id: 100502,
+    title: `Excepteur sint occaecat cupidatat non proident`,
+    previewImage: `https://i.picsum.photos/id/24/260/200.jpg`,
+    price: 13,
+    rating: 4.9,
+    type: `house`,
+    bedrooms: 3,
+    maxAdults: 3,
+    isFavorite: true,
+    isPremium: false,
+    location: {
+      latitude: 52.359160,
+      longitude: 4.849366,
+      zoom: 14,
+    },
+    city: {
+      name: `Kyiv`,
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 13,
+      },
+    },
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.`,
+    goods: [`Dinner`, `Breakfast`],
+    hostAvatarUrl: `https://i.picsum.photos/id/106/400/200.jpg`,
+    hostId: 913,
+    hostIsPro: true,
+    hostName: `Monica`,
+    images: [`https://i.picsum.photos/id/112/400/200.jpg`, `https://i.picsum.photos/id/113/400/200.jpg`, `https://i.picsum.photos/id/114/400/200.jpg`, `https://i.picsum.photos/id/115/400/200.jpg`, `https://i.picsum.photos/id/116/400/200.jpg`, `https://i.picsum.photos/id/117/400/200.jpg`, `https://i.picsum.photos/id/118/400/200.jpg`, `https://i.picsum.photos/id/119/400/200.jpg`],
+  },
+];
+
 const mockComments = [
   {
     commentId: 110,
@@ -142,6 +214,16 @@ describe(`Reducers working correctly`, () => {
         type: ActionType.LOAD_OFFERS,
         payload: mockOffers,
       })).toEqual(mockOffers);
+    });
+
+    it(`Reducer should update offers by setting offer with new parameters`, () => {
+      expect(offers(mockOffers, {
+        type: ActionType.UPDATE_OFFER,
+        payload: {
+          id: 100500,
+          key1: `value1`,
+        },
+      })).toEqual(updatedMockOffers);
     });
   });
 
@@ -255,6 +337,29 @@ describe(`Reducers working correctly`, () => {
         type: ActionType.LOAD_COMMENTS,
         payload: mockComments,
       })).toEqual(mockComments);
+    });
+  });
+
+  describe(`Reducer 'nearbyOffers' works correctly`, () => {
+    it(`Reducer without additional parameters should return initial state`, () => {
+      expect(nearbyOffers(void 0, {})).toEqual([]);
+    });
+
+    it(`Reducer should update offers by load nearby offers`, () => {
+      expect(nearbyOffers([], {
+        type: ActionType.LOAD_NEARBY_OFFERS,
+        payload: mockOffers,
+      })).toEqual(mockOffers);
+    });
+
+    it(`Reducer should update offers by setting offer with new parameters`, () => {
+      expect(nearbyOffers(mockOffers, {
+        type: ActionType.UPDATE_OFFER,
+        payload: {
+          id: 100500,
+          key1: `value1`,
+        },
+      })).toEqual(updatedMockOffers);
     });
   });
 });

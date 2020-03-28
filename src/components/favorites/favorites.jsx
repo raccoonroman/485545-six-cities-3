@@ -5,9 +5,7 @@ import {getFavoriteOffers} from '../../selectors/selectors.js';
 import Header from '../header/header.jsx';
 
 
-const Favorites = ({favoriteOffers}) => {
-  console.log(favoriteOffers);
-
+const Favorites = () => {
   return (
     <div className="page page--favorites-empty">
       <Header />
