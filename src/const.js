@@ -11,6 +11,7 @@ export const SortType = {
 export const CardType = {
   CITY: `city`,
   NEAR: `near`,
+  FAVORITE: `favorite`,
 };
 
 export const ActionType = {

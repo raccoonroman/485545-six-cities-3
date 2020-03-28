@@ -23,7 +23,7 @@ const OffersList = ({history, className, cardsType, offers, onCardHover}) => {
 };
 
 OffersList.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
   className: PropTypes.string.isRequired,
   cardsType: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
