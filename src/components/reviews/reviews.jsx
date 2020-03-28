@@ -78,7 +78,7 @@ Reviews.propTypes = {
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
-  comments: getTenSortedComments(state)
+  comments: getTenSortedComments(state),
 });
 
 export default connect(mapStateToProps)(Reviews);

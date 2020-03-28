@@ -13,6 +13,17 @@ export const loadOffers = () => (dispatch, getState, api) => {
     });
 };
 
+export const loadNearbyOffers = (offerId) => (dispatch, getState, api) => {
+  return api
+    .get(`/hotels/${offerId}/nearby`)
+    .then((data) => {
+      dispatch(actions.loadNearbyOffers(data));
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 export const checkAuth = () => (dispatch, getState, api) => {
   return api
     .get(`/login`)
@@ -25,13 +36,14 @@ export const checkAuth = () => (dispatch, getState, api) => {
     });
 };
 
-export const login = (authData) => (dispatch, getState, api) => {
+export const login = (authData, goToPreviousPage) => (dispatch, getState, api) => {
   return api
     .post(`/login`, {
       email: authData.login,
       password: authData.password,
     })
     .then((data) => {
+      goToPreviousPage();
       dispatch(actions.requireAuthorization(AuthorizationStatus.AUTH));
       dispatch(actions.setEmail(data.email));
     })
@@ -64,6 +76,17 @@ export const postComment = (commentData, offerId, enableForm, clearForm) => (dis
     })
     .catch((err) => {
       enableForm();
+      throw err;
+    });
+};
+
+export const setFavoriteStatus = (offerId, status) => (dispatch, getState, api) => {
+  return api
+    .post(`/favorite/${offerId}/${status}`)
+    .then((data) => {
+      dispatch(actions.updateOffer(data));
+    })
+    .catch((err) => {
       throw err;
     });
 };

@@ -3,7 +3,8 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import {AuthorizationStatus} from '../../const.js';
+import {BrowserRouter, Route} from 'react-router-dom';
+import {AuthorizationStatus, AppRoute} from '../../const.js';
 import {createAPI} from '../../api.js';
 import OfferDetails from './offer-details.jsx';
 
@@ -13,120 +14,81 @@ const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureStore(middlewares);
 
 
-const offer = {
-  id: 100490,
-  title: `The best title ever`,
-  previewImage: `https://i.picsum.photos/id/22/400/200.jpg`,
-  price: 333,
-  rating: 3.3,
-  type: `apartment`,
-  bedrooms: 12,
-  maxAdults: 12,
-  isFavorite: false,
-  isPremium: false,
-  location: {
-    latitude: 52.35,
-    longitude: 4.67,
-    zoom: 14,
-  },
-  city: {
-    name: `Vinnytsya`,
-    location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
-      zoom: 12,
-    },
-  },
-  description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
-  goods: [`Baby seat`, `Towels`, `Dishwasher`, `Breakfast`],
-  hostAvatarUrl: `https://i.picsum.photos/id/58/400/200.jpg`,
-  hostId: 911,
-  hostIsPro: false,
-  hostName: `Rachel`,
-  images: [`https://i.picsum.photos/id/82/400/200.jpg`, `https://i.picsum.photos/id/83/400/200.jpg`, `https://i.picsum.photos/id/84/400/200.jpg`, `https://i.picsum.photos/id/85/400/200.jpg`, `https://i.picsum.photos/id/86/400/200.jpg`, `https://i.picsum.photos/id/87/400/200.jpg`, `https://i.picsum.photos/id/88/400/200.jpg`, `https://i.picsum.photos/id/89/400/200.jpg`],
-};
-
-const neighbourhoodOffers = [
+const mockOffers = [
   {
-    id: 100500,
-    title: `Lorem ipsum`,
-    previewImage: `https://i.picsum.photos/id/22/260/200.jpg`,
-    price: 100,
-    rating: 4.3,
-    type: `apartment`,
-    bedrooms: 10,
-    maxAdults: 10,
-    isFavorite: false,
-    isPremium: false,
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 14,
+    'id': 100490,
+    'title': `The best title ever`,
+    'preview_image': `https://i.picsum.photos/id/22/400/200.jpg`,
+    'price': 333,
+    'rating': 3.3,
+    'type': `apartment`,
+    'bedrooms': 12,
+    'max_adults': 12,
+    'is_favorite': false,
+    'is_premium': false,
+    'location': {
+      'latitude': 52.35,
+      'longitude': 4.67,
+      'zoom': 14,
     },
-    city: {
-      name: `Vinnytsya`,
-      location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
-        zoom: 10,
+    'city': {
+      'name': `Vinnytsya`,
+      'location': {
+        'latitude': 52.370216,
+        'longitude': 4.895168,
+        'zoom': 12,
       },
     },
+    'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
+    'goods': [`Baby seat`, `Towels`, `Dishwasher`, `Breakfast`],
+    'host': {
+      'avatar_url': `https://i.picsum.photos/id/58/400/200.jpg`,
+      'id': 911,
+      'is_pro': false,
+      'name': `Rachel`,
+    },
+    'images': [`https://i.picsum.photos/id/82/400/200.jpg`, `https://i.picsum.photos/id/83/400/200.jpg`, `https://i.picsum.photos/id/84/400/200.jpg`, `https://i.picsum.photos/id/85/400/200.jpg`, `https://i.picsum.photos/id/86/400/200.jpg`, `https://i.picsum.photos/id/87/400/200.jpg`, `https://i.picsum.photos/id/88/400/200.jpg`, `https://i.picsum.photos/id/89/400/200.jpg`],
   },
   {
-    id: 100501,
-    title: `Ut enim ad minim veniam`,
-    previewImage: `https://i.picsum.photos/id/23/260/200.jpg`,
-    price: 9,
-    rating: 4.0,
-    type: `room`,
-    bedrooms: 4,
-    maxAdults: 5,
-    isFavorite: false,
-    isPremium: true,
-    location: {
-      latitude: 52.341667,
-      longitude: 4.902452,
-      zoom: 12,
+    'id': 100491,
+    'title': `Some title`,
+    'preview_image': `https://i.picsum.photos/id/23/400/200.jpg`,
+    'price': 900,
+    'rating': 4.5,
+    'type': `room`,
+    'bedrooms': 2,
+    'max_adults': 4,
+    'is_favorite': true,
+    'is_premium': true,
+    'location': {
+      'latitude': 51,
+      'longitude': 5,
+      'zoom': 16,
     },
-    city: {
-      name: `Vinnytsya`,
-      location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
-        zoom: 11,
+    'city': {
+      'name': `Vinnytsya`,
+      'location': {
+        'latitude': 52,
+        'longitude': 4.9,
+        'zoom': 12,
       },
     },
-  },
-  {
-    id: 100502,
-    title: `Excepteur sint occaecat cupidatat non proident`,
-    previewImage: `https://i.picsum.photos/id/24/260/200.jpg`,
-    price: 13,
-    rating: 4.9,
-    type: `house`,
-    bedrooms: 3,
-    maxAdults: 3,
-    isFavorite: true,
-    isPremium: false,
-    location: {
-      latitude: 52.359160,
-      longitude: 4.849366,
-      zoom: 13,
+    'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `,
+    'goods': [`Towels`, `Breakfast`],
+    'host': {
+      'avatar_url': `https://i.picsum.photos/id/59/400/200.jpg`,
+      'id': 912,
+      'is_pro': true,
+      'name': `Chandler`,
     },
-    city: {
-      name: `Vinnytsya`,
-      location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
-        zoom: 13,
-      },
-    },
-  },
+    'images': [`https://i.picsum.photos/id/182/400/200.jpg`, `https://i.picsum.photos/id/183/400/200.jpg`, `https://i.picsum.photos/id/184/400/200.jpg`, `https://i.picsum.photos/id/185/400/200.jpg`, `https://i.picsum.photos/id/186/400/200.jpg`, `https://i.picsum.photos/id/187/400/200.jpg`, `https://i.picsum.photos/id/188/400/200.jpg`, `https://i.picsum.photos/id/189/400/200.jpg`],
+  }
 ];
 
 
 it(`Render <OfferDetails />`, () => {
   const store = mockStore({
+    offers: mockOffers,
     authorization: {
       authorizationStatus: AuthorizationStatus.AUTH,
     },
@@ -134,16 +96,17 @@ it(`Render <OfferDetails />`, () => {
       email: `name@gmail.com`,
     },
     commentsByOffer: [],
+    nearbyOffers: mockOffers,
   });
 
   const tree = renderer
   .create(
       <Provider store={store}>
-        <OfferDetails
-          offer={offer}
-          neighbourhoodOffers={neighbourhoodOffers}
-          onOfferTitleClick={() => {}}
-        />
+        <BrowserRouter>
+          <Route exact path={`${AppRoute.OFFER}/:id`} render={(props) => (
+            <OfferDetails {...props} />
+          )} />
+        </BrowserRouter>
       </Provider>
   ).toJSON();
 

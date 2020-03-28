@@ -45,12 +45,7 @@ const withSorting = (Component) => {
 
     render() {
       const {sortBy} = this.state;
-      const {
-        offers,
-        currentCity,
-        onCardHover,
-        onOfferTitleClick,
-      } = this.props;
+      const {history, offers, currentCity, onCardHover} = this.props;
 
       const sortedOffers = this._getSortedOffers(offers, sortBy);
 
@@ -65,11 +60,11 @@ const withSorting = (Component) => {
             onSortTypeChange={this._handleSortTypeChange}
           />
           <Component
+            history={history}
             className={`cities__places-list places__list`}
             cardsType={CardType.CITY}
             offers={sortedOffers}
             onCardHover={onCardHover}
-            onOfferTitleClick={onOfferTitleClick}
           />
         </section>
       );
@@ -77,10 +72,10 @@ const withSorting = (Component) => {
   }
 
   WithSorting.propTypes = {
+    history: PropTypes.object.isRequired,
     offers: PropTypes.arrayOf(PropTypes.object).isRequired,
     currentCity: PropTypes.string.isRequired,
     onCardHover: PropTypes.func.isRequired,
-    onOfferTitleClick: PropTypes.func.isRequired,
   };
 
 

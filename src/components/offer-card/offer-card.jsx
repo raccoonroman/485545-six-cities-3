@@ -1,11 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
-import {OFFER_CATEGORIES, CardType} from '../../const.js';
-import {getRatingStarsStyle} from '../../utils.js';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const.js';
+import {getRatingStarsStyle, isAuthorized} from '../../utils.js';
+import {getAuthorizationStatus} from '../../selectors/selectors.js';
+import * as operations from '../../operations/operations.js';
 
 
-const OfferCard = ({cardType, offer, onCardHover, onOfferTitleClick}) => {
+const OfferCard = (props) => {
+  const {
+    history,
+    cardType,
+    offer,
+    onCardHover,
+    authorizationStatus,
+    setFavoriteStatus,
+  } = props;
+
   const {
     id,
     title,
@@ -17,7 +30,18 @@ const OfferCard = ({cardType, offer, onCardHover, onOfferTitleClick}) => {
     isPremium,
   } = offer;
 
+  const authorized = isAuthorized(authorizationStatus);
   const ratingRounded = Math.round(rating);
+
+  const handleBookmarkButtonClick = () => {
+    if (!authorized) {
+      history.push(AppRoute.LOGIN);
+    } else {
+      const status = +(!isFavorite);
+      setFavoriteStatus(id, status);
+    }
+  };
+
 
   const placeCardClass = cn({
     'cities__place-card': cardType === CardType.CITY,
@@ -55,7 +79,7 @@ const OfferCard = ({cardType, offer, onCardHover, onOfferTitleClick}) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={bookmarkButtonClass} type="button">
+          <button onClick={handleBookmarkButtonClick} className={bookmarkButtonClass} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -69,7 +93,7 @@ const OfferCard = ({cardType, offer, onCardHover, onOfferTitleClick}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={onOfferTitleClick(id)} href="#">{title}</a>
+          <Link to={`${AppRoute.OFFER}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -78,6 +102,7 @@ const OfferCard = ({cardType, offer, onCardHover, onOfferTitleClick}) => {
 };
 
 OfferCard.propTypes = {
+  history: PropTypes.object.isRequired,
   cardType: PropTypes.string.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -90,7 +115,18 @@ OfferCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
   }).isRequired,
   onCardHover: PropTypes.func,
-  onOfferTitleClick: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  setFavoriteStatus: PropTypes.func.isRequired,
 };
 
-export default OfferCard;
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setFavoriteStatus(offerId, status) {
+    dispatch(operations.setFavoriteStatus(offerId, status));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);

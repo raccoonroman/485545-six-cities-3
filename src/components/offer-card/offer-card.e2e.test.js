@@ -1,10 +1,14 @@
 import React from 'react';
-import {configure, shallow} from 'enzyme';
+import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {CardType} from '../../const.js';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
+import {BrowserRouter} from 'react-router-dom';
+import {AuthorizationStatus, CardType} from '../../const.js';
 import OfferCard from './offer-card.jsx';
 
 
+const mockStore = configureStore([]);
 configure({adapter: new Adapter()});
 
 const offer = {
@@ -33,40 +37,34 @@ const offer = {
 };
 
 
-it(`Click on offer card title`, () => {
-  const handleCardTitleClick = jest.fn();
-
-  const card = shallow(<OfferCard
-    cardType={CardType.NEAR}
-    offer={offer}
-    onOfferTitleClick={handleCardTitleClick}
-  />);
-
-  const cardOneTitle = card.find(`.place-card__name a`).at(0);
-
-  cardOneTitle.simulate(`click`);
-
-  expect(handleCardTitleClick).toHaveBeenCalledTimes(1);
-
-  expect(handleCardTitleClick.mock.calls[0][0]).toBe(100500);
-});
-
 it(`Hover on offer card`, () => {
   const handleCardHover = jest.fn();
-  const handleCardTitleClick = jest.fn();
+  const store = mockStore({
+    authorization: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+  });
 
-  const card = shallow(<OfferCard
-    cardType={CardType.CITY}
-    offer={offer}
-    onCardHover={handleCardHover}
-    onOfferTitleClick={handleCardTitleClick}
-  />);
+  const card = mount(
+      <Provider store={store}>
+        <BrowserRouter>
+          <OfferCard
+            history={{}}
+            cardType={CardType.NEAR}
+            offer={offer}
+            onCardHover={handleCardHover}
+          />
+        </BrowserRouter>
+      </Provider>
+  );
 
   const cardOne = card.find(`.place-card`).at(0);
 
-  cardOne.simulate(`hover`);
+  cardOne.simulate(`mouseEnter`);
+  cardOne.simulate(`mouseLeave`);
 
   expect(handleCardHover).toHaveBeenCalledTimes(2);
 
   expect(handleCardHover.mock.calls[0][0]).toBe(100500);
+  expect(handleCardHover.mock.calls[1][0]).toBe(null);
 });

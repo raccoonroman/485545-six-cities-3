@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
-import {getCitiesByOffers} from '../utils';
+import {getCitiesByOffers, updateOffers} from '../utils';
 
 
 const InitialState = {
@@ -20,6 +20,11 @@ const offers = (state = [], action) => {
   switch (action.type) {
     case ActionType.LOAD_OFFERS: {
       return action.payload;
+    }
+    case ActionType.UPDATE_OFFER: {
+      const newOffer = action.payload;
+      const updatedOffers = updateOffers(state, newOffer);
+      return updatedOffers;
     }
   }
 
@@ -77,12 +82,29 @@ const commentsByOffer = (state = [], action) => {
   return state;
 };
 
+const nearbyOffers = (state = [], action) => {
+  switch (action.type) {
+    case ActionType.LOAD_NEARBY_OFFERS: {
+      return action.payload;
+    }
+    case ActionType.UPDATE_OFFER: {
+      const newOffer = action.payload;
+      const updatedOffers = updateOffers(state, newOffer);
+      return updatedOffers;
+    }
+  }
+
+  return state;
+};
+
+
 export {
   offers,
   cities,
   authorization,
   userData,
   commentsByOffer,
+  nearbyOffers,
 };
 
 export default combineReducers({
@@ -91,4 +113,5 @@ export default combineReducers({
   authorization,
   userData,
   commentsByOffer,
+  nearbyOffers,
 });

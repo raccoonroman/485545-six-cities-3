@@ -42,6 +42,7 @@ exports[`Should offer card render correctly 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button place-card__bookmark-button--active"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -84,7 +85,8 @@ exports[`Should offer card render correctly 1`] = `
       className="place-card__name"
     >
       <a
-        href="#"
+        href="/offer/100502"
+        onClick={[Function]}
       >
         Excepteur sint occaecat cupidatat non proident
       </a>
