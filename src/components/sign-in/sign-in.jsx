@@ -1,96 +1,61 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import * as operations from '../../operations/operations.js';
 import Header from '../header/header.jsx';
+import withLoginFormState from '../../hocs/with-login-form-state/with-login-form-state.js';
 
 
-class SignIn extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.goToPreviousPage = this.goToPreviousPage.bind(this);
-    this._handleFormSubmit = this._handleFormSubmit.bind(this);
-    this._handleInputChange = this._handleInputChange.bind(this);
-    this.state = {
-      email: ``,
-      password: ``,
-    };
-  }
+const SignIn = ({formState, onInputChange, onFormSubmit}) => {
+  const {email, password} = formState;
 
-  goToPreviousPage() {
-    const {history} = this.props;
-    history.goBack();
-  }
+  return (
+    <div className="page page--gray page--login">
+      <Header />
 
-  _handleInputChange({target}) {
-    this.setState((state) => Object.assign({}, state, {
-      [target.name]: target.value,
-    }));
-  }
-
-  _handleFormSubmit(evt) {
-    evt.preventDefault();
-    const {login} = this.props;
-    const {email, password} = this.state;
-    login({login: email, password}, this.goToPreviousPage);
-  }
-
-  render() {
-    const {email, password} = this.state;
-
-    return (
-      <div className="page page--gray page--login">
-        <Header />
-
-        <main className="page__main page__main--login">
-          <div className="page__login-container container">
-            <section className="login">
-              <h1 className="login__title">Sign in</h1>
-              <form onSubmit={this._handleFormSubmit} className="login__form form" action="#" method="post">
-                <div className="login__input-wrapper form__input-wrapper">
-                  <label className="visually-hidden">E-mail</label>
-                  <input
-                    value={email}
-                    onChange={this._handleInputChange}
-                    className="login__input form__input"
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    required=""
-                  />
-                </div>
-                <div className="login__input-wrapper form__input-wrapper">
-                  <label className="visually-hidden">Password</label>
-                  <input
-                    value={password}
-                    onChange={this._handleInputChange}
-                    className="login__input form__input"
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    required=""
-                  />
-                </div>
-                <button className="login__submit form__submit button" type="submit">Sign in</button>
-              </form>
-            </section>
-          </div>
-        </main>
-      </div>
-    );
-  }
-}
-
-SignIn.propTypes = {
-  history: PropTypes.object.isRequired,
-  login: PropTypes.func.isRequired,
+      <main className="page__main page__main--login">
+        <div className="page__login-container container">
+          <section className="login">
+            <h1 className="login__title">Sign in</h1>
+            <form onSubmit={onFormSubmit} className="login__form form" action="#" method="post">
+              <div className="login__input-wrapper form__input-wrapper">
+                <label className="visually-hidden">E-mail</label>
+                <input
+                  value={email}
+                  onChange={onInputChange}
+                  className="login__input form__input"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required=""
+                />
+              </div>
+              <div className="login__input-wrapper form__input-wrapper">
+                <label className="visually-hidden">Password</label>
+                <input
+                  value={password}
+                  onChange={onInputChange}
+                  className="login__input form__input"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  required=""
+                />
+              </div>
+              <button className="login__submit form__submit button" type="submit">Sign in</button>
+            </form>
+          </section>
+        </div>
+      </main>
+    </div>
+  );
 };
 
+SignIn.propTypes = {
+  formState: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }).isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  login(authData, goToPreviousPage) {
-    dispatch(operations.login(authData, goToPreviousPage));
-  },
-});
-
-export default connect(null, mapDispatchToProps)(SignIn);
+export default withLoginFormState(SignIn);
