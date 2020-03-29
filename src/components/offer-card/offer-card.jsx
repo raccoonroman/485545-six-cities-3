@@ -46,16 +46,22 @@ const OfferCard = (props) => {
   const placeCardClass = cn({
     'cities__place-card': cardType === CardType.CITY,
     'near-places__card': cardType === CardType.NEAR,
+    'favorites__card': cardType === CardType.FAVORITE,
     'place-card': true,
   });
   const imageWrapperClass = cn({
     'cities__image-wrapper': cardType === CardType.CITY,
     'near-places__image-wrapper': cardType === CardType.NEAR,
+    'favorites__image-wrapper': cardType === CardType.FAVORITE,
     'place-card__image-wrapper': true,
   });
   const bookmarkButtonClass = cn({
     'place-card__bookmark-button button': true,
     'place-card__bookmark-button--active': isFavorite,
+  });
+  const cardInfoClass = cn({
+    'place-card__info': true,
+    'favorites__card-info': cardType === CardType.FAVORITE,
   });
 
   return (
@@ -73,11 +79,11 @@ const OfferCard = (props) => {
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={cardInfoClass}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
-            <span className="place-card__price-text">&#47;&nbsp;night</span>
+            <span className="place-card__price-text"> &#47;&nbsp;night</span>
           </div>
           <button onClick={handleBookmarkButtonClick} className={bookmarkButtonClass} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -102,7 +108,7 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
   cardType: PropTypes.string.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,

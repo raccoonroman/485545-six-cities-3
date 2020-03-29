@@ -239,7 +239,7 @@ exports[`Render <Main /> 1`] = `
                     <span
                       className="place-card__price-text"
                     >
-                      / night
+                       / night
                     </span>
                   </div>
                   <button
@@ -345,7 +345,7 @@ exports[`Render <Main /> 1`] = `
                     <span
                       className="place-card__price-text"
                     >
-                      / night
+                       / night
                     </span>
                   </div>
                   <button
