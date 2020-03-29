@@ -1,17 +1,23 @@
 import React from 'react';
 import cn from 'classnames';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {CardType} from '../../const.js';
+import {CardType, AppRoute} from '../../const.js';
 import {getCitiesByOffers, getOffersByCity} from '../../utils.js';
 import {getFavoriteOffers} from '../../selectors/selectors.js';
+import {setCity} from '../../actions/actions.js';
 import Header from '../header/header.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 
 
-const Favorites = ({favoriteOffers}) => {
+const Favorites = ({favoriteOffers, onCityChange}) => {
   const noFavorites = !favoriteOffers.length;
   const cities = getCitiesByOffers(favoriteOffers);
+
+  const handleCityNameClick = (city) => () => {
+    onCityChange(city);
+  };
 
   const renderCities = () => {
     return cities.map((city) => {
@@ -21,9 +27,9 @@ const Favorites = ({favoriteOffers}) => {
         <li key={`${city}-favorites`} className="favorites__locations-items">
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link onClick={handleCityNameClick(city)} to={AppRoute.ROOT} className="locations__item-link">
                 <span>{city}</span>
-              </a>
+              </Link>
             </div>
           </div>
           <OffersList
@@ -86,6 +92,7 @@ const Favorites = ({favoriteOffers}) => {
 
 Favorites.propTypes = {
   favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onCityChange: PropTypes.func.isRequired,
 };
 
 
@@ -93,4 +100,10 @@ const mapStateToProps = (state) => ({
   favoriteOffers: getFavoriteOffers(state),
 });
 
-export default connect(mapStateToProps)(Favorites);
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(cityName) {
+    dispatch(setCity(cityName));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
