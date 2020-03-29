@@ -8,7 +8,6 @@ import {getUserEmail, getAuthorizationStatus} from '../../selectors/selectors.js
 
 
 const Header = ({authorizationStatus, email}) => {
-
   const renderLoginText = () => {
     if (!isAuthorized(authorizationStatus)) {
       return <span className="header__login">Sign in</span>;
