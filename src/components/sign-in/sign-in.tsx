@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import Header from '../header/header.jsx';
-import withLoginFormState from '../../hocs/with-login-form-state/with-login-form-state.js';
+import Header from '../header/header';
+import withLoginFormState from '../../hocs/with-login-form-state/with-login-form-state';
 
 
 const SignIn = ({formState, onInputChange, onFormSubmit}) => {

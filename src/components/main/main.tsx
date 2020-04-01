@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import {getOffersByCity} from '../../utils.js';
-import withHoveredCard from '../../hocs/with-hovered-card/with-hovered-card.js';
-import withSorting from '../../hocs/with-sorting/with-sorting.js';
-import {getCurrentCity, getMappedOffers} from '../../selectors/selectors.js';
-import Header from '../header/header.jsx';
-import CitiesList from '../cities-list/cities-list.jsx';
-import OffersList from '../offers-list/offers-list.jsx';
-import Map from '../map/map.jsx';
+import {getOffersByCity} from '../../utils';
+import withHoveredCard from '../../hocs/with-hovered-card/with-hovered-card';
+import withSorting from '../../hocs/with-sorting/with-sorting';
+import {getCurrentCity, getMappedOffers} from '../../selectors/selectors';
+import Header from '../header/header';
+import CitiesList from '../cities-list/cities-list';
+import OffersList from '../offers-list/offers-list';
+import Map from '../map/map';
 
 
 const OffersListWithSorting = withSorting(OffersList);

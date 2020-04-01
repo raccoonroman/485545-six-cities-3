@@ -1,14 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import cn from 'classnames';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {CardType, AppRoute} from '../../const.js';
-import {getCitiesByOffers, getOffersByCity} from '../../utils.js';
-import {getFavoriteOffers} from '../../selectors/selectors.js';
-import {setCity} from '../../actions/actions.js';
-import Header from '../header/header.jsx';
-import OffersList from '../offers-list/offers-list.jsx';
+import {CardType, AppRoute} from '../../const';
+import {getCitiesByOffers, getOffersByCity} from '../../utils';
+import {getFavoriteOffers} from '../../selectors/selectors';
+import {setCity} from '../../actions/actions';
+import Header from '../header/header';
+import OffersList from '../offers-list/offers-list';
 
 
 const Favorites = ({favoriteOffers, onCityChange}) => {

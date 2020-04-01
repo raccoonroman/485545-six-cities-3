@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
-import {getCitiesList} from '../../selectors/selectors.js';
-import {setCity} from '../../actions/actions.js';
+import {getCitiesList} from '../../selectors/selectors';
+import {setCity} from '../../actions/actions';
 
 
 const CitiesList = ({cities, currentCity, onCityChange}) => {

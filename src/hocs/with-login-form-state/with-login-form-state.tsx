@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import * as operations from '../../operations/operations.js';
+import * as operations from '../../operations/operations';
 
 
 const withLoginFormState = (Component) => {

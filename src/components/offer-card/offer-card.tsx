@@ -1,12 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import cn from 'classnames';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const.js';
-import {getRatingStarsStyle, isAuthorized} from '../../utils.js';
-import {getAuthorizationStatus} from '../../selectors/selectors.js';
-import * as operations from '../../operations/operations.js';
+import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const';
+import {getRatingStarsStyle, isAuthorized} from '../../utils';
+import {getAuthorizationStatus} from '../../selectors/selectors';
+import * as operations from '../../operations/operations';
 
 
 const OfferCard = (props) => {

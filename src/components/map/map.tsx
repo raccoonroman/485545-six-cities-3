@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import withLeaflet from '../../hocs/with-leaflet/with-leaflet.js';
+import withLeaflet from '../../hocs/with-leaflet/with-leaflet';
 
 
 const Map = ({className, children}) => {

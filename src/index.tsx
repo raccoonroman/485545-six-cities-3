@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import {AuthorizationStatus} from './const.js';
-import App from './components/app/app.jsx';
-import reducer from './reducer/reducer.js';
-import {requireAuthorization} from './actions/actions.js';
-import {loadOffers, checkAuth} from './operations/operations.js';
-import {createAPI} from './api.js';
+import {AuthorizationStatus} from './const';
+import App from './components/app/app';
+import reducer from './reducer/reducer';
+import {requireAuthorization} from './actions/actions';
+import {loadOffers, checkAuth} from './operations/operations';
+import {createAPI} from './api';
 
 
 const onUnauthorized = () => {

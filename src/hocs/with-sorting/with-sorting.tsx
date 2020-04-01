@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import {SortType, CardType} from '../../const.js';
-import Sorting from '../../components/sorting/sorting.jsx';
+import {SortType, CardType} from '../../const';
+import Sorting from '../../components/sorting/sorting';
 
 
 const sortTypes = [

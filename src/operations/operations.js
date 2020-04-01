@@ -1,5 +1,5 @@
-import * as actions from '../actions/actions.js';
-import {AuthorizationStatus} from '../const.js';
+import * as actions from '../actions/actions';
+import {AuthorizationStatus} from '../const';
 
 
 export const loadOffers = () => (dispatch, getState, api) => {

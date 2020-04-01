@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import cn from 'classnames';
-import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const.js';
-import {getRatingStarsStyle, isAuthorized} from '../../utils.js';
-import * as operations from '../../operations/operations.js';
-import {getMappedOffers, getMappedNearbyOffers, getAuthorizationStatus} from '../../selectors/selectors.js';
-import Header from '../header/header.jsx';
-import Reviews from '../reviews/reviews.jsx';
-import Map from '../map/map.jsx';
-import OffersList from '../offers-list/offers-list.jsx';
+import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const';
+import {getRatingStarsStyle, isAuthorized} from '../../utils';
+import * as operations from '../../operations/operations';
+import {getMappedOffers, getMappedNearbyOffers, getAuthorizationStatus} from '../../selectors/selectors';
+import Header from '../header/header';
+import Reviews from '../reviews/reviews';
+import Map from '../map/map';
+import OffersList from '../offers-list/offers-list';
 
 
 const MAX_IMAGES = 6;

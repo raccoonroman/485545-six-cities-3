@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const.js';
+import {DEFAULT_CITIES, ActionType, AuthorizationStatus} from '../const';
 import {getCitiesByOffers, updateOffers} from '../utils';
 
 

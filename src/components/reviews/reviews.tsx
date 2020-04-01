@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getRatingStarsStyle, isAuthorized} from '../../utils.js';
-import {getAuthorizationStatus, getTenSortedComments} from '../../selectors/selectors.js';
-import ReviewsForm from '../reviews-form/reviews-form.jsx';
+import {getRatingStarsStyle, isAuthorized} from '../../utils';
+import {getAuthorizationStatus, getTenSortedComments} from '../../selectors/selectors';
+import ReviewsForm from '../reviews-form/reviews-form';
 
 
 const Reviews = ({offerId, authorizationStatus, comments}) => {

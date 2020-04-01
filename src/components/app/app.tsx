@@ -1,14 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {AppRoute} from '../../const.js';
-import {isAuthorized} from '../../utils.js';
-import {getAuthorizationStatus} from '../../selectors/selectors.js';
-import Main from '../main/main.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import OfferDetails from '../offer-details/offer-details.jsx';
-import Favorites from '../favorites/favorites.jsx';
+import {AppRoute} from '../../const';
+import {isAuthorized} from '../../utils';
+import {getAuthorizationStatus} from '../../selectors/selectors';
+import Main from '../main/main';
+import SignIn from '../sign-in/sign-in';
+import OfferDetails from '../offer-details/offer-details';
+import Favorites from '../favorites/favorites';
 
 
 const App = ({authorizationStatus}) => {

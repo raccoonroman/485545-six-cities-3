@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import {SortType} from '../../const.js';
-import withListOpenState from '../../hocs/with-list-open-state/with-list-open-state.js';
+import {SortType} from '../../const';
+import withListOpenState from '../../hocs/with-list-open-state/with-list-open-state';
 
 
 const Sorting = ({sortBy, sortListOpened, onSortTypeClick, onSortItemClick}) => {
