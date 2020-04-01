@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import {Offer} from '../../types';
 import {SortType, CardType} from '../../const';
 import Sorting from '../../components/sorting/sorting';
 
@@ -23,9 +23,19 @@ const sortTypes = [
   },
 ];
 
+interface Props {
+  history: object;
+  offers: Offer[];
+  currentCity: string;
+  onCardHover: (offerId: number | null) => Function;
+}
+
+interface State {
+  sortBy: string;
+}
 
 const withSorting = (Component) => {
-  class WithSorting extends React.PureComponent {
+  class WithSorting extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
       this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
@@ -70,14 +80,6 @@ const withSorting = (Component) => {
       );
     }
   }
-
-  WithSorting.propTypes = {
-    history: PropTypes.object.isRequired,
-    offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-    currentCity: PropTypes.string.isRequired,
-    onCardHover: PropTypes.func.isRequired,
-  };
-
 
   return WithSorting;
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import cn from 'classnames';
+import {Offer} from '../../types';
 import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const';
 import {getRatingStarsStyle, isAuthorized} from '../../utils';
 import * as operations from '../../operations/operations';
@@ -14,7 +14,18 @@ import OffersList from '../offers-list/offers-list';
 
 const MAX_IMAGES = 6;
 
-class OfferDetails extends React.PureComponent {
+interface Props {
+  history: object;
+  match: object;
+  authorizationStatus: string;
+  offers: Offer[];
+  nearbyOffers: Offer[];
+  loadComments: (offerId: number) => void;
+  loadNearbyOffers: (offerId: number) => void;
+  setFavoriteStatus: (offerId: number, status: number) => void;
+}
+
+class OfferDetails extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
     this._handleBookmarkButtonClick = this._handleBookmarkButtonClick.bind(this);
@@ -215,50 +226,6 @@ class OfferDetails extends React.PureComponent {
     );
   }
 }
-
-OfferDetails.propTypes = {
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        previewImage: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        type: PropTypes.oneOf(OFFER_CATEGORIES).isRequired,
-        bedrooms: PropTypes.number.isRequired,
-        maxAdults: PropTypes.number.isRequired,
-        isFavorite: PropTypes.bool.isRequired,
-        isPremium: PropTypes.bool.isRequired,
-        location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired,
-        }).isRequired,
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          location: PropTypes.shape({
-            latitude: PropTypes.number.isRequired,
-            longitude: PropTypes.number.isRequired,
-            zoom: PropTypes.number.isRequired,
-          }).isRequired,
-        }).isRequired,
-        description: PropTypes.string.isRequired,
-        goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-        hostAvatarUrl: PropTypes.string.isRequired,
-        hostId: PropTypes.number.isRequired,
-        hostIsPro: PropTypes.bool.isRequired,
-        hostName: PropTypes.string.isRequired,
-        images: PropTypes.arrayOf(PropTypes.string).isRequired,
-      })
-  ).isRequired,
-  nearbyOffers: PropTypes.arrayOf(PropTypes.object),
-  loadComments: PropTypes.func.isRequired,
-  loadNearbyOffers: PropTypes.func.isRequired,
-  setFavoriteStatus: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),

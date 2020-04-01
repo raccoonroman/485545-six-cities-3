@@ -2,14 +2,23 @@ import * as React from 'react';
 import cn from 'classnames';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
+import {Offer} from '../../types';
 import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const';
 import {getRatingStarsStyle, isAuthorized} from '../../utils';
 import {getAuthorizationStatus} from '../../selectors/selectors';
 import * as operations from '../../operations/operations';
 
 
-const OfferCard = (props) => {
+interface Props {
+  history: object;
+  cardType: string;
+  offer: Offer;
+  onCardHover: (offerId: number | null) => Function;
+  authorizationStatus: string;
+  setFavoriteStatus: (offerId: number, status: number) => void;
+}
+
+const OfferCard: React.FC<Props> = (props: Props) => {
   const {
     history,
     cardType,
@@ -105,24 +114,6 @@ const OfferCard = (props) => {
       </div>
     </article>
   );
-};
-
-OfferCard.propTypes = {
-  history: PropTypes.object,
-  cardType: PropTypes.string.isRequired,
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.oneOf(OFFER_CATEGORIES).isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-  }).isRequired,
-  onCardHover: PropTypes.func,
-  authorizationStatus: PropTypes.string.isRequired,
-  setFavoriteStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

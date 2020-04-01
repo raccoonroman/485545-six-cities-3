@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
+import {Offer} from '../../types';
 import {getOffersByCity} from '../../utils';
 import withHoveredCard from '../../hocs/with-hovered-card/with-hovered-card';
 import withSorting from '../../hocs/with-sorting/with-sorting';
@@ -12,10 +12,18 @@ import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 
 
+interface Props {
+  history: object;
+  currentCity: string;
+  offers: Offer[];
+  hoveredCardId: number | null;
+  onCardHover: (offerId: number | null) => Function;
+}
+
 const OffersListWithSorting = withSorting(OffersList);
 
-
-const Main = ({history, currentCity, offers, hoveredCardId, onCardHover}) => {
+const Main: React.FC<Props> = (props: Props) => {
+  const {history, currentCity, offers, hoveredCardId, onCardHover} = props;
   const offersByCity = getOffersByCity(currentCity, offers);
 
   const renderOffersList = () => {
@@ -88,21 +96,6 @@ const Main = ({history, currentCity, offers, hoveredCardId, onCardHover}) => {
       </main>
     </div>
   );
-};
-
-Main.propTypes = {
-  history: PropTypes.object.isRequired,
-  currentCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        city: PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          location: PropTypes.object.isRequired,
-        }).isRequired,
-      }).isRequired
-  ).isRequired,
-  hoveredCardId: PropTypes.number,
-  onCardHover: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

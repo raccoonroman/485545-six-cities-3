@@ -1,4 +1,3 @@
-export const OFFER_CATEGORIES = [`apartment`, `room`, `house`, `hotel`];
 export const DEFAULT_CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 export const SortType = {
@@ -21,7 +20,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_EMAIL: `SET_EMAIL`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
-  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
 };
 
 export const AuthorizationStatus = {

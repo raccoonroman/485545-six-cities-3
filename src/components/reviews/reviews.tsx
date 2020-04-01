@@ -1,12 +1,19 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Comment} from '../../types';
 import {getRatingStarsStyle, isAuthorized} from '../../utils';
 import {getAuthorizationStatus, getTenSortedComments} from '../../selectors/selectors';
 import ReviewsForm from '../reviews-form/reviews-form';
 
 
-const Reviews = ({offerId, authorizationStatus, comments}) => {
+interface Props {
+  offerId: number;
+  authorizationStatus: string;
+  comments: Comment[];
+}
+
+const Reviews: React.FC<Props> = (props: Props) => {
+  const {offerId, authorizationStatus, comments} = props;
   const authorized = isAuthorized(authorizationStatus);
 
   const renderReviewItems = () => {
@@ -61,19 +68,6 @@ const Reviews = ({offerId, authorizationStatus, comments}) => {
       {authorized && <ReviewsForm offerId={offerId} />}
     </section>
   );
-};
-
-Reviews.propTypes = {
-  offerId: PropTypes.number.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    commentId: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    userAvatarUrl: PropTypes.string.isRequired,
-    userName: PropTypes.string.isRequired,
-  })).isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import {AppRoute} from '../../const';
 import {isAuthorized} from '../../utils';
 import {getAuthorizationStatus} from '../../selectors/selectors';
@@ -11,7 +10,12 @@ import OfferDetails from '../offer-details/offer-details';
 import Favorites from '../favorites/favorites';
 
 
-const App = ({authorizationStatus}) => {
+interface Props {
+  authorizationStatus: string;
+}
+
+const App: React.FC<Props> = (props: Props) => {
+  const {authorizationStatus} = props;
   const authorized = isAuthorized(authorizationStatus);
 
   return (
@@ -32,10 +36,6 @@ const App = ({authorizationStatus}) => {
       </Switch>
     </BrowserRouter>
   );
-};
-
-App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

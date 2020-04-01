@@ -1,11 +1,21 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as operations from '../../operations/operations';
 
 
+interface Props {
+  offerId: number;
+  postComment: (commentData: object, offerId: number, enableForm: Function, clearForm: Function) => void;
+}
+
+interface State {
+  rating: number;
+  text: string;
+  isFormDisabled: boolean;
+}
+
 const withReviewFormState = (Component) => {
-  class WithReviewFormState extends React.PureComponent {
+  class WithReviewFormState extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
       this._handleRatingChange = this._handleRatingChange.bind(this);
@@ -56,11 +66,6 @@ const withReviewFormState = (Component) => {
       );
     }
   }
-
-  WithReviewFormState.propTypes = {
-    offerId: PropTypes.number.isRequired,
-    postComment: PropTypes.func.isRequired,
-  };
 
   const mapDispatchToProps = (dispatch) => ({
     postComment(commentData, offerId, enableForm, clearForm) {

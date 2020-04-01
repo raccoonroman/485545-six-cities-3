@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import withReviewFormState from '../../hocs/with-review-form-state/with-review-form-state';
 
 
@@ -17,8 +16,19 @@ const StarValue = {
   1: `terribly`,
 };
 
+interface Props {
+  formState: {
+    rating: number;
+    text: string;
+    isFormDisabled: boolean;
+  };
+  onRatingChange: (evt) => void;
+  onTextChange: (evt) => void;
+  onFormSubmit: (evt) => void;
+}
 
-const ReviewsForm = ({formState, onRatingChange, onTextChange, onFormSubmit}) => {
+const ReviewsForm: React.FC<Props> = (props: Props) => {
+  const {formState, onRatingChange, onTextChange, onFormSubmit} = props;
   const {rating, text, isFormDisabled} = formState;
   const isSubmitAllowed = rating > 0 && text.length >= TextLength.MIN && text.length <= TextLength.MAX;
 
@@ -74,17 +84,6 @@ const ReviewsForm = ({formState, onRatingChange, onTextChange, onFormSubmit}) =>
       </div>
     </form>
   );
-};
-
-ReviewsForm.propTypes = {
-  formState: PropTypes.shape({
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    isFormDisabled: PropTypes.bool.isRequired,
-  }).isRequired,
-  onRatingChange: PropTypes.func.isRequired,
-  onTextChange: PropTypes.func.isRequired,
-  onFormSubmit: PropTypes.func.isRequired,
 };
 
 export default withReviewFormState(ReviewsForm);

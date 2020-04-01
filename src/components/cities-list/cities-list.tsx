@@ -1,12 +1,19 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
 import {getCitiesList} from '../../selectors/selectors';
 import {setCity} from '../../actions/actions';
 
 
-const CitiesList = ({cities, currentCity, onCityChange}) => {
+interface Props {
+  cities: string[];
+  currentCity: string;
+  onCityChange: (cityName: string) => object;
+}
+
+const CitiesList: React.FC<Props> = (props: Props) => {
+  const {cities, currentCity, onCityChange} = props;
+
   const getTabClass = (city) => cn({
     'locations__item-link tabs__item': true,
     'tabs__item--active': city === currentCity,
@@ -28,12 +35,6 @@ const CitiesList = ({cities, currentCity, onCityChange}) => {
       ))}
     </ul>
   );
-};
-
-CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currentCity: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

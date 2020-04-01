@@ -2,7 +2,7 @@ import * as React from 'react';
 import cn from 'classnames';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
+import {Offer} from '../../types';
 import {CardType, AppRoute} from '../../const';
 import {getCitiesByOffers, getOffersByCity} from '../../utils';
 import {getFavoriteOffers} from '../../selectors/selectors';
@@ -11,7 +11,13 @@ import Header from '../header/header';
 import OffersList from '../offers-list/offers-list';
 
 
-const Favorites = ({favoriteOffers, onCityChange}) => {
+interface Props {
+  favoriteOffers: Offer[];
+  onCityChange: (cityName: string) => object;
+}
+
+const Favorites: React.FC<Props> = (props: Props) => {
+  const {favoriteOffers, onCityChange} = props;
   const noFavorites = !favoriteOffers.length;
   const cities = getCitiesByOffers(favoriteOffers);
 
@@ -89,12 +95,6 @@ const Favorites = ({favoriteOffers, onCityChange}) => {
     </div>
   );
 };
-
-Favorites.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onCityChange: PropTypes.func.isRequired,
-};
-
 
 const mapStateToProps = (state) => ({
   favoriteOffers: getFavoriteOffers(state),

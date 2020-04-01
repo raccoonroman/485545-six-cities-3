@@ -1,11 +1,20 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as operations from '../../operations/operations';
 
 
+interface Props {
+  history: object;
+  login: (authData: object, goToPreviousPage: Function) => void;
+}
+
+interface State {
+  email: string;
+  password: string;
+}
+
 const withLoginFormState = (Component) => {
-  class WithLoginFormState extends React.PureComponent {
+  class WithLoginFormState extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
       this.goToPreviousPage = this.goToPreviousPage.bind(this);
@@ -45,11 +54,6 @@ const withLoginFormState = (Component) => {
       );
     }
   }
-
-  WithLoginFormState.propTypes = {
-    history: PropTypes.object.isRequired,
-    login: PropTypes.func.isRequired,
-  };
 
   const mapDispatchToProps = (dispatch) => ({
     login(authData, goToPreviousPage) {

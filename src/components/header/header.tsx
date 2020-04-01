@@ -1,13 +1,19 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {AppRoute} from '../../const';
 import {isAuthorized} from '../../utils';
 import {getUserEmail, getAuthorizationStatus} from '../../selectors/selectors';
 
 
-const Header = ({authorizationStatus, email}) => {
+interface Props {
+  authorizationStatus: string;
+  email: string;
+}
+
+const Header: React.FC<Props> = (props: Props) => {
+  const {authorizationStatus, email} = props;
+
   const renderLoginText = () => {
     if (!isAuthorized(authorizationStatus)) {
       return <span className="header__login">Sign in</span>;
@@ -45,11 +51,6 @@ const Header = ({authorizationStatus, email}) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

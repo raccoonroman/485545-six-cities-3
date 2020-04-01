@@ -1,10 +1,19 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Header from '../header/header';
 import withLoginFormState from '../../hocs/with-login-form-state/with-login-form-state';
 
 
-const SignIn = ({formState, onInputChange, onFormSubmit}) => {
+interface Props {
+  formState: {
+    email: string;
+    password: string;
+  };
+  onInputChange: (evt) => void;
+  onFormSubmit: (evt) => void;
+}
+
+const SignIn: React.FC<Props> = (props: Props) => {
+  const {formState, onInputChange, onFormSubmit} = props;
   const {email, password} = formState;
 
   return (
@@ -47,15 +56,6 @@ const SignIn = ({formState, onInputChange, onFormSubmit}) => {
       </main>
     </div>
   );
-};
-
-SignIn.propTypes = {
-  formState: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  }).isRequired,
-  onInputChange: PropTypes.func.isRequired,
-  onFormSubmit: PropTypes.func.isRequired,
 };
 
 export default withLoginFormState(SignIn);

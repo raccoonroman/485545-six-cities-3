@@ -1,9 +1,19 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import {Offer} from '../../types';
 import OfferCard from '../offer-card/offer-card';
 
 
-const OffersList = ({history, className, cardsType, offers, onCardHover}) => {
+interface Props {
+  history: object;
+  className: string;
+  cardsType: string;
+  offers: Offer[];
+  onCardHover: (offerId: number | null) => Function;
+}
+
+const OffersList: React.FC<Props> = (props: Props) => {
+  const {history, className, cardsType, offers, onCardHover} = props;
+
   return (
     <div className={className}>
       {offers.map((offer) => {
@@ -20,14 +30,6 @@ const OffersList = ({history, className, cardsType, offers, onCardHover}) => {
       })}
     </div>
   );
-};
-
-OffersList.propTypes = {
-  history: PropTypes.object,
-  className: PropTypes.string.isRequired,
-  cardsType: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onCardHover: PropTypes.func,
 };
 
 

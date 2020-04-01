@@ -1,11 +1,19 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import {SortType} from '../../const';
 import withListOpenState from '../../hocs/with-list-open-state/with-list-open-state';
 
 
-const Sorting = ({sortBy, sortListOpened, onSortTypeClick, onSortItemClick}) => {
+interface Props {
+  sortBy: string;
+  sortListOpened: boolean;
+  onSortTypeClick: () => void;
+  onSortItemClick: (sortType: string) => Function;
+}
+
+const Sorting: React.FC<Props> = (props: Props) => {
+  const {sortBy, sortListOpened, onSortTypeClick, onSortItemClick} = props;
+
   const sortListClass = cn({
     'places__options places__options--custom': true,
     'places__options--opened': sortListOpened,
@@ -44,13 +52,6 @@ const Sorting = ({sortBy, sortListOpened, onSortTypeClick, onSortItemClick}) => 
       <ul className={sortListClass}>{renderSortItems()}</ul>
     </form>
   );
-};
-
-Sorting.propTypes = {
-  sortBy: PropTypes.string.isRequired,
-  sortListOpened: PropTypes.bool.isRequired,
-  onSortTypeClick: PropTypes.func.isRequired,
-  onSortItemClick: PropTypes.func.isRequired,
 };
 
 export default withListOpenState(Sorting);

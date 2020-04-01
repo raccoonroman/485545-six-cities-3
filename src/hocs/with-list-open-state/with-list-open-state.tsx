@@ -1,9 +1,17 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
+
+interface Props {
+  sortBy: string;
+  onSortTypeChange: (sortType: string) => void;
+}
+
+interface State {
+  sortListOpened: boolean;
+}
 
 const withListOpenState = (Component) => {
-  class WithListOpenState extends React.PureComponent {
+  class WithListOpenState extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
       this._handleSortTypeClick = this._handleSortTypeClick.bind(this);
@@ -41,12 +49,6 @@ const withListOpenState = (Component) => {
       );
     }
   }
-
-  WithListOpenState.propTypes = {
-    sortBy: PropTypes.string.isRequired,
-    onSortTypeChange: PropTypes.func.isRequired,
-  };
-
 
   return WithListOpenState;
 };

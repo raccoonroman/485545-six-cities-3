@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import leaflet from 'leaflet';
+import * as leaflet from 'leaflet';
+import {Offer} from '../../types';
 
 
 const Pin = {
@@ -70,14 +70,23 @@ const renderMarkers = (offers, currentOfferId, map) => {
   return markers;
 };
 
+interface Props {
+  className: string;
+  offers: Offer[];
+  currentOfferId: number;
+}
 
 const withLeaflet = (Component) => {
-  class WithLeaflet extends React.PureComponent {
+  class WithLeaflet extends React.PureComponent<Props, null> {
+    private mapRef: React.RefObject<HTMLDivElement>;
+    private map: any;
+    private markers: any;
+
     constructor(props) {
       super(props);
-      this._mapRef = React.createRef();
-      this._map = null;
-      this._markers = null;
+      this.mapRef = React.createRef();
+      this.map = null;
+      this.markers = null;
     }
 
     componentDidMount() {
@@ -92,13 +101,13 @@ const withLeaflet = (Component) => {
 
       if (prevOffers[0].city.name !== offers[0].city.name) {
         const {latitude, longitude} = cityLocation;
-        this._map.setView([latitude, longitude], zoom);
+        this.map.setView([latitude, longitude], zoom);
       }
 
       if (currentOfferId) {
         const offer = offers.find(({id}) => id === currentOfferId);
         const {latitude, longitude} = offer.location;
-        this._map.setView([latitude, longitude], zoom);
+        this.map.setView([latitude, longitude], zoom);
       }
 
       this._renderMarkers();
@@ -112,29 +121,29 @@ const withLeaflet = (Component) => {
     _renderMap() {
       const {offers} = this.props;
       const {location} = offers[0].city;
-      const mapElement = this._mapRef.current;
-      this._map = renderMap(mapElement, location);
+      const mapElement = this.mapRef.current;
+      this.map = renderMap(mapElement, location);
     }
 
     _renderMarkers() {
       const {offers, currentOfferId} = this.props;
-      if (this._markers) {
+      if (this.markers) {
         this._removeMarkers();
       }
-      this._markers = renderMarkers(offers, currentOfferId, this._map);
+      this.markers = renderMarkers(offers, currentOfferId, this.map);
     }
 
     _removeMap() {
-      if (this._map) {
-        this._map.remove();
-        this._map = null;
+      if (this.map) {
+        this.map.remove();
+        this.map = null;
       }
     }
 
     _removeMarkers() {
-      if (this._markers) {
-        this._markers.clearLayers();
-        this._markers = null;
+      if (this.markers) {
+        this.markers.clearLayers();
+        this.markers = null;
       }
     }
 
@@ -143,34 +152,11 @@ const withLeaflet = (Component) => {
 
       return (
         <Component className={className}>
-          <div ref={this._mapRef} id="map"></div>
+          <div ref={this.mapRef} id="map"></div>
         </Component>
       );
     }
   }
-
-  WithLeaflet.propTypes = {
-    className: PropTypes.string.isRequired,
-    offers: PropTypes.arrayOf(
-        PropTypes.shape({
-          location: PropTypes.shape({
-            latitude: PropTypes.number.isRequired,
-            longitude: PropTypes.number.isRequired,
-            zoom: PropTypes.number.isRequired,
-          }).isRequired,
-          city: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            location: PropTypes.shape({
-              latitude: PropTypes.number.isRequired,
-              longitude: PropTypes.number.isRequired,
-              zoom: PropTypes.number.isRequired,
-            }).isRequired,
-          }).isRequired,
-        }).isRequired
-    ).isRequired,
-    currentOfferId: PropTypes.number,
-  };
-
 
   return WithLeaflet;
 };
