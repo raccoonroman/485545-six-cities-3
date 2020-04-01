@@ -1,8 +1,9 @@
 import * as React from 'react';
+import {RouteComponentProps} from 'react-router-dom';
 import {connect} from 'react-redux';
 import cn from 'classnames';
 import {Offer} from '../../types';
-import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const';
+import {CardType, AppRoute} from '../../const';
 import {getRatingStarsStyle, isAuthorized} from '../../utils';
 import * as operations from '../../operations/operations';
 import {getMappedOffers, getMappedNearbyOffers, getAuthorizationStatus} from '../../selectors/selectors';
@@ -14,9 +15,7 @@ import OffersList from '../offers-list/offers-list';
 
 const MAX_IMAGES = 6;
 
-interface Props {
-  history: object;
-  match: object;
+type Props = RouteComponentProps<{ id: string; }> & {
   authorizationStatus: string;
   offers: Offer[];
   nearbyOffers: Offer[];
@@ -48,13 +47,13 @@ class OfferDetails extends React.PureComponent<Props, null> {
   _loadComments() {
     const {match, loadComments} = this.props;
     const {id} = match.params;
-    loadComments(id);
+    loadComments(+id);
   }
 
   _loadNearbyOffers() {
     const {match, loadNearbyOffers} = this.props;
     const {id} = match.params;
-    loadNearbyOffers(id);
+    loadNearbyOffers(+id);
   }
 
   _handleBookmarkButtonClick() {

@@ -24,8 +24,8 @@ const App: React.FC<Props> = (props: Props) => {
         <Route exact path={AppRoute.ROOT} render={({history}) => (
           <Main history={history} />
         )} />
-        <Route exact path={`${AppRoute.OFFER}/:id`} render={(props) => (
-          <OfferDetails {...props} />
+        <Route exact path={`${AppRoute.OFFER}/:id`} render={(routeProps) => (
+          <OfferDetails {...routeProps} />
         )} />
         <Route exact path={AppRoute.LOGIN} render={({history}) => (
           !authorized ? <SignIn history={history} /> : <Redirect to={AppRoute.ROOT} />

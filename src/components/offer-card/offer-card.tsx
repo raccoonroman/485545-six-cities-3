@@ -3,7 +3,7 @@ import cn from 'classnames';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types';
-import {OFFER_CATEGORIES, CardType, AppRoute} from '../../const';
+import {CardType, AppRoute} from '../../const';
 import {getRatingStarsStyle, isAuthorized} from '../../utils';
 import {getAuthorizationStatus} from '../../selectors/selectors';
 import * as operations from '../../operations/operations';

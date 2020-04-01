@@ -3,7 +3,15 @@ import * as leaflet from 'leaflet';
 import {Offer} from '../../types';
 
 
-const Pin = {
+interface Pin {
+  PATH: {
+    BLUE: string,
+    ORANGE: string,
+  },
+  SIZES: [number, number],
+}
+
+const Pin: Pin = {
   PATH: {
     BLUE: `/img/pin.svg`,
     ORANGE: `/img/pin-active.svg`,
@@ -29,7 +37,7 @@ const renderMap = (container, location) => {
     zoom,
     zoomControl: false,
     scrollWheelZoom: false,
-    marker: true,
+    // marker: true,
   });
 
   leaflet
@@ -42,7 +50,6 @@ const renderMap = (container, location) => {
 
   return map;
 };
-
 
 const renderMarkers = (offers, currentOfferId, map) => {
   if (!map) {
@@ -70,6 +77,7 @@ const renderMarkers = (offers, currentOfferId, map) => {
   return markers;
 };
 
+
 interface Props {
   className: string;
   offers: Offer[];
@@ -78,10 +86,6 @@ interface Props {
 
 const withLeaflet = (Component) => {
   class WithLeaflet extends React.PureComponent<Props, null> {
-    private mapRef: React.RefObject<HTMLDivElement>;
-    private map: any;
-    private markers: any;
-
     constructor(props) {
       super(props);
       this.mapRef = React.createRef();
@@ -117,6 +121,10 @@ const withLeaflet = (Component) => {
       this._removeMap();
       this._removeMarkers();
     }
+
+    private mapRef: React.RefObject<HTMLDivElement>;
+    private map: null | leaflet.Map;
+    private markers: null | leaflet.LayerGroup;
 
     _renderMap() {
       const {offers} = this.props;

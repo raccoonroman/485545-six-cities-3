@@ -4,11 +4,11 @@ import OfferCard from '../offer-card/offer-card';
 
 
 interface Props {
-  history: object;
+  history?: object;
   className: string;
   cardsType: string;
   offers: Offer[];
-  onCardHover: (offerId: number | null) => Function;
+  onCardHover?: (offerId: number | null) => Function;
 }
 
 const OffersList: React.FC<Props> = (props: Props) => {
