@@ -1,20 +1,16 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {AuthorizationStatus, AppRoute} from '../../const.js';
-import {createAPI} from '../../api.js';
-import OfferDetails from './offer-details.jsx';
+import {AuthorizationStatus, AppRoute} from '../../const';
+import {OfferRaw} from '../../types';
+import Main from './main';
 
 
-const api = createAPI(() => {});
-const middlewares = [thunk.withExtraArgument(api)];
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore([]);
 
-
-const mockOffers = [
+const mockOffers: OfferRaw[] = [
   {
     'id': 100490,
     'title': `The best title ever`,
@@ -85,30 +81,34 @@ const mockOffers = [
   }
 ];
 
+const cities: string[] = [`Vinnytsya`, `Lviv`, `Kyiv`];
 
-it(`Render <OfferDetails />`, () => {
+
+it(`Render <Main />`, () => {
   const store = mockStore({
     offers: mockOffers,
+    cities: {
+      currentCity: cities[0],
+      cities,
+    },
     authorization: {
-      authorizationStatus: AuthorizationStatus.AUTH,
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
     },
     userData: {
-      email: `name@gmail.com`,
+      email: ``,
     },
-    commentsByOffer: [],
-    nearbyOffers: mockOffers,
   });
 
   const tree = renderer
-  .create(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Route exact path={`${AppRoute.OFFER}/:id`} render={(props) => (
-            <OfferDetails {...props} />
-          )} />
-        </BrowserRouter>
-      </Provider>
-  ).toJSON();
+    .create(
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route exact path={AppRoute.ROOT} render={({history}) => (
+              <Main history={history} />
+            )} />
+          </BrowserRouter>
+        </Provider>
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

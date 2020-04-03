@@ -1,14 +1,15 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {AuthorizationStatus} from '../../const.js';
-import Reviews from './reviews.jsx';
+import {AuthorizationStatus} from '../../const';
+import {CommentRaw} from '../../types';
+import Reviews from './reviews';
 
 
 const mockStore = configureStore([]);
 
-const commentsByOffer = [
+const commentsByOffer: CommentRaw[] = [
   {
     'id': 0,
     'comment': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,

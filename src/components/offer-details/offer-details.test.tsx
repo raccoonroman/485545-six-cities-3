@@ -1,14 +1,25 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import {AuthorizationStatus} from '../../const.js';
-import App from './app.jsx';
+import {BrowserRouter, Route} from 'react-router-dom';
+import {AuthorizationStatus, AppRoute} from '../../const';
+import {createAPI} from '../../api';
+import {OfferRaw} from '../../types';
+import OfferDetails from './offer-details';
 
 
-const mockStore = configureStore([]);
+const onUnauthorized = () => {
+  // do nothing
+};
 
-const mockOffers = [
+const api = createAPI(onUnauthorized);
+const middlewares = [thunk.withExtraArgument(api)];
+const mockStore = configureStore(middlewares);
+
+
+const mockOffers: OfferRaw[] = [
   {
     'id': 100490,
     'title': `The best title ever`,
@@ -79,30 +90,30 @@ const mockOffers = [
   }
 ];
 
-const cities = [`Vinnytsia`, `Kyiv`];
 
-
-it(`Render App`, () => {
+it(`Render <OfferDetails />`, () => {
   const store = mockStore({
     offers: mockOffers,
-    cities: {
-      currentCity: cities[0],
-      cities,
-    },
     authorization: {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authorizationStatus: AuthorizationStatus.AUTH,
     },
     userData: {
-      email: ``,
+      email: `name@gmail.com`,
     },
+    commentsByOffer: [],
+    nearbyOffers: mockOffers,
   });
 
   const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App />
-        </Provider>
-    ).toJSON();
+  .create(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Route exact path={`${AppRoute.OFFER}/:id`} render={(props) => (
+            <OfferDetails {...props} />
+          )} />
+        </BrowserRouter>
+      </Provider>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

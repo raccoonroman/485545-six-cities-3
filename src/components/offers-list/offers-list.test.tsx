@@ -1,12 +1,16 @@
-import React from "react";
-import {configure, mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import Map from "./map.jsx";
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
+import {BrowserRouter, Route} from 'react-router-dom';
+import {CardType, AuthorizationStatus, AppRoute} from '../../const';
+import {Offer} from '../../types';
+import OffersList from './offers-list';
 
 
-configure({adapter: new Adapter()});
+const mockStore = configureStore([]);
 
-const offers = [
+const offers: Offer[] = [
   {
     id: 100500,
     title: `Lorem ipsum`,
@@ -21,14 +25,14 @@ const offers = [
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
-      zoom: 16,
+      zoom: 12,
     },
     city: {
-      name: `Vinnytsia`,
+      name: `Vinnytsya`,
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 12,
+        zoom: 10,
       },
     },
   },
@@ -46,14 +50,14 @@ const offers = [
     location: {
       latitude: 52.341667,
       longitude: 4.902452,
-      zoom: 16,
+      zoom: 12,
     },
     city: {
-      name: `Vinnytsia`,
+      name: `Vinnytsya`,
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 12,
+        zoom: 11,
       },
     },
   },
@@ -71,31 +75,42 @@ const offers = [
     location: {
       latitude: 52.359160,
       longitude: 4.849366,
-      zoom: 16,
+      zoom: 12,
     },
     city: {
-      name: `Vinnytsia`,
+      name: `Vinnytsya`,
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 12,
+        zoom: 13,
       },
     },
   },
 ];
 
 
-it(`Should <Map /> render correctly`, () => {
-  const div = global.document.createElement(`div`);
-  global.document.body.appendChild(div);
-  const tree = mount(
-      <Map
-        className="cities__map map"
-        offers={offers}
-        currentOfferId={100501}
-      />,
-      {attachTo: div}
-  );
+it(`Should <OffersList /> render correctly`, () => {
+  const store = mockStore({
+    authorization: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+  });
 
-  expect(tree.getDOMNode()).toMatchSnapshot();
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <BrowserRouter>
+            <Route exact path={AppRoute.ROOT} render={({history}) => (
+              <OffersList
+                history={history}
+                className={`near-places__list places__list`}
+                cardsType={CardType.NEAR}
+                offers={offers}
+              />
+            )} />
+          </BrowserRouter>
+        </Provider>
+    ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });

@@ -1,15 +1,15 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {BrowserRouter} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const.js';
-import Favorites from './favorites.jsx';
+import {AuthorizationStatus} from '../../const';
+import {OfferRaw} from '../../types';
+import App from './app';
 
 
 const mockStore = configureStore([]);
 
-const mockOffers = [
+const mockOffers: OfferRaw[] = [
   {
     'id': 100490,
     'title': `The best title ever`,
@@ -19,7 +19,7 @@ const mockOffers = [
     'type': `apartment`,
     'bedrooms': 12,
     'max_adults': 12,
-    'is_favorite': true,
+    'is_favorite': false,
     'is_premium': false,
     'location': {
       'latitude': 52.35,
@@ -61,7 +61,7 @@ const mockOffers = [
       'zoom': 16,
     },
     'city': {
-      'name': `Kyiv`,
+      'name': `Vinnytsya`,
       'location': {
         'latitude': 52,
         'longitude': 4.9,
@@ -80,51 +80,30 @@ const mockOffers = [
   }
 ];
 
+const cities: string[] = [`Vinnytsia`, `Kyiv`];
 
-describe(`Render <Favorites />`, () => {
-  it(`When favorites list is empty`, () => {
-    const store = mockStore({
-      offers: [],
-      authorization: {
-        authorizationStatus: AuthorizationStatus.AUTH,
-      },
-      userData: {
-        email: `name@gmail.com`,
-      },
-    });
 
-    const tree = renderer
+it(`Render App`, () => {
+  const store = mockStore({
+    offers: mockOffers,
+    cities: {
+      currentCity: cities[0],
+      cities,
+    },
+    authorization: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+    userData: {
+      email: ``,
+    },
+  });
+
+  const tree = renderer
     .create(
         <Provider store={store}>
-          <BrowserRouter>
-            <Favorites />
-          </BrowserRouter>
+          <App />
         </Provider>
     ).toJSON();
 
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`When favorites list is not empty`, () => {
-    const store = mockStore({
-      offers: mockOffers,
-      authorization: {
-        authorizationStatus: AuthorizationStatus.AUTH,
-      },
-      userData: {
-        email: `name@gmail.com`,
-      },
-    });
-
-    const tree = renderer
-    .create(
-        <Provider store={store}>
-          <BrowserRouter>
-            <Favorites />
-          </BrowserRouter>
-        </Provider>
-    ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
+  expect(tree).toMatchSnapshot();
 });

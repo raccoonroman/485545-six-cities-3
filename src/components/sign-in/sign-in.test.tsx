@@ -1,10 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {AuthorizationStatus, AppRoute} from '../../const.js';
-import SignIn from './sign-in.jsx';
+import {AuthorizationStatus, AppRoute} from '../../const';
+import SignIn from './sign-in';
 
 
 const mockStore = configureStore([]);

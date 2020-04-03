@@ -1,13 +1,13 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import CitiesList from './cities-list.jsx';
+import CitiesList from './cities-list';
 
 
 const mockStore = configureStore([]);
 
-const cities = [`Kyiv`, `Kharkiv`, `Odessa`, `Vinnytsia`, `Lviv`];
+const cities: string[] = [`Kyiv`, `Kharkiv`, `Odessa`, `Vinnytsia`, `Lviv`];
 const currentCity = `Vinnytsia`;
 
 

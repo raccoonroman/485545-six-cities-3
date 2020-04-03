@@ -1,17 +1,18 @@
-import React from 'react';
+import * as React from 'react';
 import {configure, mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {BrowserRouter} from 'react-router-dom';
-import {AuthorizationStatus, CardType} from '../../const.js';
-import OfferCard from './offer-card.jsx';
+import {AuthorizationStatus, CardType} from '../../const';
+import {Offer} from '../../types';
+import OfferCard from './offer-card';
 
 
 const mockStore = configureStore([]);
 configure({adapter: new Adapter()});
 
-const offer = {
+const offer: Offer = {
   id: 100500,
   title: `Excepteur sint occaecat cupidatat non proident`,
   previewImage: `https://i.picsum.photos/id/24/260/200.jpg`,
@@ -25,6 +26,7 @@ const offer = {
   location: {
     latitude: 52.359160,
     longitude: 4.849366,
+    zoom: 12,
   },
   city: {
     name: `Vinnytsia`,

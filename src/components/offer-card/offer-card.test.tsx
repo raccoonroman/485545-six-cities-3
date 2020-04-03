@@ -1,15 +1,16 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {AuthorizationStatus, CardType, AppRoute} from '../../const.js';
-import OfferCard from './offer-card.jsx';
+import {AuthorizationStatus, CardType, AppRoute} from '../../const';
+import {Offer} from '../../types';
+import OfferCard from './offer-card';
 
 
 const mockStore = configureStore([]);
 
-const offer = {
+const offer: Offer = {
   id: 100502,
   title: `Excepteur sint occaecat cupidatat non proident`,
   previewImage: `https://i.picsum.photos/id/24/260/200.jpg`,
@@ -23,6 +24,7 @@ const offer = {
   location: {
     latitude: 52.359160,
     longitude: 4.849366,
+    zoom: 12,
   },
   city: {
     name: `Vinnytsia`,
@@ -32,6 +34,10 @@ const offer = {
       zoom: 13,
     },
   },
+};
+
+const handleCardHover = () => {
+  // do nothing.
 };
 
 
@@ -51,7 +57,7 @@ it(`Should offer card render correctly`, () => {
                 history={history}
                 cardType={CardType.NEAR}
                 offer={offer}
-                onCardHover={() => {}}
+                onCardHover={handleCardHover}
               />
             )} />
           </BrowserRouter>
