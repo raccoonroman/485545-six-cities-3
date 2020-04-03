@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+import {RouteComponentProps} from 'react-router-dom';
 import * as operations from '../../operations/operations';
 
 
-interface Props {
-  history: object;
+type Props = RouteComponentProps & {
   login: (authData: object, goToPreviousPage: Function) => void;
 }
 

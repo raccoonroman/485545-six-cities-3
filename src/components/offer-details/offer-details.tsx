@@ -15,7 +15,7 @@ import OffersList from '../offers-list/offers-list';
 
 const MAX_IMAGES = 6;
 
-type Props = RouteComponentProps<{ id: string; }> & {
+type Props = RouteComponentProps<{ id: string }> & {
   authorizationStatus: string;
   offers: Offer[];
   nearbyOffers: Offer[];

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import cn from 'classnames';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, RouteComponentProps} from 'react-router-dom';
 import {Offer} from '../../types';
 import {CardType, AppRoute} from '../../const';
 import {getRatingStarsStyle, isAuthorized} from '../../utils';
@@ -9,11 +9,10 @@ import {getAuthorizationStatus} from '../../selectors/selectors';
 import * as operations from '../../operations/operations';
 
 
-interface Props {
-  history: object;
+type Props = RouteComponentProps & {
   cardType: string;
   offer: Offer;
-  onCardHover: (offerId: number | null) => Function;
+  onCardHover: (offerId: number | null) => (event: React.MouseEvent) => void;
   authorizationStatus: string;
   setFavoriteStatus: (offerId: number, status: number) => void;
 }

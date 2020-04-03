@@ -8,10 +8,10 @@ interface Props {
   sortBy: string;
   sortListOpened: boolean;
   onSortTypeClick: () => void;
-  onSortItemClick: (sortType: string) => Function;
+  onSortItemClick: (sortType: string) => (event: React.MouseEvent) => void;
 }
 
-const Sorting: React.FC<Props> = (props: Props) => {
+const Sorting: React.FunctionComponent<Props> = (props: Props) => {
   const {sortBy, sortListOpened, onSortTypeClick, onSortItemClick} = props;
 
   const sortListClass = cn({
@@ -22,7 +22,7 @@ const Sorting: React.FC<Props> = (props: Props) => {
   const renderSortItems = () => {
     const sortTypes = Object.values(SortType);
 
-    return sortTypes.map((sortType) => {
+    return sortTypes.map((sortType: string) => {
       const sortItemClass = cn({
         'places__option': true,
         'places__option--active': sortType === sortBy,
@@ -32,7 +32,7 @@ const Sorting: React.FC<Props> = (props: Props) => {
           key={sortType}
           onClick={onSortItemClick(sortType)}
           className={sortItemClass}
-          tabIndex="0"
+          tabIndex={0}
         >
           {sortType}
         </li>
@@ -43,7 +43,7 @@ const Sorting: React.FC<Props> = (props: Props) => {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
-      <span onClick={onSortTypeClick} className="places__sorting-type" tabIndex="0">
+      <span onClick={onSortTypeClick} className="places__sorting-type" tabIndex={0}>
         {sortBy}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>

@@ -5,10 +5,10 @@ import {Offer} from '../../types';
 
 interface Pin {
   PATH: {
-    BLUE: string,
-    ORANGE: string,
-  },
-  SIZES: [number, number],
+    BLUE: string;
+    ORANGE: string;
+  };
+  SIZES: [number, number];
 }
 
 const Pin: Pin = {
