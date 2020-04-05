@@ -210,7 +210,8 @@ exports[`Render <Main /> 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/offer/100490"
+                  onClick={[Function]}
                 >
                   <img
                     alt="The best title ever"
@@ -316,7 +317,8 @@ exports[`Render <Main /> 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/offer/100491"
+                  onClick={[Function]}
                 >
                   <img
                     alt="Some title"

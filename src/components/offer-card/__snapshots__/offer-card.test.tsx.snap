@@ -8,7 +8,8 @@ exports[`Should offer card render correctly 1`] = `
     className="near-places__image-wrapper place-card__image-wrapper"
   >
     <a
-      href="#"
+      href="/offer/100502"
+      onClick={[Function]}
     >
       <img
         alt="Excepteur sint occaecat cupidatat non proident"

@@ -83,9 +83,9 @@ const OfferCard: React.FC<Props> = (props: Props) => {
           <span>Premium</span>
         </div>)}
       <div className={imageWrapperClass}>
-        <a href="#">
+        <Link to={`${AppRoute.OFFER}/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title} />
-        </a>
+        </Link>
       </div>
       <div className={cardInfoClass}>
         <div className="place-card__price-wrapper">

@@ -215,7 +215,8 @@ exports[`Render <Favorites /> When favorites list is not empty 1`] = `
                   className="favorites__image-wrapper place-card__image-wrapper"
                 >
                   <a
-                    href="#"
+                    href="/offer/100490"
+                    onClick={[Function]}
                   >
                     <img
                       alt="The best title ever"
@@ -344,7 +345,8 @@ exports[`Render <Favorites /> When favorites list is not empty 1`] = `
                   className="favorites__image-wrapper place-card__image-wrapper"
                 >
                   <a
-                    href="#"
+                    href="/offer/100491"
+                    onClick={[Function]}
                   >
                     <img
                       alt="Some title"

@@ -11,7 +11,8 @@ exports[`Should <OffersList /> render correctly 1`] = `
       className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
-        href="#"
+        href="/offer/100500"
+        onClick={[Function]}
       >
         <img
           alt="Lorem ipsum"
@@ -115,7 +116,8 @@ exports[`Should <OffersList /> render correctly 1`] = `
       className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
-        href="#"
+        href="/offer/100501"
+        onClick={[Function]}
       >
         <img
           alt="Ut enim ad minim veniam"
@@ -212,7 +214,8 @@ exports[`Should <OffersList /> render correctly 1`] = `
       className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
-        href="#"
+        href="/offer/100502"
+        onClick={[Function]}
       >
         <img
           alt="Excepteur sint occaecat cupidatat non proident"
